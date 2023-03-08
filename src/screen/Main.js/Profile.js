@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
-import Block from '../components/Block'
+import Block from '../../components/Block'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 const Profile = () => {

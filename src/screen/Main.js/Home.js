@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, Text, View , Image, TouchableOpacity, FlatList}
 import React from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { SliderBox } from "react-native-image-slider-box";
-import Block from '../components/Block'
+import Block from '../../components/Block'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
