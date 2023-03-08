@@ -11,13 +11,13 @@ const DATA = [
       id: 1,
       name: 'BEAGLE CƯNG CƯNG',
       price: 1800000,
-      images: require('../assets/image/salad.png'),
+      images: require('../../assets/image/salad.png'),
     },
     {
       id: 2,
       name: 'BEAGLE CƯNG CƯNG',
       price: 2000000,
-      images: require('../assets/image/salad.png'),
+      images: require('../../assets/image/salad.png'),
     },
   ];
 
@@ -44,11 +44,11 @@ const DATA = [
 
 const Home = () => {
     const images = [
-        require('../assets/image/anhcamnang.png'),
-        require('../assets/image/anhcamnang1.png'),
-        require('../assets/image/caphe.png'),
-        require('../assets/image/main.png'),
-        require('../assets/image/salad.png'),
+        require('../../assets/image/anhcamnang.png'),
+        require('../../assets/image/anhcamnang1.png'),
+        require('../../assets/image/caphe.png'),
+        require('../../assets/image/main.png'),
+        require('../../assets/image/salad.png'),
 
     ];
   return (
@@ -62,7 +62,7 @@ const Home = () => {
         <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
             <FontAwesome5 style={{marginRight: '15%'}} color={'black'} name='lock' size={25} />
             <TouchableOpacity>
-                <Image source={require('../assets/image/profiledog.png')}/>
+                <Image source={require('../../assets/image/profiledog.png')}/>
             </TouchableOpacity>
             
 
