@@ -11,7 +11,6 @@ import {
   Pressable,
 } from 'react-native';
 import React, {useState, useContext} from 'react';
-import authApi from '../../api/authApi';
 import {CONFIRM_OTP_SCREEN} from './../../router/ScreenName';
 import {ToastAndroid} from 'react-native/Libraries/Components/ToastAndroid/ToastAndroid';
 

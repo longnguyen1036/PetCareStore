@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import OTPTextInput from 'react-native-otp-textinput';
-import authApi from '../../api/authApi';
 import {LOGIN_SCREEN} from './../../router/ScreenName';
 
 const ConfirmOTP = ({navigation}) => {

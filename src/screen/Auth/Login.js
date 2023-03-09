@@ -12,8 +12,6 @@ import {
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import {REGISTER_SCREEN} from '../../router/ScreenName';
-import authApi from '../../api/authApi';
-
 import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
 
 
@@ -95,6 +93,7 @@ const Login = ({navigation}) => {
           </View>
         </View>
       </View>
+      
       <Modal
         animationType="slide"
         transparent={true}

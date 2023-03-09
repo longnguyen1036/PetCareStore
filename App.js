@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Home from './src/screen/Main.js/Home'
-import { Login } from './src/screen/Auth'
+import { ConfirmOTP, CreateNewPass, ForgetPass, Login, Register, Welcome } from './src/screen/Auth'
 
 
 const App = () => {
   return (
     
-    <Login/>
+    <ForgetPass/>
     
   )
 }
