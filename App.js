@@ -1,17 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Home from './src/screen/Main.js/Home'
-import { ConfirmOTP, CreateNewPass, ForgetPass, Login, Register, Welcome } from './src/screen/Auth'
-
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import Home from './src/screen/Main.js/Home';
+import {
+  ConfirmOTP,
+  CreateNewPass,
+  ForgetPass,
+  Login,
+  Register,
+  Welcome,
+} from './src/screen/Auth';
 
 const App = () => {
-  return (
-    
-    <ForgetPass/>
-    
-  )
-}
+  return <ForgetPass />;
+};
 
-export default App
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
