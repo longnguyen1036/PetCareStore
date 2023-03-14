@@ -5990,6 +5990,11 @@
   dependencies:
     "react-native-snap-carousel" "latest"
 
+"react-native-select-dropdown@^3.3.0":
+  "integrity" "sha512-gDUeVt9oPXpjkboc/PZiavbYpo4bNIpl7OgKmOOaa4pJjjIBIDkb2LcQquG5bjXn3J6P6nr7YUlHvne2Xb29Xw=="
+  "resolved" "https://registry.npmjs.org/react-native-select-dropdown/-/react-native-select-dropdown-3.3.0.tgz"
+  "version" "3.3.0"
+
 "react-native-snap-carousel@latest":
   "integrity" "sha512-xWEGusacIgK1YaDXLi7Gao2+ISLoGPVEBR8fcMf4tOOJQufutlNwkoLu0l6B8Qgsrre0nTxoVZikRgGRDWlLaQ=="
   "resolved" "https://registry.npmjs.org/react-native-snap-carousel/-/react-native-snap-carousel-3.9.1.tgz"

@@ -7,12 +7,13 @@ import Product1 from './src/screen/Product1'
 import ProductPet from './src/screen/ProductPet'
 import ItemProduct2 from './src/screen/ItemProduct2'
 import Product2 from './src/screen/Product2'
+import InsertPet from './src/screen/InsertPet'
 
 
 const App = () => {
   return (
     
-    <Product2/>
+    <InsertPet/>
     
   )
 }
