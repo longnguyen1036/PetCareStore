@@ -22,7 +22,7 @@ const Profile = () => {
             <View>
                 <View style = {{flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10}}>
                     <View>
-                        <Image source={require('../assets/image/profileavatar.png')} style = {{}} ></Image>
+                        <Image source={require('../../assets/image/profileavatar.png')} style = {{}} ></Image>
                     </View>
                     <View style = {{marginLeft: 10, justifyContent: 'center'}}>
                         <Text style= {{fontSize: 20, fontWeight: '700', color: 'black'}}>phuocps19167</Text>
