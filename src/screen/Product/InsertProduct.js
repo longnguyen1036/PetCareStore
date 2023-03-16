@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View ,Image, TouchableOpacity, TextInput, SafeAreaView, FlatList } from 'react-native'
 import React from 'react'
-import Block from '../components/Block'
+import Block from '../../components/Block'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import SelectDropdown from 'react-native-select-dropdown'
 

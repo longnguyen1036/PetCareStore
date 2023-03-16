@@ -12,7 +12,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { loggedAction, logoutAction } from '../redux/actions/authAction';
 
 function MainStack(props){
-  //fen chuyền props của thg navigation cho tui đi truyen vao dau
+  
     return(
         <Stack.Navigator
       initialRouteName={MAIN_TAB}
@@ -24,7 +24,7 @@ function MainStack(props){
 }
 
 function MainNavigation() {
-  // màn hình nao điều hướng từ login thì truyrn62 vào đó
+  
   const [checkLogin, setCheckLogin] = useState();
   const authState = useSelector(state => state.authState.logged)
   console.log('authStatedasdasd', authState);

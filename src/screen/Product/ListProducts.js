@@ -56,7 +56,7 @@ const DATA = [
         </View>
   );
 
-const Product1 = () => {
+const ListProducts = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -102,7 +102,7 @@ const Product1 = () => {
   )
 }
 
-export default Product1
+export default ListProducts
 
 const styles = StyleSheet.create({
     container: {
