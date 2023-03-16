@@ -1,0 +1,25 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import Profile from './src/Profile/Profile'
+import Home from './src/screen/Home'
+import ItemProduct from './src/screen/ItemProduct'
+import Product1 from './src/screen/Product1'
+import ProductPet from './src/screen/ProductPet'
+import ItemProduct2 from './src/screen/ItemProduct2'
+import Product2 from './src/screen/Product2'
+import InsertPet from './src/screen/InsertPet'
+import InsertProduct from './src/screen/InsertProduct'
+import InsertService from './src/screen/InsertService'
+
+
+const App = () => {
+  return (
+    
+    <InsertService/>
+    
+  )
+}
+
+export default App
+
+const styles = StyleSheet.create({})
