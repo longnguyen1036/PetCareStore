@@ -70,7 +70,7 @@ const Home = () => {
 
       </View>
 
-      <View style={{marginTop: '10%'}}>
+      {/* <View style={{marginTop: '10%'}}>
         <SliderBox 
             images={images}
             dotColor="#FFEE58"
@@ -81,7 +81,7 @@ const Home = () => {
             ImageComponentStyle={{borderRadius: 15, width: '90%', marginTop: 5}}
         />
 
-      </View>
+      </View> */}
 
       <View style={{paddingHorizontal: '5%', marginTop: '5%'}}>
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Danh mục</Text>

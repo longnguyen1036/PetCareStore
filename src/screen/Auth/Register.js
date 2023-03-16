@@ -10,11 +10,12 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState, useContext} from 'react';
-import {CONFIRM_OTP_SCREEN} from './../../router/ScreenName';
-import {ToastAndroid} from 'react-native/Libraries/Components/ToastAndroid/ToastAndroid';
+import React, { useState, useContext } from 'react';
+import { CONFIRM_OTP_SCREEN } from './../../router/ScreenName';
+import { ToastAndroid } from 'react-native/Libraries/Components/ToastAndroid/ToastAndroid';
+import authApi from '../../api/authApi';
 
-const Register = ({navigation}) => {
+const Register = ({ navigation }) => {
   const [hidden, setHidden] = useState(true);
   const [hidden1, setHidden1] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,6 +23,8 @@ const Register = ({navigation}) => {
   const [emailAccount, setEmailAccount] = useState('');
   const [passwordAccount, setPasswordAccount] = useState('');
   const [confirmPassWord, setConfirmPassWord] = useState('');
+  const [addressStore, setAddressStore] = useState('');
+  const [phoneStore, setPhoneStore] = useState();
   const [checkUser, setCheckUser] = useState();
 
   const hiddenPassWord = () => {
@@ -38,7 +41,7 @@ const Register = ({navigation}) => {
 
     if (passwordAccount.localeCompare(confirmPassWord) == 0) {
       try {
-        if (nameAccount == '' || emailAccount == '' || passwordAccount == '') {
+        if (nameAccount == '' || emailAccount == '' || passwordAccount == '' || addressStore == '' || phoneStore == '') {
           setModalVisible(true);
         } else if (!isValidEmail) {
           console.log('Email khong hop le');
@@ -70,6 +73,8 @@ const Register = ({navigation}) => {
       nameAccount,
       emailAccount,
       passwordAccount,
+      addressStore,
+      phoneStore
     );
     setCheckUser(user.status);
     console.log('data', user.status);
@@ -91,8 +96,8 @@ const Register = ({navigation}) => {
           <Image style={styles.hinh} source={require('../../assets/image/phonenumber.png')}></Image>
         </View>
 
-        <View style={{width: '100%', paddingHorizontal: 15}}>
-          <Text style={{fontSize: 20, color: 'black', paddingBottom: 20}}>
+        <View style={{ width: '100%', paddingHorizontal: 15 }}>
+          <Text style={{ fontSize: 20, color: 'black', paddingBottom: 20 }}>
             Đăng ký
           </Text>
           <TextInput
@@ -120,6 +125,32 @@ const Register = ({navigation}) => {
             placeholder="Nhập email"
             onChangeText={setEmailAccount}
             value={emailAccount}
+          />
+          <TextInput
+            style={{
+              width: '100%',
+              borderWidth: 1,
+              marginVertical: 5,
+              borderRadius: 6,
+              paddingLeft: 15,
+              borderColor: '#DADFE6',
+            }}
+            placeholder="Nhập địa chỉ cửa hàng"
+            onChangeText={setAddressStore}
+            value={addressStore}
+          />
+          <TextInput
+            style={{
+              width: '100%',
+              borderWidth: 1,
+              marginVertical: 5,
+              borderRadius: 6,
+              paddingLeft: 15,
+              borderColor: '#DADFE6',
+            }}
+            placeholder="Nhập số điện thoại cửa hàng"
+            onChangeText={setPhoneStore}
+            value={phoneStore}
           />
           <TextInput
             style={{
@@ -197,7 +228,7 @@ const Register = ({navigation}) => {
               marginTop: 10,
             }}
             onPress={() => register()}>
-            <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold'}}>
+            <Text style={{ fontSize: 17, color: 'white', fontWeight: 'bold' }}>
               Đăng ký
             </Text>
           </TouchableOpacity>
@@ -214,7 +245,7 @@ const Register = ({navigation}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Image
-              style={{width: 60, height: 60}}
+              style={{ width: 60, height: 60 }}
               source={require('../../assets/image/warning.png')}></Image>
             <Text style={styles.modalText}>
               {' '}

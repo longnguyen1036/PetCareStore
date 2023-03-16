@@ -10,13 +10,30 @@ import {
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import OTPTextInput from 'react-native-otp-textinput';
+import authApi from '../../api/authApi';
 import {LOGIN_SCREEN} from './../../router/ScreenName';
 
 const ConfirmOTP = ({navigation}) => {
- 
+  const [otp, setOtp] = useState();
+
   const [modalVisible, setModalVisible] = useState(false);
   
-  
+  const OTPRegister = async () => {
+    try {
+      const res = await authApi.OTPRegister(
+        otp
+      );
+      console.log('res',res);
+      if (res.status != 200) {
+        setModalVisible(true);
+      } else {
+        navigation.navigate('LOGIN_SCREEN');
+      }
+    } catch (e) {
+      console.log('login error: ', e);
+    }
+  };
+
  
   return (
     <View style={styles.container}>
@@ -37,15 +54,13 @@ const ConfirmOTP = ({navigation}) => {
       </View>
       <View style={styles.v3}>
         <OTPTextInput
-          // defaultValue={otp}
-          // handleTextChange={setOtp}
+          defaultValue={otp}
+          handleTextChange={setOtp}
           inputCount={6}
         />
       </View>
       <View style={styles.v4}>
-        <TouchableOpacity style={styles.btn} 
-        // onPress={() => OTPRegister()}
-        >
+        <TouchableOpacity style={styles.btn} onPress={() => OTPRegister()}>
           <Text style={styles.t4}>Tiếp theo</Text>
         </TouchableOpacity>
       </View>

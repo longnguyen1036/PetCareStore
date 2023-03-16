@@ -11,13 +11,49 @@ import {
   Pressable,
 } from 'react-native';
 import React, {useState, useContext} from 'react';
-import {REGISTER_SCREEN} from '../../router/ScreenName';
+import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
+import {useDispatch, useSelector} from 'react-redux';
+import authApi from '../../api/authApi';
+import { loggedAction } from '../../redux/actions/authAction';
 import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = ({navigation}) => {
+  const dispatch = useDispatch()
+  const authState = useSelector(state => state.authState.logged)
+  
   const [modalVisible, setModalVisible] = useState(false);
- 
+  console.log("authState: " , authState)
+  const [emailStore, setEmailStore] = useState('prolatui112233@gmail.com');
+  const [passStore, setPassStore] = useState('123');
+
+  const Login = async () => {
+    try {
+      if ( emailStore == '' || passStore == '') {
+        setModalVisible(true);
+      }
+      console.log('truoc login', emailStore, passStore)
+      const res = await authApi.Login(
+        emailStore, 
+        passStore,
+      );
+      console.log('resssssssssssssssssssssssssssss',res.status);
+      if (res.status != 200) {
+        setModalVisible(true);
+      } else {
+        AsyncStorage.setItem('checkLogin', 'true');
+        const checkLogin = await AsyncStorage.getItem('checkLogin'); 
+        dispatch(loggedAction());
+        console.log('checkLogin', checkLogin)
+        
+        
+      }
+    } catch (e) {
+      console.log('login error: ', e);
+      setModalVisible(true);
+    }
+  };
   return (
     <ScrollView>
       <View>
@@ -37,6 +73,8 @@ const Login = ({navigation}) => {
               borderColor: '#DADFE6',
             }}
             placeholder="Nhập Email"
+            onChangeText={setEmailStore}
+            value={emailStore}
           />
           <TextInput
             style={{
@@ -47,12 +85,14 @@ const Login = ({navigation}) => {
               borderColor: '#DADFE6',
             }}
             secureTextEntry
+            onChangeText={setPassStore}
+            value={passStore}
             placeholder="Nhập mật khẩu"
           />
           <View style={{width: '100%', alignItems: 'flex-end', marginTop: 10}}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('FPass');
+                navigation.navigate(FORGET_PASS);
               }}>
               <Text>Quên mật khẩu?</Text>
             </TouchableOpacity>
@@ -68,7 +108,7 @@ const Login = ({navigation}) => {
               padding: 8,
               marginTop: 10,
             }}
-            >
+            onPress={() => Login()}>
             <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold'}}>
               Đăng nhập
             </Text>
@@ -93,7 +133,6 @@ const Login = ({navigation}) => {
           </View>
         </View>
       </View>
-      
       <Modal
         animationType="slide"
         transparent={true}

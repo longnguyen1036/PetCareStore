@@ -5,6 +5,7 @@ export const REGISTER_SCREEN = 'REGSITER_SCREEN';
 export const FORGET_PASS = 'FORGET_PASS';
 export const CONFIRM_OTP_SCREEN = 'CONFIRM_OTP_SCREEN';
 export const CREATE_NEW_PASS = 'CREATE_NEW_PASS';
+export const OTP_FORGET_PASS_SCREEN = 'OTP_FORGET_PASS_SCREEN';
 
 
 export const HOME_SCREEN = 'HOME_SCREEN';
@@ -31,3 +32,4 @@ export const EDIT_PROFILE_ADDRESS = 'EDIT_PROFILE_ADDRESS';
 export const CHART_SCREEN = 'CHART_SCREEN';
 
 export const MAIN_TAB = 'MAIN_TAB';
+

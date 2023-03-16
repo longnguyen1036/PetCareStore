@@ -8,24 +8,45 @@ import { MyTab } from './BottomNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Home } from '../screen/Main';
 import { HOME_SCREEN, MAIN_TAB } from './ScreenName';
+import { useDispatch,useSelector } from 'react-redux';
+import { loggedAction, logoutAction } from '../redux/actions/authAction';
 
-function MainStack(){
+function MainStack(props){
+  //fen chuyền props của thg navigation cho tui đi truyen vao dau
     return(
         <Stack.Navigator
       initialRouteName={MAIN_TAB}
       screenOptions={{headerShown: false}}>
-
       <Stack.Screen name={MAIN_TAB} component={MyTab} />
       <Stack.Screen name={HOME_SCREEN} component={Home} />
-    
       </Stack.Navigator>
     )
 }
 
 function MainNavigation() {
+  // màn hình nao điều hướng từ login thì truyrn62 vào đó
+  const [checkLogin, setCheckLogin] = useState();
+  const authState = useSelector(state => state.authState.logged)
+  console.log('authStatedasdasd', authState);
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const getCheckLogin = async () => {
+      const checkDangNhap = await AsyncStorage.getItem('checkLogin');
+      setCheckLogin(checkDangNhap);
+      console.log('Check Dang Nhap', checkDangNhap);
+      if(checkDangNhap == true){
+        dispatch(loggedAction())
+      }else{
+        dispatch(logoutAction())
+      }
+    };
+    getCheckLogin();
+  }, [checkLogin]);
+
     return (
       <NavigationContainer ref={navigationRef1}>
-         <MainStack />  
+        {authState == true ? <MainStack /> : <AuthStack />}
       </NavigationContainer>
     );
   }

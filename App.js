@@ -15,13 +15,27 @@ import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import MainNavigation from './src/router';
 
+function App1(){
+  return(
+    <Provider store={store}>
+      
+    <SafeAreaProvider>
+   
+      <MainNavigation />
+    
+    </SafeAreaProvider>
+    
+  </Provider>
+  )
+}
+
 const App = () => {
   return (
-    <SafeAreaProvider>
+   
     <Provider store={store}>
-      <MainNavigation></MainNavigation>
+      <App1/>
     </Provider>
-  </SafeAreaProvider>
+ 
   )
   
   
