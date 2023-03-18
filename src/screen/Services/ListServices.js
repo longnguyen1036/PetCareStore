@@ -8,37 +8,37 @@ const DATA = [
       id: '1',
       title: 'First Item',
       price: 800000,
-      image: require('../assets/image/productpet1.png'),
+      image: require('../../assets/image/productpet1.png'),
     },
     {
       id: '2',
       title: 'Second Item',
       price: 900000,
-      image: require('../assets/image/productpet2.png'),
+      image: require('../../assets/image/productpet2.png'),
     },
     {
       id: '3',
       title: 'Third Item',
       price: 100000,
-      image: require('../assets/image/productpet1.png'),
+      image: require('../../assets/image/productpet1.png'),
     },
     {
     id: '4',
     title: 'Four Item',
     price: 100000,
-    image: require('../assets/image/productpet2.png'),
+    image: require('../../assets/image/productpet2.png'),
     },
     {
     id: '5',
     title: 'Five Item',
     price: 100000,
-    image: require('../assets/image/productpet1.png'),
+    image: require('../../assets/image/productpet1.png'),
     },
     {
         id: '6',
         title: 'Five Item',
         price: 100000,
-        image: require('../assets/image/productpet2.png'),
+        image: require('../../assets/image/productpet2.png'),
         },
   ];
 

@@ -7,9 +7,12 @@ import AuthStack from './AuthStack';
 import { MyTab } from './BottomNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Home } from '../screen/Main';
-import { HOME_SCREEN, MAIN_TAB } from './ScreenName';
+import { HOME_SCREEN, MAIN_TAB, PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from './ScreenName';
 import { useDispatch,useSelector } from 'react-redux';
 import { loggedAction, logoutAction } from '../redux/actions/authAction';
+import { ListPets } from '../screen/Pets';
+import { ListProducts } from '../screen/Product';
+import { ListServices } from '../screen/Services';
 
 function MainStack(props){
   
@@ -19,6 +22,10 @@ function MainStack(props){
       screenOptions={{headerShown: false}}>
       <Stack.Screen name={MAIN_TAB} component={MyTab} />
       <Stack.Screen name={HOME_SCREEN} component={Home} />
+      <Stack.Screen name={PETS_SCREEN} component={ListPets} />
+      <Stack.Screen name={PRODUCTS_SCREEN} component={ListProducts} />
+      <Stack.Screen name={SERVICES_SCREEN} component={ListServices} />
+
       </Stack.Navigator>
     )
 }

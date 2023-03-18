@@ -10,7 +10,7 @@ const DATA = [
       price: 800000,
       price1: 900000,
       address: 'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-      image: require('../assets/image/profileavatar.png'),
+      image: require('../../assets/image/profileavatar.png'),
     },
     {
         id: '2',
@@ -18,7 +18,7 @@ const DATA = [
         price: 700000,
         price1: 800000,
         address: 'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-        image: require('../assets/image/profileavatar.png'),
+        image: require('../../assets/image/profileavatar.png'),
     },
     {
         id: '3',
@@ -26,7 +26,7 @@ const DATA = [
         price: 600000,
         price1: 700000,
         address: 'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-        image: require('../assets/image/profileavatar.png'),
+        image: require('../../assets/image/profileavatar.png'),
     },
     {
         id: '4',
@@ -34,7 +34,7 @@ const DATA = [
         price: 500000,
         price1: 600000,
         address: 'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-        image: require('../assets/image/profileavatar.png'),
+        image: require('../../assets/image/profileavatar.png'),
     },
     {
         id: '5',
@@ -42,7 +42,7 @@ const DATA = [
         price: 400000,
         price1: 400000,
         address: 'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-        image: require('../assets/image/profileavatar.png'),
+        image: require('../../assets/image/profileavatar.png'),
     },
   ];
 
