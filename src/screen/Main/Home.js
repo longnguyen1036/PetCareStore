@@ -6,7 +6,7 @@ import Block from '../../components/Block'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { PETS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
+import { PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
 
 
 const DATA = [
@@ -47,7 +47,7 @@ const DATA = [
     );
   };
 
-const Home = () => {
+const Home = ({navigation}) => {
     const images = [
         require('../../assets/image/anhcamnang.png'),
         require('../../assets/image/anhcamnang1.png'),

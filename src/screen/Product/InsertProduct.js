@@ -70,7 +70,7 @@ const InsertProduct = () => {
 
 
         <View>
-            <Text style={styles.nameProduct}>Giới tính</Text>
+            <Text style={styles.nameProduct}>Phân loại</Text>
         </View>
 
         <SelectDropdown
@@ -101,7 +101,7 @@ const InsertProduct = () => {
 
 
 <View>
-            <Text style={styles.nameProduct}>Tuổi</Text>
+            <Text style={styles.nameProduct}>Trình trạng</Text>
         </View>
 
         <SelectDropdown

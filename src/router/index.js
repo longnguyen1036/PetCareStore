@@ -7,12 +7,13 @@ import AuthStack from './AuthStack';
 import { MyTab } from './BottomNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Home } from '../screen/Main';
-import { HOME_SCREEN, MAIN_TAB, PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from './ScreenName';
+import { HOME_SCREEN, INSERT_PETS_SCREEN, INSERT_PRODUCTS_SCREEN, INSERT_SERVICES_SCREEN, MAIN_TAB, PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from './ScreenName';
 import { useDispatch,useSelector } from 'react-redux';
 import { loggedAction, logoutAction } from '../redux/actions/authAction';
-import { ListPets } from '../screen/Pets';
-import { ListProducts } from '../screen/Product';
+import { InsertPet, ListPets } from '../screen/Pets';
+import { InsertProduct, ListProducts } from '../screen/Product';
 import { ListServices } from '../screen/Services';
+import InsertService from '../screen/Services/InsertService';
 
 function MainStack(props){
   
@@ -25,6 +26,10 @@ function MainStack(props){
       <Stack.Screen name={PETS_SCREEN} component={ListPets} />
       <Stack.Screen name={PRODUCTS_SCREEN} component={ListProducts} />
       <Stack.Screen name={SERVICES_SCREEN} component={ListServices} />
+      <Stack.Screen name={INSERT_PETS_SCREEN} component={InsertPet} />
+      <Stack.Screen name={INSERT_PRODUCTS_SCREEN} component={InsertProduct} />
+      <Stack.Screen name={INSERT_SERVICES_SCREEN} component={InsertService} />
+      
 
       </Stack.Navigator>
     )
