@@ -6,11 +6,11 @@ import SelectDropdown from 'react-native-select-dropdown'
 
 const categoryproducts = ["Thức ăn", "Dây", "Quần", "Jerry"]
 
-const InsertProduct = () => {
+const InsertProduct = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.hearderIcon}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.goBack()}>
             <FontAwesome5 style={{}} color={'black'} name='chevron-left' size={25} />
         </TouchableOpacity>
 

@@ -12,7 +12,7 @@ import React from 'react';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Block from '../../components/Block';
-import { INSERT_PETS_SCREEN } from '../../router/ScreenName';
+import {INSERT_PETS_SCREEN} from '../../router/ScreenName';
 
 const DATA = [
   {
@@ -57,22 +57,22 @@ const Item = ({title, price, image}) => (
   <View
     style={{
       backgroundColor: '#E6EAED',
-      width: 150,
-      height: 186,
+      width: 160,
+      height: 200,
       borderRadius: 8,
       paddingHorizontal: 8,
       marginRight: '5%',
       marginTop: '2%',
       marginLeft: '5%',
     }}>
-    <View style={{alignItems: 'center'}}>
-      <Image source={image}></Image>
-    </View>
+    <Block alignCenter marginTop={'5%'} >
+      <Image style={{width: 100, height: 110}} source={image}></Image>
+    </Block>
     <View
       style={{
         backgroundColor: 'white',
-        borderRadius: 8,
-        marginTop: '12%',
+        borderRadius: 5,
+        marginTop: '8%',
         paddingHorizontal: 5,
         paddingVertical: 5,
       }}>
@@ -83,7 +83,7 @@ const Item = ({title, price, image}) => (
       </View>
       <View
         style={{
-          marginTop: '8%',
+          marginTop: '5%',
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
@@ -124,17 +124,18 @@ const ListPets = ({navigation}) => {
         <View>
           <Text style={styles.textHeader}>Thú Cưng</Text>
         </View>
-        <TouchableOpacity onPress={()=> navigation.navigate(INSERT_PETS_SCREEN)}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(INSERT_PETS_SCREEN)}>
           <FontAwesome5 style={{}} color={'black'} name="plus" size={25} />
         </TouchableOpacity>
       </View>
 
       <Block paddingHorizontal={10}>
         <Block
+          backgroundColor={'#F2F3F2'}
           row={1}
           justifyCenter
           alignCenter
-          backgroundColor={'white'}
           height={40}
           borderRadius={15}
           margin={10}>
@@ -151,7 +152,7 @@ const ListPets = ({navigation}) => {
         </Block>
       </Block>
 
-      <SafeAreaView style={{paddingHorizontal: '3%'}}>
+      <SafeAreaView >
         <FlatList
           numColumns={2}
           data={DATA}
@@ -170,6 +171,7 @@ export default ListPets;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   header: {
     flexDirection: 'row',

@@ -158,7 +158,7 @@ import { loggedAction, logoutAction } from '../../redux/actions/authAction';
             width: '90%',
             marginTop: '3%',
             backgroundColor: '#18A2E1',
-            height: '18%',
+            height: '13%',
             borderRadius: 8,
             alignItems: 'center',
             justifyContent: 'center',
@@ -179,7 +179,7 @@ import { loggedAction, logoutAction } from '../../redux/actions/authAction';
               }}>
               Thay đổi mật khẩu
             </Text>
-            <FontAwesome5 style={{width: '10%'}} name="chevron-right" size={18} />
+            <FontAwesome5 color={'white'} style={{width: '10%'}} name="chevron-right" size={18} />
           </TouchableOpacity>
           <View
             style={{
@@ -205,7 +205,7 @@ import { loggedAction, logoutAction } from '../../redux/actions/authAction';
               }}>
               Thay địa chỉ
             </Text>
-            <FontAwesome5 style={{width: '10%'}} name="chevron-right" size={18} />
+            <FontAwesome5 color={'white'} style={{width: '10%'}} name="chevron-right" size={18} />
           </TouchableOpacity>
         </View>
         <View style={{width: '90%', marginTop: '3%', flexDirection: 'row'}}>
@@ -226,7 +226,7 @@ import { loggedAction, logoutAction } from '../../redux/actions/authAction';
             width: '90%',
             marginTop: '3%',
             backgroundColor: '#18A2E1',
-            height: '22%',
+            height: '18%',
             borderRadius: 8,
             alignItems: 'center',
             justifyContent: 'center',
