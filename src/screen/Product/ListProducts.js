@@ -2,36 +2,37 @@ import { StyleSheet, Text, View ,Image, TouchableOpacity, TextInput, SafeAreaVie
 import React from 'react'
 import Block from '../../components/Block'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import { INSERT_PRODUCTS_SCREEN } from '../../router/ScreenName';
 const DATA = [
     {
       id: '1',
       title: 'First Item',
       price: 800000,
-      image: require('../assets/image/profileavatar.png'),
+      image: require('../../assets/image/profileavatar.png'),
     },
     {
       id: '2',
       title: 'Second Item',
       price: 900000,
-      image: require('../assets/image/profileavatar.png'),
+      image: require('../../assets/image/profileavatar.png'),
     },
     {
       id: '3',
       title: 'Third Item',
       price: 100000,
-      image: require('../assets/image/profileavatar.png'),
+      image: require('../../assets/image/profileavatar.png'),
     },
     {
     id: '4',
     title: 'Four Item',
     price: 100000,
-    image: require('../assets/image/profileavatar.png'),
+    image: require('../../assets/image/profileavatar.png'),
     },
     {
     id: '5',
     title: 'Five Item',
     price: 100000,
-    image: require('../assets/image/profileavatar.png'),
+    image: require('../../assets/image/profileavatar.png'),
     },
   ];
 
@@ -56,17 +57,17 @@ const DATA = [
         </View>
   );
 
-const ListProducts = () => {
+const ListProducts = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.goBack()}>
             <FontAwesome5 style={{}} color={'black'} name='chevron-left' size={25} />
         </TouchableOpacity>
         <View>
             <Text style ={styles.textHeader}>Sản phẩm</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> navigation.navigate(INSERT_PRODUCTS_SCREEN)}>
             <FontAwesome5 style={{}} color={'black'} name='plus' size={25} />
         </TouchableOpacity>
       </View>

@@ -6,6 +6,7 @@ import Block from '../../components/Block'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
 
 
 const DATA = [
@@ -25,6 +26,7 @@ const DATA = [
 
   const renderItem = ({item}) => {
     return (
+      <TouchableOpacity>
       <Block
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
@@ -41,10 +43,11 @@ const DATA = [
           </TouchableOpacity>
         </Block>
       </Block>
+      </TouchableOpacity>
     );
   };
 
-const Home = () => {
+const Home = ({navigation}) => {
     const images = [
         require('../../assets/image/anhcamnang.png'),
         require('../../assets/image/anhcamnang1.png'),
@@ -54,6 +57,7 @@ const Home = () => {
 
     ];
   return (
+   
     <View style={{flex: 1, backgroundColor: '#F5F5F5'}}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: '5%', marginTop: '3%'}}>
         <View>
@@ -72,7 +76,7 @@ const Home = () => {
 
       </View>
 
-      <View style={{marginTop: '10%'}}>
+      {/* <View style={{marginTop: '10%'}}>
         <SliderBox 
             images={images}
             dotColor="#FFEE58"
@@ -83,7 +87,7 @@ const Home = () => {
             ImageComponentStyle={{borderRadius: 15, width: '90%', marginTop: 5}}
         />
 
-      </View>
+      </View> */}
 
       <View style={styles.category}>
         <Text style={styles.c1}>Danh mục</Text>
