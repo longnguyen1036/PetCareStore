@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
   },
   dropdown4BtnStyle: {
     width: '50%',
-    height: 50,
+    height: 30,
     backgroundColor: '#FFF',
     borderRadius: 8,
     borderWidth: 1,

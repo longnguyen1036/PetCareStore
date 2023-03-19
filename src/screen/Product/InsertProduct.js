@@ -100,7 +100,7 @@ const InsertProduct = ({navigation}) => {
         />
 
 
-<View>
+<View >
             <Text style={styles.nameProduct}>Trình trạng</Text>
         </View>
 
@@ -209,8 +209,8 @@ PressInsert: {
 },
 dropdown4BtnStyle: {
     width: '50%',
-    height: 50,
-    backgroundColor: '#FFF',
+    height: 30,
+    backgroundColor: 'white',
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#444',
