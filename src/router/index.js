@@ -8,10 +8,8 @@ import {MyTab} from './BottomNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Home} from '../screen/Main';
 
-import {HOME_SCREEN, MAIN_TAB, PETS_SCREEN} from './ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import {loggedAction, logoutAction} from '../redux/actions/authAction';
-import {ListPets} from '../screen/Pets';
 
 import {
   HOME_SCREEN,
@@ -23,8 +21,6 @@ import {
   PRODUCTS_SCREEN,
   SERVICES_SCREEN,
 } from './ScreenName';
-import {useDispatch, useSelector} from 'react-redux';
-import {loggedAction, logoutAction} from '../redux/actions/authAction';
 import {InsertPet, ListPets} from '../screen/Pets';
 import {InsertProduct, ListProducts} from '../screen/Product';
 import {ListServices} from '../screen/Services';
@@ -69,8 +65,8 @@ function MainNavigation() {
 
   return (
     <NavigationContainer ref={navigationRef1}>
-      {authState == true ? <MainStack /> : <AuthStack />}
-      {/* <MainStack/> */}
+      {/* {authState == true ? <MainStack /> : <AuthStack />} */}
+      <MainStack/>
     </NavigationContainer>
   );
 }
