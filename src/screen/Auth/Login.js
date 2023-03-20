@@ -10,7 +10,6 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState, useContext} from 'react';
 import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
@@ -38,7 +37,6 @@ const Login = ({navigation}) => {
         emailStore, 
         passStore,
       );
-      console.log('resssssssssssssssssssssssssssss',res.status);
       if (res.status != 200) {
         setModalVisible(true);
       } else {
@@ -46,7 +44,6 @@ const Login = ({navigation}) => {
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
         dispatch(loggedAction());
         console.log('checkLogin', checkLogin)
-        
         
       }
     } catch (e) {
