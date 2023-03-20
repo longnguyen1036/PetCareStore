@@ -111,6 +111,7 @@ import { loggedAction, logoutAction } from '../../redux/actions/authAction';
               marginTop: '1%',
             }}>
             <TouchableOpacity
+
               style={{
                 backgroundColor: '#18A2E1',
                 width: '30%',
