@@ -79,7 +79,7 @@ const Home = ({navigation}) => {
 
       </View>
 
-       <View style={{marginTop: '10%'}}>
+       {/* <View style={{marginTop: '10%'}}>
         <SliderBox 
             images={images}
             dotColor="#FFEE58"
@@ -90,7 +90,7 @@ const Home = ({navigation}) => {
             ImageComponentStyle={{borderRadius: 15, width: '90%', marginTop: 5}}
         />
 
-      </View> 
+      </View>  */}
 
       <View style={styles.category}>
       <View style={{paddingHorizontal: '3%', marginTop: '3%', marginBottom: '3%'}}>
