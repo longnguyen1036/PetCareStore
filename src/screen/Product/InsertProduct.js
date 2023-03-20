@@ -6,11 +6,9 @@ import SelectDropdown from 'react-native-select-dropdown'
 
 const categoryproducts = ["Thức ăn", "Dây", "Quần", "Jerry"]
 
-const InsertProduct = () => {
   return (
     <View style={styles.container}>
       <View style={styles.hearderIcon}>
-        <TouchableOpacity>
             <FontAwesome5 style={{}} color={'black'} name='chevron-left' size={25} />
         </TouchableOpacity>
 
@@ -70,7 +68,6 @@ const InsertProduct = () => {
 
 
         <View>
-            <Text style={styles.nameProduct}>Giới tính</Text>
         </View>
 
         <SelectDropdown
@@ -100,8 +97,6 @@ const InsertProduct = () => {
         />
 
 
-<View>
-            <Text style={styles.nameProduct}>Tuổi</Text>
         </View>
 
         <SelectDropdown
@@ -209,8 +204,6 @@ PressInsert: {
 },
 dropdown4BtnStyle: {
     width: '50%',
-    height: 50,
-    backgroundColor: '#FFF',
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#444',
