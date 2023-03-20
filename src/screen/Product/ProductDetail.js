@@ -14,18 +14,18 @@ const createTwoButtonAlert = () =>
 
 const ProductDetail = () => {
     const [ItemsImage, setItemsImage] = useState([
-        { key: 1, image: require('../../assets/image/detail1.png')},
-        { key: 2, image: require('../../assets/image/detail2.png')},
-        { key: 3, image: require('../../assets/image/detail1.png')},
-        { key: 4, image: require('../../assets/image/detail2.png')},
-        { key: 5, image: require('../../assets/image/detail1.png')},
-        { key: 6, image: require('../../assets/image/detail2.png')},
-        { key: 7, image: require('../../assets/image/detail1.png')},
-        { key: 8, image: require('../../assets/image/detail2.png')},
-        { key: 9, image: require('../../assets/image/detail1.png')},
+        { key: 1, image: require('../../assets/image/profiledog.png')},
+        { key: 2, image: require('../../assets/image/profiledog.png')},
+        { key: 3, image: require('../../assets/image/profiledog.png')},
+        { key: 4, image: require('../../assets/image/profiledog.png')},
+        { key: 5, image: require('../../assets/image/profiledog.png')},
+        { key: 6, image: require('../../assets/image/profiledog.png')},
+        { key: 7, image: require('../../assets/image/profiledog.png')},
+        { key: 8, image: require('../../assets/image/profiledog.png')},
+        { key: 9, image: require('../../assets/image/profiledog.png')},
     ])
 
-    const [selectedImage, setSelectedImage] = useState(require('../../assets/image/detail1.png'));
+    const [selectedImage, setSelectedImage] = useState(require('../../assets/image/profiledog.png'));
   return (
     <View style={{ backgroundColor: '#dcdcdc', height: '100%'}}>
       <View style = {{alignItems: 'center',}}>

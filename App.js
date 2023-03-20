@@ -9,34 +9,35 @@ import React from 'react';
 //   Welcome,
 // } from './src/screen/Auth';
 
-// import { MyTab } from './src/router/BottomNavigation';
-// import { SafeAreaProvider } from 'react-native-safe-area-context';
-// import { Provider } from 'react-redux';
-// import { store } from './src/redux/store';
-// import MainNavigation from './src/router';
-import ProductDetail from './src/screen/Product/ProductDetail';
+import { MyTab } from './src/router/BottomNavigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
+import MainNavigation from './src/router';
 
-// function App1(){
-//   return(
-//     <Provider store={store}>
+
+
+function App1(){
+  return(
+    <Provider store={store}>
       
-//     <SafeAreaProvider>
+    <SafeAreaProvider>
    
-//       <MainNavigation />
+      <MainNavigation />
     
-//     </SafeAreaProvider>
+    </SafeAreaProvider>
     
-//   </Provider>
-//   )
-// }
+  </Provider>
+  )
+}
 
 const App = () => {
   return (
    
-    // <Provider store={store}>
-    //   <App1/>
-    // </Provider>
-    <ProductDetail/>
+    <Provider store={store}>
+      <App1/>
+    </Provider>
+    
  
   )
   
