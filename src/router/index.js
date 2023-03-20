@@ -20,11 +20,13 @@ import {
   PETS_SCREEN,
   PRODUCTS_SCREEN,
   SERVICES_SCREEN,
+  PETS_DETAIL_SCREEN,
 } from './ScreenName';
 import {InsertPet, ListPets} from '../screen/Pets';
 import {InsertProduct, ListProducts} from '../screen/Product';
 import {ListServices} from '../screen/Services';
 import InsertService from '../screen/Services/InsertService';
+import PetDetail from '../screen/Pets/PetDetail';
 
 function MainStack(props) {
   return (
@@ -39,6 +41,7 @@ function MainStack(props) {
       <Stack.Screen name={INSERT_PETS_SCREEN} component={InsertPet} />
       <Stack.Screen name={INSERT_PRODUCTS_SCREEN} component={InsertProduct} />
       <Stack.Screen name={INSERT_SERVICES_SCREEN} component={InsertService} />
+      <Stack.Screen name={PETS_DETAIL_SCREEN} component={PetDetail} />
     </Stack.Navigator>
   );
 }

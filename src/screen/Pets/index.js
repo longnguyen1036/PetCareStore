@@ -1,3 +1,5 @@
 import ListPets from "./ListPets";
 import InsertPet from "./InsertPet";
-export {ListPets, InsertPet}
+import PetDetail from "./PetDetail";
+import UpdatePet from "./UpdatePet";
+export {ListPets, InsertPet, PetDetail, UpdatePet}
