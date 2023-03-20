@@ -10,12 +10,14 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
+import React, {useState} from 'react';
 import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
 import { loggedAction } from '../../redux/actions/authAction';
 import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setToken, getToken} from '../../helper/auth';
 
 
 const Login = ({navigation}) => {
@@ -37,6 +39,7 @@ const Login = ({navigation}) => {
         emailStore, 
         passStore,
       );
+      console.log('resssssssssssssssssssssssssssss',res);
       if (res.status != 200) {
         setModalVisible(true);
       } else {
@@ -44,6 +47,7 @@ const Login = ({navigation}) => {
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
         dispatch(loggedAction());
         console.log('checkLogin', checkLogin)
+        await setToken(res.data.token)
         
       }
     } catch (e) {
