@@ -27,9 +27,14 @@ const InsertPet = async (namePet, agePet, typePet, image, pricePet, quantityPet,
         console.log('formDatadsds', formData._parts);
 
 
+        const insertPet = await axios.post(`${BASE_URL_TEST}/addproduct`, formData,
+        {
             headers: {
                 token: `Bearer ${token}`
             }
+        })
+        
+    
           
         console.log('insert thanh cong', insertPet)
         return insertPet
@@ -38,5 +43,33 @@ const InsertPet = async (namePet, agePet, typePet, image, pricePet, quantityPet,
     }
 }
 
+const InsertImage = async (image) => {
+    try {
+        console.log('insert image', image)
+        const file = {
+            uri: image.path,
+            type: image.mime,
+            name: image.path.split('/').pop(),
+          };
+        const formData = new FormData();
+        formData.append('image', file);
+        console.log('formDataneneenen', formData._parts)
+        const insertImage = await axios.post(`http://pes.store/api/upLoadOne`,formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrTmFtZSI6IkjDoG8gaG9hIHPDoG5oIMSRaeG7h3UiLCJ1c2VyTmFtZSI6IjA4NjU2NTg1NDQiLCJfaWQiOiI2M2U0YmUzMTlhMmYwZmYwN2MzNmNlNjEiLCJpYXQiOjE2NzkzMjEyMDR9.ZTSFNdq_Pz-ROLxOuP9Gk8p04JL_SA750Dwh3ZBtyKA`
+              },
+        })
+        console.log('api image', insertImage)
+        return insertImage
+        
+    } catch (error) {
+        console.log('insert image error', error);
+    }
+}
+
 export default {
+    InsertPet,
+    InsertImage
 }
