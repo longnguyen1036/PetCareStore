@@ -14,7 +14,7 @@ const InsertPet = async (namePet, agePet, typePet, image, pricePet, quantityPet,
         formData.append('image', {
             uri: image.path,
             type: image.mime,
-            // name: image.filename,
+            name: image.path.split('/').pop(),
           });
         formData.append('pricePet', pricePet);
         formData.append('quantityPet', quantityPet);
@@ -30,6 +30,7 @@ const InsertPet = async (namePet, agePet, typePet, image, pricePet, quantityPet,
         const insertPet = await axios.post(`${BASE_URL_TEST}/addproduct`, formData,
         {
             headers: {
+                "Content-Type": "multipart/form-data",
                 token: `Bearer ${token}`
             }
         })
@@ -38,6 +39,45 @@ const InsertPet = async (namePet, agePet, typePet, image, pricePet, quantityPet,
           
         console.log('insert thanh cong', insertPet)
         return insertPet
+    } catch (error) {
+        console.log('insert pet error', error);
+    }
+}
+
+const InsertProduct = async (nameProduct, priceProduct, image, descriptionProduct, quantityProduct, typeProduct, codeProduct, nameModel) => {
+    try {
+        console.log('log insert pet', nameProduct, priceProduct, image, descriptionProduct, quantityProduct, typeProduct, codeProduct, nameModel)
+        const token = await getToken();
+        const formData = new FormData();
+         formData.append('nameProduct', nameProduct);
+        formData.append('priceProduct', priceProduct);
+        formData.append('image', {
+            uri: image.path,
+            type: image.mime,
+            name: image.path.split('/').pop(),
+          });
+        formData.append('descriptionProduct', descriptionProduct);
+        formData.append('quantityProduct', quantityProduct);
+        formData.append('typeProduct', typeProduct);
+        formData.append('codeProduct', codeProduct);
+        formData.append('nameModel', nameModel);
+
+
+        console.log('formDatadsds', formData._parts);
+
+
+        const insertProduct = await axios.post(`${BASE_URL_TEST}/addproduct`, formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                token: `Bearer ${token}`
+            }
+        })
+        
+    
+          
+        console.log('insert thanh cong', insertProduct)
+        return insertProduct
     } catch (error) {
         console.log('insert pet error', error);
     }
@@ -71,5 +111,6 @@ const InsertImage = async (image) => {
 
 export default {
     InsertPet,
-    InsertImage
+    InsertImage,
+    InsertProduct
 }

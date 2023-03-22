@@ -39,11 +39,11 @@ const InsertPet = ({ navigation }) => {
         cropping: true,
       });
       console.log('imageeeeeeeeee',image);
-      setImageUri(image.path);
+      setImageUri(image);
 
-      const urlimage = await productApi.InsertImage(image)
-      setUrlImage(urlimage.data.data.link);
-      console.log('link hinh ne', urlimage.data.data.link)
+      // const urlimage = await productApi.InsertImage(image)
+      // setUrlImage(urlimage.data.data.link);
+      // console.log('link hinh ne', urlimage.data.data.link)
     } catch (error) {
       console.log('erorr hinh', error);
     }
@@ -51,7 +51,7 @@ const InsertPet = ({ navigation }) => {
 
   const addProduct = async () => {
     try {
-      const res = await productApi.InsertPet(namePet, agePet, typePet, urlImage, pricePet, quantityPet, descriptionPet, genderPet, namePet, 'petStore')
+      const res = await productApi.InsertPet(namePet, agePet, typePet, imageUri, pricePet, quantityPet, descriptionPet, genderPet, namePet, 'petStore')
       if (res.status === 200) {
         console.log('success')
       } else {
@@ -78,7 +78,7 @@ const InsertPet = ({ navigation }) => {
 
         {imageUri ? (
           <Block marginLeft={'5%'}>
-            <Image source={{ uri: imageUri }} style={{ width: 100, height: 100 }} />
+            <Image source={{ uri: imageUri.path }} style={{ width: 100, height: 100 }} />
           </Block>
         ) : (
           <TouchableOpacity
