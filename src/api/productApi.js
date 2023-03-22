@@ -27,29 +27,9 @@ const InsertPet = async (namePet, agePet, typePet, image, pricePet, quantityPet,
         console.log('formDatadsds', formData._parts);
 
 
-        // const insertPet = await axios.post(`${BASE_URL_TEST}/addproduct`, {
-        //     headers: {
-        //         token: `Bearer ${token}`
-        //     },data : {
-        //         formData._parts
-        //     }
-        // })
-        
-        const insertPet = {
-            method: 'POST',
-            url: `${BASE_URL_TEST}/addproduct`,
             headers: {
                 token: `Bearer ${token}`
-            }, data: {
-                formData
             }
-          };
-          
-          axios.request(insertPet).then(function (response) {
-              console.log(response.data);
-          }).catch(function (error) {
-              console.error(error);
-          });
           
         console.log('insert thanh cong', insertPet)
         return insertPet
@@ -59,5 +39,4 @@ const InsertPet = async (namePet, agePet, typePet, image, pricePet, quantityPet,
 }
 
 export default {
-    InsertPet
 }
