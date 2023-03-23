@@ -8,7 +8,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
-
+import { useSelector } from 'react-redux';
 
 const DATA = [
     {
@@ -51,6 +51,8 @@ const DATA = [
   };
 
 const Home = ({navigation}) => {
+  // const test = useSelector(state => state.authState.userInfo)
+  // console.log('testttt', test)
     const images = [
         require('../../assets/image/anhcamnang.png'),
         require('../../assets/image/anhcamnang1.png'),
