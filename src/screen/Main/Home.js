@@ -38,7 +38,7 @@ const DATA = [
         <Block radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
           <Block paddingTop={5}>
             <Text >{item.name}</Text>
-            <Text color={'#'}>Cate</Text>
+            <Text color={'black'}>Cate</Text>
             <Text marginTop={7} size={15}>{item.price} VND</Text>
           </Block>
           <TouchableOpacity style={styles.nut}>
