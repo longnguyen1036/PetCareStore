@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert  } from 'react-native'
 import React, {useState} from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { UPDATE_PETS_SCREEN } from '../../router/ScreenName';
+import { UPDATE_SERVICES_SCREEN } from '../../router/ScreenName';
+
 const createTwoButtonAlert = () =>
     Alert.alert('Xac nhan xoa san pham', 'Ban co chac chan muon xoa khong', [
       {
@@ -12,7 +13,7 @@ const createTwoButtonAlert = () =>
       {text: 'OK', onPress: () => console.log('OK Pressed')},
     ]);
 
-const PetDetail = ({navigation}) => {
+const SeviceDetail = ({navigation}) => {
     const [ItemsImage, setItemsImage] = useState([
         { key: 1, image: require('../../assets/image/detail1.png')},
         { key: 2, image: require('../../assets/image/detail2.png')},
@@ -102,7 +103,7 @@ const PetDetail = ({navigation}) => {
             </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate(UPDATE_PETS_SCREEN)} style={{marginTop: '5%', backgroundColor: '#18A2E1', padding: '3%', borderRadius: 8}}>
+        <TouchableOpacity onPress={() => navigation.navigate(UPDATE_SERVICES_SCREEN)} style={{marginTop: '5%', backgroundColor: '#18A2E1', padding: '3%', borderRadius: 8}}>
             <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>Chỉnh sửa sản phẩm</Text>
 
         </TouchableOpacity>
@@ -112,6 +113,6 @@ const PetDetail = ({navigation}) => {
   )
 }
 
-export default PetDetail
+export default SeviceDetail
 
 const styles = StyleSheet.create({})

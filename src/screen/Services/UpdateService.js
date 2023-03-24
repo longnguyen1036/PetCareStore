@@ -6,7 +6,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 
 const categoryproducts = ["Thức ăn", "Dây", "Quần", "Jerry"]
 
-const UpdatePet = ({ navigation}) => {
+const UpdateService = ( {navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.hearderIcon}>
@@ -128,7 +128,7 @@ const UpdatePet = ({ navigation}) => {
   )
 }
 
-export default UpdatePet
+export default UpdateService
 
 const styles = StyleSheet.create({
     container: {

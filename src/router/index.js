@@ -21,12 +21,21 @@ import {
   PRODUCTS_SCREEN,
   SERVICES_SCREEN,
   PETS_DETAIL_SCREEN,
+  PRODUCTS_DETAIL_SCREEN,
+  UPDATE_PRODUCTS_SCREEN,
+  UPDATE_PETS_SCREEN,
+  SERVICES_DETAIL_SCREEN,
+  UPDATE_SERVICES_SCREEN,
 } from './ScreenName';
-import {InsertPet, ListPets} from '../screen/Pets';
+import {InsertPet, ListPets, UpdatePet} from '../screen/Pets';
 import {InsertProduct, ListProducts} from '../screen/Product';
 import {ListServices} from '../screen/Services';
 import InsertService from '../screen/Services/InsertService';
 import PetDetail from '../screen/Pets/PetDetail';
+import ProductDetail from '../screen/Product/ProductDetail';
+import UpdateProduct from '../screen/Product/UpdateProduct';
+import SeviceDetail from '../screen/Services/SeviceDetail';
+import UpdateService from '../screen/Services/UpdateService';
 
 function MainStack(props) {
   return (
@@ -42,6 +51,11 @@ function MainStack(props) {
       <Stack.Screen name={INSERT_PRODUCTS_SCREEN} component={InsertProduct} />
       <Stack.Screen name={INSERT_SERVICES_SCREEN} component={InsertService} />
       <Stack.Screen name={PETS_DETAIL_SCREEN} component={PetDetail} />
+      <Stack.Screen name={PRODUCTS_DETAIL_SCREEN} component={ProductDetail} />
+      <Stack.Screen name={UPDATE_PRODUCTS_SCREEN} component={UpdateProduct} />
+      <Stack.Screen name={UPDATE_PETS_SCREEN} component={UpdatePet} />
+      <Stack.Screen name={SERVICES_DETAIL_SCREEN} component={SeviceDetail} />
+      <Stack.Screen name={UPDATE_SERVICES_SCREEN} component={UpdateService} />
     </Stack.Navigator>
   );
 }
