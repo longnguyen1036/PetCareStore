@@ -54,6 +54,7 @@ const DATA = [
 ];
 
 const Item = ({title, price, image}) => (
+  
   <View
     style={{
       backgroundColor: '#E6EAED',

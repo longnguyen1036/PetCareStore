@@ -83,6 +83,45 @@ const InsertProduct = async (nameProduct, priceProduct, image, descriptionProduc
 }
 }
 
+const InsertService = async (nameService, priceService, image, descriptionService, typeService, quantityService, timeService, nameModel) => {
+    try {
+        console.log('log insert pet', nameService, priceService, image, descriptionService, typeService, quantityService, timeService, nameModel)
+        const token = await getToken();
+        const formData = new FormData();
+         formData.append('nameService', nameService);
+        formData.append('priceService', priceService);
+        formData.append('image', {
+            uri: image.path,
+            type: image.mime,
+            name: image.path.split('/').pop(),
+          });
+        formData.append('descriptionService', descriptionService);
+        formData.append('typeService', typeService);
+        formData.append('quantityService', quantityService);
+        formData.append('timeService', timeService);
+        formData.append('nameModel', nameModel);
+
+
+        console.log('formDatadsds', formData._parts);
+
+
+        const insertService = await axios.post(`${BASE_URL_TEST}/addproduct`, formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                token: `Bearer ${token}`
+            }
+        })
+        
+    
+          
+        console.log('insert thanh cong', insertService)
+        return insertService
+    } catch (error) {
+        console.log('insert pet error', error);
+}
+}
+
 const InsertImage = async (image) => {
     try {
         console.log('insert image', image)
@@ -112,5 +151,6 @@ const InsertImage = async (image) => {
 export default {
     InsertPet,
     InsertImage,
-    InsertProduct
+    InsertProduct, 
+    InsertService
 }
