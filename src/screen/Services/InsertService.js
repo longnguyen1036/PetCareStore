@@ -8,6 +8,7 @@ import {
   FlatList,
   Modal,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import Block from '../../components/Block';
@@ -17,10 +18,9 @@ import SelectDropdown from 'react-native-select-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
 import productApi from '../../api/productApi';
 
-
 const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 
-const InsertService = () => {
+const InsertService = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [nameService, setNameService] = useState('');
   const [priceService, setPriceService] = useState();
@@ -28,6 +28,8 @@ const InsertService = () => {
   const [descriptionService, setDescriptionService] = useState('');
   const [typeService, setTypeService] = useState('');
   const [quantityService, setQuantityService] = useState();
+
+  const [loading, setLoading] = useState(false);
 
   const [modalVisibleTime, setModalVisibleTime] = useState(false);
   const [time, setTime] = useState('');
@@ -41,7 +43,7 @@ const InsertService = () => {
   const insertTimeService = () => {
     const arrTime = [...timeService];
     arrTime.push(arrTime[arrTime.length - 1]);
-    
+
     arrTime[arrTime.length - 2] = {...time};
 
     setTimeService(arrTime);
@@ -69,9 +71,10 @@ const InsertService = () => {
 
   const addService = async () => {
     try {
-        timeService.pop()
-        const timeApi = JSON.stringify(timeService)
-        console.log('timeservice', timeService)
+      setLoading(true);
+      timeService.pop();
+      const timeApi = JSON.stringify(timeService);
+      console.log('timeservice', timeService);
       const res = await productApi.InsertService(
         nameService,
         priceService,
@@ -83,16 +86,19 @@ const InsertService = () => {
         'serviceStore',
       );
       if (res.status === 200) {
+        setLoading(false);
+        Alert.alert( 'Them san pham thanh cong')
         console.log('success');
+        navigation.goBack()
       } else {
+        setLoading(true);
+        Alert.alert( 'Them san pham that bai')
         console.log('thất bại');
       }
     } catch (error) {
       console.log('loi them san pham', error);
     }
   };
-
-
 
   const renderItem = ({item}) => {
     // console.log('itemmm', item);
@@ -120,7 +126,7 @@ const InsertService = () => {
   return (
     <View style={styles.container}>
       <View style={styles.hearderIcon}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome5
             style={{}}
             color={'black'}
@@ -131,63 +137,65 @@ const InsertService = () => {
       </View>
 
       {imageUri ? (
-          <Block marginLeft={'5%'}>
-            <Image
-              source={{uri: imageUri.path}}
-              style={{width: 100, height: 100}}
-            />
-          </Block>
-        ) : (
-          <TouchableOpacity
-            style={styles.iconAdd}
-            onPress={() => handleChooseImage()}>
-            <FontAwesome5 style={{}} color={'black'} name="plus" size={25} />
-          </TouchableOpacity>
-        )}
+        <Block marginLeft={'5%'}>
+          <Image
+            source={{uri: imageUri.path}}
+            style={{width: 100, height: 100}}
+          />
+        </Block>
+      ) : (
+        <TouchableOpacity
+          style={styles.iconAdd}
+          onPress={() => handleChooseImage()}>
+          <FontAwesome5 style={{}} color={'black'} name="plus" size={25} />
+        </TouchableOpacity>
+      )}
 
       <View style={styles.conTent}>
         <View>
           <Text style={styles.nameProduct}>Tên dịch vụ</Text>
         </View>
         <View style={styles.textInput}>
-        <TextInput
-              placeholder="Nhập tên dịch vụ"
-              onChangeText={setNameService}
-              value={nameService}
-            />
+          <TextInput
+            placeholder="Nhập tên dịch vụ"
+            onChangeText={setNameService}
+            value={nameService}
+          />
         </View>
 
         <View>
-            <Text style={styles.nameProduct}>Mô tả</Text>
-          </View>
-          <View style={styles.textInput}>
-            <TextInput
-              placeholder="Ví dụ: massage cho chó mèo từ a tới z,.... "
-              onChangeText={setDescriptionService}
-              value={descriptionService}
-            />
-          </View>
+          <Text style={styles.nameProduct}>Mô tả</Text>
+        </View>
+        <View style={styles.textInput}>
+          <TextInput
+            placeholder="Ví dụ: massage cho chó mèo từ a tới z,.... "
+            onChangeText={setDescriptionService}
+            value={descriptionService}
+          />
+        </View>
         <View>
           <Text style={styles.nameProduct}>Giá dịch vụ</Text>
         </View>
         <View style={styles.textInput}>
-          <TextInput placeholder="Nhập giá dịch vụ" 
-          keyboardType="numeric"
-          onChangeText={setPriceService}
-          value={priceService}/>
+          <TextInput
+            placeholder="Nhập giá dịch vụ"
+            keyboardType="numeric"
+            onChangeText={setPriceService}
+            value={priceService}
+          />
         </View>
 
         <View>
-            <Text style={styles.nameProduct}>Số lượng</Text>
-          </View>
-          <View style={styles.textInput}>
-            <TextInput
-              placeholder="Nhập số lượng"
-              keyboardType="numeric"
-              onChangeText={setQuantityService}
-              value={quantityService}
-            />
-          </View>
+          <Text style={styles.nameProduct}>Số lượng</Text>
+        </View>
+        <View style={styles.textInput}>
+          <TextInput
+            placeholder="Nhập số lượng"
+            keyboardType="numeric"
+            onChangeText={setQuantityService}
+            value={quantityService}
+          />
+        </View>
 
         <View>
           <Text style={styles.nameProduct}>Giống</Text>
@@ -197,9 +205,8 @@ const InsertService = () => {
           data={categoryproducts}
           onSelect={(selectedItem, index) => {
             console.log(selectedItem, index);
-            setTypeService(selectedItem)
+            setTypeService(selectedItem);
           }}
-        
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
             // if data array is an array of objects then return selectedItem.property to render after item is selected
@@ -224,7 +231,6 @@ const InsertService = () => {
           }}
         />
 
-        
         <View>
           <Text style={styles.nameProduct}>Thời gian</Text>
         </View>
@@ -243,12 +249,35 @@ const InsertService = () => {
             </Text>
           </Block>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <Block
+            backgroundColor={'white'}
+            border={1}
+            width={180}
+            height={50}
+            radius={10}
+            alignCenter
+            paddingTop={10}>
+            <Text size={18} color={'black'}>
+              Test
+            </Text>
+          </Block>
+        </TouchableOpacity>
       </View>
       <View style={styles.viewPressInsert}>
-        <TouchableOpacity style={styles.PressInsert} onPress={()=> addService()}>
-          <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
+        <TouchableOpacity
+          style={styles.PressInsert}
+          onPress={() => addService()}>
+          {loading == true ? (
+            <ActivityIndicator size={'large'} color={'grey'} />
+            
+            
+          ) : (
+            <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
             Thêm sản phẩm
           </Text>
+          )}
         </TouchableOpacity>
       </View>
 
@@ -298,7 +327,7 @@ const InsertService = () => {
           <TextInput
             value={time}
             onChangeText={time =>
-              setTime({time: time.toString(), status: true, })
+              setTime({time: time.toString(), status: true})
             }
             placeholder="Nhập thời gian dịch vụ 12:00"
             style={{

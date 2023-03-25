@@ -14,6 +14,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
   INSERT_PETS_SCREEN,
   INSERT_SERVICES_SCREEN,
+  SERVICES_DETAIL_SCREEN,
 } from '../../router/ScreenName';
 
 const DATA = [
@@ -64,67 +65,71 @@ const DATA = [
   },
 ];
 
-const Item = ({title, price, image, price1, address}) => (
-  <View
-    style={{
-      width: '100%',
-      backgroundColor: '#E6EAED',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      paddingVertical: 10,
-      borderRadius: 8,
-      marginTop: '3%',
-    }}>
-    <Block alignCenter marginTop={'2%'}>
-      <Image style={{width: 100, height: 120}} source={image}></Image>
-    </Block>
-    <View
-      style={{
-        backgroundColor: 'white',
-        paddingLeft: '4%',
-        borderRadius: 10
-      }}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
 
-        }}>
-        <View>
-          <Text style={{fontSize: 18, color: 'black'}}>{title}</Text>
-          <Text style={{color: 'red'}}>{price}</Text>
-          <Text style={{color: 'black'}}>{price1}</Text>
-        </View>
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#F2F3F2',
-            borderRadius: 5,
-            width: 30,
-            height: 30, 
-            paddingLeft: '5%',
-            paddingTop: '2%',
-            marginRight: '4%'
-          }}>
-          <FontAwesome5
-            style={{}}
-            color={'black'}
-            name="chevron-right"
-            size={18}
-          />
-        </TouchableOpacity>
-      </View>
-      <View>
-        <Text>Cửa hàng: Petmart</Text>
-        <Text style={{width: 250, fontSize: 16, color: 'black'}}>
-          {address}
-        </Text>
-      </View>
-    </View>
-  </View>
-);
 
 const ListServices = ({navigation}) => {
+
+  const Item = ({title, price, image, price1, address}) => (
+    <TouchableOpacity
+    onPress={()=> navigation.navigate(SERVICES_DETAIL_SCREEN)}
+      style={{
+        width: '100%',
+        backgroundColor: '#E6EAED',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        paddingVertical: 10,
+        borderRadius: 8,
+        marginTop: '3%',
+      }}>
+      <Block alignCenter marginTop={'2%'}>
+        <Image style={{width: 100, height: 120}} source={image}></Image>
+      </Block>
+      <View
+        style={{
+          backgroundColor: 'white',
+          paddingLeft: '4%',
+          borderRadius: 10
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+  
+          }}>
+          <View>
+            <Text style={{fontSize: 18, color: 'black'}}>{title}</Text>
+            <Text style={{color: 'red'}}>{price}</Text>
+            <Text style={{color: 'black'}}>{price1}</Text>
+          </View>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#F2F3F2',
+              borderRadius: 5,
+              width: 30,
+              height: 30, 
+              paddingLeft: '5%',
+              paddingTop: '2%',
+              marginRight: '4%'
+            }}>
+            <FontAwesome5
+              style={{}}
+              color={'black'}
+              name="chevron-right"
+              size={18}
+            />
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Text>Cửa hàng: Petmart</Text>
+          <Text style={{width: 250, fontSize: 16, color: 'black'}}>
+            {address}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
