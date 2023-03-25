@@ -17,6 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SelectDropdown from 'react-native-select-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
 import productApi from '../../api/productApi';
+import Toast, { ErrorToast } from 'react-native-toast-message';
 
 const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 
@@ -49,6 +50,27 @@ const InsertService = ({navigation}) => {
     setTimeService(arrTime);
     console.log('arrTime: ', timeService);
     setModalVisibleTime(false);
+  };
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Them thanh cong',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
+  const showToast2 = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Them that bai',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
   };
 
   const handleChooseImage = async () => {
@@ -87,12 +109,12 @@ const InsertService = ({navigation}) => {
       );
       if (res.status === 200) {
         setLoading(false);
-        Alert.alert( 'Them san pham thanh cong')
+        showToast()
         console.log('success');
-        navigation.goBack()
+        navigation.goBack();
       } else {
         setLoading(true);
-        Alert.alert( 'Them san pham that bai')
+        showToast2()
         console.log('thất bại');
       }
     } catch (error) {
@@ -250,20 +272,7 @@ const InsertService = ({navigation}) => {
           </Block>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Block
-            backgroundColor={'white'}
-            border={1}
-            width={180}
-            height={50}
-            radius={10}
-            alignCenter
-            paddingTop={10}>
-            <Text size={18} color={'black'}>
-              Test
-            </Text>
-          </Block>
-        </TouchableOpacity>
+        
       </View>
       <View style={styles.viewPressInsert}>
         <TouchableOpacity
@@ -271,12 +280,10 @@ const InsertService = ({navigation}) => {
           onPress={() => addService()}>
           {loading == true ? (
             <ActivityIndicator size={'large'} color={'grey'} />
-            
-            
           ) : (
             <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-            Thêm sản phẩm
-          </Text>
+              Thêm sản phẩm
+            </Text>
           )}
         </TouchableOpacity>
       </View>
@@ -352,6 +359,9 @@ const InsertService = ({navigation}) => {
           </Block>
         </View>
       </Modal>
+      <Toast/>
+      
+
     </View>
   );
 };
