@@ -17,7 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SelectDropdown from 'react-native-select-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
 import productApi from '../../api/productApi';
-import Toast, { ErrorToast } from 'react-native-toast-message';
+import Toast, {ErrorToast} from 'react-native-toast-message';
 
 const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 
@@ -109,15 +109,17 @@ const InsertService = ({navigation}) => {
       );
       if (res.status === 200) {
         setLoading(false);
-        showToast()
+        showToast();
         console.log('success');
         navigation.goBack();
       } else {
-        setLoading(true);
-        showToast2()
+        setLoading(false);
+        showToast2();
         console.log('thất bại');
       }
     } catch (error) {
+      setLoading(false);
+      showToast2();
       console.log('loi them san pham', error);
     }
   };
@@ -271,8 +273,6 @@ const InsertService = ({navigation}) => {
             </Text>
           </Block>
         </TouchableOpacity>
-
-        
       </View>
       <View style={styles.viewPressInsert}>
         <TouchableOpacity
@@ -359,9 +359,7 @@ const InsertService = ({navigation}) => {
           </Block>
         </View>
       </Modal>
-      <Toast/>
-      
-
+      <Toast />
     </View>
   );
 };

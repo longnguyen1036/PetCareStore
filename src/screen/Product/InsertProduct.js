@@ -8,6 +8,7 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import Block from '../../components/Block';
@@ -15,6 +16,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SelectDropdown from 'react-native-select-dropdown';
 import productApi from '../../api/productApi';
 import ImagePicker from 'react-native-image-crop-picker';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 const categorypets = ['Thức ăn', 'Vệ sinh', 'Phụ kiện', 'Khác...'];
 const categorygenderpets = ['Đực', 'Cái'];
@@ -27,6 +29,7 @@ const InsertProduct = ({navigation}) => {
   const [quantityProduct, setQuantityProduct] = useState();
   const [typeProduct, setTypeProduct] = useState();
   const [codeProduct, setCodeProduct] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleChooseImage = async () => {
     try {
@@ -46,8 +49,31 @@ const InsertProduct = ({navigation}) => {
     }
   };
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Them thanh cong',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
+  const showToast2 = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Them that bai',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
   const addProduct = async () => {
     try {
+      setLoading(true);
       const res = await productApi.InsertProduct(
         nameProduct,
         priceProduct,
@@ -59,11 +85,18 @@ const InsertProduct = ({navigation}) => {
         'productStore',
       );
       if (res.status === 200) {
+        setLoading(false);
+        showToast();
+        navigation.goBack();
         console.log('success');
       } else {
+        setLoading(false);
+        showToast2();
         console.log('thất bại');
       }
     } catch (error) {
+      showToast2();
+      setLoading(false);
       console.log('loi them san pham', error);
     }
   };
@@ -152,7 +185,7 @@ const InsertProduct = ({navigation}) => {
             data={categorypets}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
-              setTypeProduct(selectedItem)
+              setTypeProduct(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               // text represented after item is selected
@@ -177,20 +210,23 @@ const InsertProduct = ({navigation}) => {
               );
             }}
           />
-
-
         </View>
         <View style={styles.viewPressInsert}>
-        <TouchableOpacity
+          <TouchableOpacity
             style={styles.PressInsert}
             onPress={() => addProduct()}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-              Thêm sản phẩm
-            </Text>
+            {loading == true ? (
+              <ActivityIndicator size={'large'} color={'grey'} />
+            ) : (
+              <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
+                Thêm sản phẩm
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
         <View style={{height: 200}}></View>
       </ScrollView>
+      <Toast />
     </View>
   );
 };

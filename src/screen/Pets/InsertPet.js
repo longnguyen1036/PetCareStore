@@ -7,7 +7,7 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
-  
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import Block from '../../components/Block';
@@ -17,6 +17,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {ScrollView} from 'react-native-gesture-handler';
 import productApi from '../../api/productApi';
 import ImagePicker from 'react-native-image-crop-picker';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 const categorypets = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 const categorygenderpets = ['Đực', 'Cái'];
@@ -31,6 +32,7 @@ const InsertPet = ({navigation}) => {
   const [descriptionPet, setDescriptionPet] = useState();
   const [genderPet, setGenderPet] = useState();
   const [urlImage, setUrlImage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleChooseImage = async () => {
     try {
@@ -50,9 +52,31 @@ const InsertPet = ({navigation}) => {
     }
   };
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Them thanh cong',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
+  const showToast2 = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Them that bai',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
   const addProduct = async () => {
     try {
-
+      setLoading(true);
       const res = await productApi.InsertPet(
         namePet,
         agePet,
@@ -66,13 +90,20 @@ const InsertPet = ({navigation}) => {
         'petStore',
       );
       if (res.status === 200) {
+        setLoading(false);
+        showToast();
+        navigation.goBack();
         console.log('success');
-
       } else {
+        setLoading(false);
+        showToast2();
+
         console.log('thất bại');
       }
-
     } catch (error) {
+      showToast2();
+
+      setLoading(false);
       console.log('loi them san pham', error);
     }
   };
@@ -236,13 +267,18 @@ const InsertPet = ({navigation}) => {
           <TouchableOpacity
             style={styles.PressInsert}
             onPress={() => addProduct()}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-              Thêm sản phẩm
-            </Text>
+            {loading == true ? (
+              <ActivityIndicator size={'large'} color={'grey'} />
+            ) : (
+              <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
+                Thêm sản phẩm
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
         <View style={{height: 200}}></View>
       </ScrollView>
+      <Toast />
     </View>
   );
 };
