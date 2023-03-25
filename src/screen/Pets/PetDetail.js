@@ -6,15 +6,15 @@ import {
   Image,
   ScrollView,
   Alert,
-  Modal
+  Modal,
 } from 'react-native';
 import Block from '../../components/Block';
 import React, {useState} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useRoute } from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
-
+import {EDIT_PETS_SCREEN} from '../../router/ScreenName';
 
 const createTwoButtonAlert = () =>
   Alert.alert('Xac nhan xoa san pham', 'Ban co chac chan muon xoa khong', [
@@ -28,36 +28,30 @@ const createTwoButtonAlert = () =>
 
 const PetDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
-
-  const [ItemsImage, setItemsImage] = useState([
-    {key: 1, image: require('../../assets/image/detail1.png')},
-    {key: 2, image: require('../../assets/image/detail2.png')},
-    {key: 3, image: require('../../assets/image/detail1.png')},
-    {key: 4, image: require('../../assets/image/detail2.png')},
-    {key: 5, image: require('../../assets/image/detail1.png')},
-    {key: 6, image: require('../../assets/image/detail2.png')},
-    {key: 7, image: require('../../assets/image/detail1.png')},
-    {key: 8, image: require('../../assets/image/detail2.png')},
-    {key: 9, image: require('../../assets/image/detail1.png')},
-  ]);
-
-  const [selectedImage, setSelectedImage] = useState(
-    require('../../assets/image/detail1.png'),
-  );
-
   const route = useRoute();
-  const {agePet, _id, code, descriptionPet, imgPet, genderPet, namePet, pricePet, quantityPet, typePet } = route.params
-  
-  const [id, setId] = useState(_id)
-  const [nameProduct, setNameProduct] = useState(namePet)
-  const [ageProduct, setAgeProduct] = useState(agePet)
-  const [codeProduct, setCodeProduct] = useState(code)
-  const [descriptionProduct, setDecriptionProduct] = useState(descriptionPet)
-  const [genderProduct, setGenderProduct] = useState(genderPet)
-  const [imgProduct, setImgProduct] = useState(imgPet)
-  const [priceProduct, setPriceProduct] = useState(pricePet)
-  const [quantityProduct, setQuantityProduct] = useState(quantityPet)
-  const [typeProduct, setTypeProduct] = useState(typePet)
+  const {
+    agePet,
+    _id,
+    code,
+    descriptionPet,
+    imgPet,
+    genderPet,
+    namePet,
+    pricePet,
+    quantityPet,
+    typePet,
+  } = route.params;
+
+  const [id, setId] = useState(_id);
+  const [nameProduct, setNameProduct] = useState(namePet);
+  const [ageProduct, setAgeProduct] = useState(agePet);
+  const [codeProduct, setCodeProduct] = useState(code);
+  const [descriptionProduct, setDecriptionProduct] = useState(descriptionPet);
+  const [genderProduct, setGenderProduct] = useState(genderPet);
+  const [imgProduct, setImgProduct] = useState(imgPet);
+  const [priceProduct, setPriceProduct] = useState(pricePet);
+  const [quantityProduct, setQuantityProduct] = useState(quantityPet);
+  const [typeProduct, setTypeProduct] = useState(typePet);
 
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
@@ -70,11 +64,13 @@ const PetDetail = ({navigation}) => {
             paddingHorizontal: '3%',
             paddingVertical: '3%',
           }}>
-          <TouchableOpacity onPress={()=> navigation.goBack()} style={{marginLeft: '4%'}}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={{marginLeft: '4%'}}>
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={()=> setModalVisible(true)}>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
             <MaterialCommunityIcons name="delete" size={30} color={'black'} />
           </TouchableOpacity>
         </View>
@@ -106,14 +102,22 @@ const PetDetail = ({navigation}) => {
             {nameProduct}
           </Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-           Mô tả: {descriptionProduct}
+            Mô tả: {descriptionProduct}
           </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(priceProduct)}</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+            {formatMoney(priceProduct)}
+          </Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
             Số lượng: {quantityProduct}
           </Text>
         </View>
-        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%', marginLeft: '15%'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '73%',
+            marginTop: '3%',
+            marginLeft: '15%',
+          }}>
           <TouchableOpacity
             style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
@@ -193,7 +197,20 @@ const PetDetail = ({navigation}) => {
         </View>
 
         <TouchableOpacity
-          onPress={createTwoButtonAlert}
+          onPress={() =>
+            navigation.navigate(EDIT_PETS_SCREEN, {
+              agePet: ageProduct,
+              _id: id,
+              code: codeProduct,
+              descriptionPet: descriptionProduct,
+              imgPet: imgProduct,
+              genderPet: genderProduct,
+              namePet: nameProduct,
+              pricePet: priceProduct,
+              quantityPet: quantityProduct,
+              typePet: typeProduct,
+            })
+          }
           style={{
             marginTop: '5%',
             backgroundColor: '#18A2E1',
@@ -211,32 +228,30 @@ const PetDetail = ({navigation}) => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
-        }}
-      >
+        }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Image style={{width: 60, height: 60}}  source={require('../../assets/image/warning.png')}></Image>
+            <Image
+              style={{width: 60, height: 60}}
+              source={require('../../assets/image/warning.png')}></Image>
             <Text style={styles.modalText}>Xac nhan xoa dich vu!</Text>
             <Block row justifySpaceBetween>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Đồng ý</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose2]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Huy</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.textStyle}>Đồng ý</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose2]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.textStyle}>Huy</Text>
+              </TouchableOpacity>
             </Block>
           </View>
         </View>
       </Modal>
-
     </View>
   );
 };
@@ -244,53 +259,53 @@ const PetDetail = ({navigation}) => {
 export default PetDetail;
 
 const styles = StyleSheet.create({
-    modalView: {
-        margin: 30,
-        marginTop: '60%',
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-      },
-      button: {
-        borderRadius: 5,
-        padding: 10,
-        elevation: 2
-      },
-      buttonOpen: {
-        backgroundColor: "#52B4FF",
-      },
-      buttonClose: {
-        backgroundColor: "#52B4FF",
-        width: 100,
-      },
-      buttonClose2: {
-        marginLeft: '10%',
-        backgroundColor: "grey",
-        width: 100,
-      },
-      textStyle: {
-        fontSize: 18,
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-      },
-      modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-      },
-      hinh: {
-        marginTop: 20,
-        marginLeft: '5%',
-        width: '100%',
-        height: 350,
-      },
+  modalView: {
+    margin: 30,
+    marginTop: '60%',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#52B4FF',
+  },
+  buttonClose: {
+    backgroundColor: '#52B4FF',
+    width: 100,
+  },
+  buttonClose2: {
+    marginLeft: '10%',
+    backgroundColor: 'grey',
+    width: 100,
+  },
+  textStyle: {
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  hinh: {
+    marginTop: 20,
+    marginLeft: '5%',
+    width: '100%',
+    height: 350,
+  },
 });

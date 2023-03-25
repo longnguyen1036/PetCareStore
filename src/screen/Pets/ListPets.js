@@ -8,113 +8,112 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Block from '../../components/Block';
 import {INSERT_PETS_SCREEN, PETS_DETAIL_SCREEN} from '../../router/ScreenName';
-
-const DATA = [
-  {
-    id: '1',
-    title: 'First Item',
-    price: 800000,
-    image: require('../../assets/image/productpet1.png'),
-  },
-  {
-    id: '2',
-    title: 'Second Item',
-    price: 900000,
-    image: require('../../assets/image/productpet2.png'),
-  },
-  {
-    id: '3',
-    title: 'Third Item',
-    price: 100000,
-    image: require('../../assets/image/productpet1.png'),
-  },
-  {
-    id: '4',
-    title: 'Four Item',
-    price: 100000,
-    image: require('../../assets/image/productpet2.png'),
-  },
-  {
-    id: '5',
-    title: 'Five Item',
-    price: 100000,
-    image: require('../../assets/image/productpet1.png'),
-  },
-  {
-    id: '6',
-    title: 'Five Item',
-    price: 100000,
-    image: require('../../assets/image/productpet2.png'),
-  },
-];
-
-
-
+import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 const ListPets = ({navigation}) => {
+  const [listProduct, setListProduct] = useState([]);
 
-  const Item = ({title, price, image}) => (
-    <TouchableOpacity onPress={()=> navigation.navigate(PETS_DETAIL_SCREEN)}>
-    <View
-      style={{
-        backgroundColor: '#E6EAED',
-        width: 160,
-        height: 200,
-        borderRadius: 8,
-        paddingHorizontal: 8,
-        marginRight: '5%',
-        marginTop: '2%',
-        marginLeft: '5%',
-      }}>
-      <Block alignCenter marginTop={'5%'} >
-        <Image style={{width: 100, height: 110}} source={image}></Image>
-      </Block>
+  const getAllProduct = async () => {
+    const getListProductApi = await productApi.getAllProduct();
+    console.log('getAllProductApi', getListProductApi.data.data[2]);
+
+    setListProduct(getListProductApi.data.data[2]);
+  };
+
+  useEffect(() => {
+    getAllProduct();
+  }, []);
+
+  const Item = ({
+    agePet,
+    _id,
+    code,
+    descriptionPet,
+    imgPet,
+    genderPet,
+    namePet,
+    pricePet,
+    quantityPet,
+    typePet,
+  }) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(PETS_DETAIL_SCREEN, {
+          agePet: agePet,
+          _id: _id,
+          code: code,
+          descriptionPet: descriptionPet,
+          imgPet: imgPet,
+          genderPet: genderPet,
+          namePet: namePet,
+          pricePet: pricePet,
+          quantityPet: quantityPet,
+          typePet: typePet,
+        })
+      }>
       <View
         style={{
-          backgroundColor: 'white',
-          borderRadius: 5,
-          marginTop: '8%',
-          paddingHorizontal: 5,
-          paddingVertical: 5,
+          backgroundColor: '#E6EAED',
+          width: 160,
+          height: 200,
+          borderRadius: 8,
+          paddingHorizontal: 8,
+          marginRight: '5%',
+          marginTop: '2%',
+          marginLeft: '5%',
         }}>
-        <View style={{marginTop: '2%'}}>
-          <Text style={{fontSize: 15, fontWeight: '500', color: 'black'}}>
-            {title}
-          </Text>
-        </View>
+        <Block alignCenter marginTop={'5%'}>
+          <Image
+            style={{width: 100, height: 110}}
+            source={{uri: imgPet}}></Image>
+        </Block>
         <View
           style={{
-            marginTop: '5%',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            backgroundColor: 'white',
+            borderRadius: 5,
+            marginTop: '8%',
+            paddingHorizontal: 5,
+            paddingVertical: 5,
           }}>
-          <Text style={{color: 'black'}}>{price}</Text>
-          <TouchableOpacity
+          <View style={{marginTop: '2%'}}>
+            <Text style={{fontSize: 15, fontWeight: '500', color: 'black'}}>
+              {namePet}
+            </Text>
+          </View>
+          <View
             style={{
-              backgroundColor: '#E6EAED',
-              borderRadius: 5,
-              width: 25,
-              height: 25,
-              justifyContent: 'center',
-              alignItems: 'center',
+              marginTop: '5%',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
             }}>
-            <FontAwesome5
-              style={{}}
-              color={'black'}
-              name="chevron-right"
-              size={18}
-            />
-          </TouchableOpacity>
+            <Text style={{color: 'black'}}>{formatMoney(pricePet)}</Text>
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#E6EAED',
+                borderRadius: 5,
+                width: 25,
+                height: 25,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FontAwesome5
+                style={{}}
+                color={'black'}
+                name="chevron-right"
+                size={18}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
     </TouchableOpacity>
   );
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -157,12 +156,23 @@ const ListPets = ({navigation}) => {
         </Block>
       </Block>
 
-      <SafeAreaView >
+      <SafeAreaView>
         <FlatList
           numColumns={2}
-          data={DATA}
+          data={listProduct}
           renderItem={({item}) => (
-            <Item title={item.title} price={item.price} image={item.image} />
+            <Item
+              agePet={item.agePet}
+              _id={item._id}
+              code={item.code}
+              descriptionPet={item.descriptionPet}
+              imgPet={item.imgPet}
+              genderPet={item.genderPet}
+              namePet={item.namePet}
+              pricePet={item.pricePet}
+              quantityPet={item.quantityPet}
+              typePet={item.typePet}
+            />
           )}
           keyExtractor={item => item.id}
         />

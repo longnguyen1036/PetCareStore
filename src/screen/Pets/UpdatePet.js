@@ -1,198 +1,246 @@
-import { StyleSheet, Text, View ,Image, TouchableOpacity, TextInput, SafeAreaView, FlatList } from 'react-native'
-import React from 'react'
-import Block from '../../components/Block'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import SelectDropdown from 'react-native-select-dropdown'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+  FlatList,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import Block from '../../components/Block';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import SelectDropdown from 'react-native-select-dropdown';
+import {useRoute} from '@react-navigation/native';
+import {ScrollView} from 'react-native-gesture-handler';
+import ImagePicker from 'react-native-image-crop-picker';
+import productApi from '../../api/productApi';
 
-const categoryproducts = ["Thức ăn", "Dây", "Quần", "Jerry"]
+const categoryproducts = ['Thức ăn', 'Dây', 'Quần', 'Jerry'];
 
-const UpdatePet = () => {
+const UpdatePet = ({navigation}) => {
+  const route = useRoute();
+  const {
+    agePet,
+    _id,
+    code,
+    descriptionPet,
+    imgPet,
+    genderPet,
+    namePet,
+    pricePet,
+    quantityPet,
+    typePet,
+  } = route.params;
+
+  const [id, setId] = useState(_id);
+  const [nameProduct, setNameProduct] = useState(namePet);
+  const [ageProduct, setAgeProduct] = useState(agePet);
+  const [codeProduct, setCodeProduct] = useState(code);
+  const [descriptionProduct, setDecriptionProduct] = useState(descriptionPet);
+  const [genderProduct, setGenderProduct] = useState(genderPet);
+  const [imgProduct, setImgProduct] = useState(imgPet);
+  const [priceProduct, setPriceProduct] = useState(pricePet);
+  const [quantityProduct, setQuantityProduct] = useState(quantityPet);
+  const [typeProduct, setTypeProduct] = useState(typePet);
+  const [imageEdit, setImageEdit] = useState();
+  const handleChooseImage = async () => {
+    try {
+      const image = await ImagePicker.openPicker({
+        width: 300,
+        height: 400,
+        cropping: true,
+      });
+      console.log('imageeeeeeeeee', image);
+      setImgProduct(image);
+
+    } catch (error) {
+      console.log('erorr hinh', error);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.hearderIcon}>
-        <TouchableOpacity>
-            <FontAwesome5 style={{}} color={'black'} name='chevron-left' size={25} />
-        </TouchableOpacity>
+      <View style={styles.container}>
+          <ScrollView>
+        <View style={styles.hearderIcon}>
+          <TouchableOpacity onPress={() => navigation.goBack()} >
+            <FontAwesome5
+              style={{}}
+              color={'black'}
+              name="chevron-left"
+              size={25}
+            />
+          </TouchableOpacity>
+        </View>
 
-      </View>
+        <View
+          style={{
+            marginHorizontal: '6%',
+            marginVertical: '2%',
+            flexDirection: 'row',
+            position: 'relative',
+          }}>
+          <Image
+            source={{uri: imgProduct }}
+            style={{width: 100, height: 100, borderRadius: 8}}></Image>
+          <TouchableOpacity style={styles.iconAdd} onPress={() => handleChooseImage()}>
+            <FontAwesome5 style={{marginTop: 5}} color={'black'} name="edit" size={25} />
+          </TouchableOpacity>
+        </View>
 
-      <View style={{marginHorizontal: '6%',
-        marginVertical: '2%', flexDirection: 'row'}}>
-            <Image source={require('../../assets/image/profiledog.png')}/>
-            <Image source={require('../../assets/image/profiledog.png')}/>
-            <Image source={require('../../assets/image/profiledog.png')}/>
-            <Image source={require('../../assets/image/profiledog.png')}/>
-            <TouchableOpacity style={styles.iconAdd}>
-                    <FontAwesome5 style={{}} color={'black'} name='plus' size={25} />
-            </TouchableOpacity>
-
-      </View>
-
-      
-
-      
-
-      <View style={styles.conTent}>
-        <View>
+        <View style={styles.conTent}>
+          <View>
             <Text style={styles.nameProduct}>Tên dịch vụ</Text>
-        </View>
-        <View style={styles.textInput}>
-            <TextInput  placeholder='Nhập tên dịch vụ'/>
-        </View>
+          </View>
+          <View style={styles.textInput}>
+            <TextInput placeholder="Nhập tên dịch vụ" />
+          </View>
 
-        <View>
+          <View>
             <Text style={styles.nameProduct}>Giá dịch vụ</Text>
-        </View>
-        <View style={styles.textInput}>
-            <TextInput placeholder='Nhập giá dịch vụ'/>
-        </View>
+          </View>
+          <View style={styles.textInput}>
+            <TextInput placeholder="Nhập giá dịch vụ" />
+          </View>
 
-        <View>
+          <View>
             <Text style={styles.nameProduct}>Danh mục</Text>
-        </View>
+          </View>
 
-        <SelectDropdown
+          <SelectDropdown
             data={categoryproducts}
             onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index)
+              console.log(selectedItem, index);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
-                // text represented after item is selected
-                // if data array is an array of objects then return selectedItem.property to render after item is selected
-                return selectedItem
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return selectedItem;
             }}
             rowTextForSelection={(item, index) => {
-                // text represented for each item in dropdown
-                // if data array is an array of objects then return item.property to represent item in dropdown
-                return item
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
             }}
-
             defaultButtonText={'Chó'}
-
             buttonStyle={styles.dropdown4BtnStyle}
             buttonTextStyle={styles.dropdown4BtnTxtStyle}
-
             renderDropdownIcon={isOpened => {
-                return <FontAwesome5 name={isOpened ? 'chevron-up' : 'chevron-down'} color={'black'} size={18} />;
-              }}
-        />
+              return (
+                <FontAwesome5
+                  name={isOpened ? 'chevron-up' : 'chevron-down'}
+                  color={'black'}
+                  size={18}
+                />
+              );
+            }}
+          />
 
-
-        <View>
+          <View>
             <Text style={styles.nameProduct}>Giới tính</Text>
-        </View>
+          </View>
 
-        <SelectDropdown
+          <SelectDropdown
             data={categoryproducts}
             onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index)
+              console.log(selectedItem, index);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
-                // text represented after item is selected
-                // if data array is an array of objects then return selectedItem.property to render after item is selected
-                return selectedItem
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return selectedItem;
             }}
             rowTextForSelection={(item, index) => {
-                // text represented for each item in dropdown
-                // if data array is an array of objects then return item.property to represent item in dropdown
-                return item
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
             }}
-
             defaultButtonText={'Thú y'}
-
             buttonStyle={styles.dropdown4BtnStyle}
             buttonTextStyle={styles.dropdown4BtnTxtStyle}
-
             renderDropdownIcon={isOpened => {
-                return <FontAwesome5 name={isOpened ? 'chevron-up' : 'chevron-down'} color={'black'} size={18} />;
-              }}
-        />
+              return (
+                <FontAwesome5
+                  name={isOpened ? 'chevron-up' : 'chevron-down'}
+                  color={'black'}
+                  size={18}
+                />
+              );
+            }}
+          />
+        </View>
+        <View style={styles.viewPressInsert}>
+          <TouchableOpacity style={styles.PressInsert}>
+            <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
+              Thêm sản phẩm
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-
-
-
-        
-
-        
+        <View style={{height: 200}}></View>
+    </ScrollView>
       </View>
-      <View style={styles.viewPressInsert}>
-        <TouchableOpacity style={styles.PressInsert}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>Thêm sản phẩm</Text>
+  );
+};
 
-        </TouchableOpacity>
-
-      </View>
-
-      
-    </View>
-  )
-}
-
-export default UpdatePet
+export default UpdatePet;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F5F5F5'
-    
-    },
-    
-    hearderIcon: {
-        paddingHorizontal: '2%',
-        marginVertical: '2%',
-    
-    },
-    iconAdd: {
-        height: 40,
-        width: 40,
-        backgroundColor: '#d3d3d3',
-        marginLeft: '5%',
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-    
-    },
-    
-    conTent: {
-        paddingHorizontal: '5%',
-        height: '60%',
-        justifyContent: 'space-between'
-    
-    },
-    nameProduct: {
-        fontSize: 16,
-        color: 'black',
-        fontWeight: '600'
-    
-    },
-    textInput: {
-        borderBottomWidth: 0.5
-    
-    },
-    viewPressInsert: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '10%',
-        
-    
-    },
-    
-    PressInsert: {
-        backgroundColor: '#18A2E1',
-        width: '50%',
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 60
-    
-    },
-    dropdown4BtnStyle: {
-        width: '50%',
-        height: 50,
-        backgroundColor: '#FFF',
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: '#444',
-      },
-      dropdown4BtnTxtStyle: {color: '#444', textAlign: 'left'},
-})
+  container: {
+    // flex: 1,
+    backgroundColor: '#F5F5F5',
+  },
+
+  hearderIcon: {
+    paddingHorizontal: '2%',
+    marginVertical: '2%',
+  },
+  iconAdd: {
+    height: 40,
+    width: 40,
+    backgroundColor: '#d3d3d3',
+    borderRadius: 8,
+    alignItems: 'center',
+    position: 'absolute',
+    left: 90,
+    top: -25
+  },
+
+  conTent: {
+    paddingHorizontal: '5%',
+    height: '60%',
+    justifyContent: 'space-between',
+  },
+  nameProduct: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: '600',
+  },
+  textInput: {
+    borderBottomWidth: 0.5,
+  },
+  viewPressInsert: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '10%',
+  },
+
+  PressInsert: {
+    backgroundColor: '#18A2E1',
+    width: '50%',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 60,
+  },
+  dropdown4BtnStyle: {
+    width: '50%',
+    height: 50,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#444',
+  },
+  dropdown4BtnTxtStyle: {color: '#444', textAlign: 'left'},
+});
