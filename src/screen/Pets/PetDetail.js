@@ -12,6 +12,10 @@ import Block from '../../components/Block';
 import React, {useState} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useRoute } from '@react-navigation/native';
+import formatMoney from '../../components/FormatMoney';
+
+
 const createTwoButtonAlert = () =>
   Alert.alert('Xac nhan xoa san pham', 'Ban co chac chan muon xoa khong', [
     {
@@ -40,9 +44,24 @@ const PetDetail = ({navigation}) => {
   const [selectedImage, setSelectedImage] = useState(
     require('../../assets/image/detail1.png'),
   );
+
+  const route = useRoute();
+  const {agePet, _id, code, descriptionPet, imgPet, genderPet, namePet, pricePet, quantityPet, typePet } = route.params
+  
+  const [id, setId] = useState(_id)
+  const [nameProduct, setNameProduct] = useState(namePet)
+  const [ageProduct, setAgeProduct] = useState(agePet)
+  const [codeProduct, setCodeProduct] = useState(code)
+  const [descriptionProduct, setDecriptionProduct] = useState(descriptionPet)
+  const [genderProduct, setGenderProduct] = useState(genderPet)
+  const [imgProduct, setImgProduct] = useState(imgPet)
+  const [priceProduct, setPriceProduct] = useState(pricePet)
+  const [quantityProduct, setQuantityProduct] = useState(quantityPet)
+  const [typeProduct, setTypeProduct] = useState(typePet)
+
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
-      <View style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center', marginLeft: '-5%'}}>
         <View
           style={{
             flexDirection: 'row',
@@ -51,7 +70,7 @@ const PetDetail = ({navigation}) => {
             paddingHorizontal: '3%',
             paddingVertical: '3%',
           }}>
-          <TouchableOpacity onPress={()=> navigation.goBack()}>
+          <TouchableOpacity onPress={()=> navigation.goBack()} style={{marginLeft: '4%'}}>
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
@@ -62,11 +81,11 @@ const PetDetail = ({navigation}) => {
 
         <View>
           <Image
-            source={selectedImage}
+            source={{uri: imgProduct}}
             style={{width: 200, height: 200, borderRadius: 8}}></Image>
         </View>
 
-        <ScrollView style={{width: '40%'}} horizontal={true}>
+        {/* <ScrollView style={{width: '40%'}} horizontal={true}>
           {ItemsImage.map(object => {
             return (
               <TouchableOpacity
@@ -81,23 +100,26 @@ const PetDetail = ({navigation}) => {
               </TouchableOpacity>
             );
           })}
-        </ScrollView>
+        </ScrollView> */}
         <View style={{marginTop: '3%', width: '73%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-            BEAGLE CƯNG CƯNG
+            {nameProduct}
           </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>700.000đ</Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-            Tình trạng: Còn hàng
+           Mô tả: {descriptionProduct}
+          </Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(priceProduct)}</Text>
+          <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
+            Số lượng: {quantityProduct}
           </Text>
         </View>
-        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
+        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%', marginLeft: '15%'}}>
           <TouchableOpacity
             style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Gioi tinh
+              Giới tính
             </Text>
-            <Text>Giong cai</Text>
+            <Text>{genderProduct}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -108,9 +130,9 @@ const PetDetail = ({navigation}) => {
               borderRadius: 8,
             }}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Tuoi
+              Tuổi
             </Text>
-            <Text>6 thang</Text>
+            <Text>{ageProduct}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -121,22 +143,9 @@ const PetDetail = ({navigation}) => {
               borderRadius: 8,
             }}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Can nang
+              Giống
             </Text>
-            <Text>4,7kg</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'white',
-              marginLeft: '5%',
-              padding: 8,
-              borderRadius: 8,
-            }}>
-            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Giong
-            </Text>
-            <Text>Mèo</Text>
+            <Text>{typeProduct}</Text>
           </TouchableOpacity>
         </View>
 
@@ -192,7 +201,7 @@ const PetDetail = ({navigation}) => {
             borderRadius: 8,
           }}>
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
-            Thêm vào giỏ hàng
+            Chỉnh sửa
           </Text>
         </TouchableOpacity>
       </View>
