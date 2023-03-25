@@ -49,7 +49,7 @@ function MainStack(props) {
       <Stack.Screen name={PETS_SCREEN} component={ListPets} />
       <Stack.Screen name={PRODUCTS_SCREEN} component={ListProducts} />
       <Stack.Screen name={SERVICES_SCREEN} component={ListServices} />
-      <Stack.Screen name={PETS_DETAIL_SCREEN} component={PetDetail} />
+       <Stack.Screen name={PETS_DETAIL_SCREEN} component={PetDetail} />
       <Stack.Screen name={PRODUCTS_DETAIL_SCREEN} component={ProductDetail} />
       <Stack.Screen name={SERVICES_DETAIL_SCREEN} component={ServiceDetail} />
       <Stack.Screen name={INSERT_PETS_SCREEN} component={InsertPet} />

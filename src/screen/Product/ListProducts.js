@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {INSERT_PRODUCTS_SCREEN} from '../../router/ScreenName';
+import {INSERT_PRODUCTS_SCREEN, PRODUCTS_DETAIL_SCREEN} from '../../router/ScreenName';
 const DATA = [
   {
     id: '1',
@@ -45,63 +45,67 @@ const DATA = [
   },
 ];
 
-const Item = ({title, price, image}) => (
-  <View
-  style={{
-    backgroundColor: '#F2F3F2',
-    width: 160,
-    height: 200,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    marginRight: '5%',
-    marginTop: '2%',
-    marginLeft: '5%',
-  }}>
-  <Block alignCenter marginTop={'2%'} >
-    <Image style={{width: 100, height: 110}} source={image}></Image>
-  </Block>
-  <View
-    style={{
-      backgroundColor: 'white',
-      borderRadius: 5,
-      marginTop: '8%',
-      paddingHorizontal: 5,
-      paddingVertical: 5,
-    }}>
-    <View style={{marginTop: '2%'}}>
-      <Text style={{fontSize: 15, fontWeight: '500', color: 'black'}}>
-        {title}
-      </Text>
-    </View>
-    <View
-      style={{
-        marginTop: '8%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      }}>
-      <Text style={{color: 'black'}}>{price}</Text>
-      <TouchableOpacity
-        style={{
-          backgroundColor: '#E6EAED',
-          borderRadius: 5,
-          width: 25,
-          height: 25,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <FontAwesome5
-          style={{}}
-          color={'black'}
-          name="chevron-right"
-          size={18}
-        />
-      </TouchableOpacity>
-    </View>
-  </View>
-</View>
-);
+
 
 const ListProducts = ({navigation}) => {
+
+
+  const Item = ({title, price, image}) => (
+
+    <TouchableOpacity onPress={()=> navigation.navigate(PRODUCTS_DETAIL_SCREEN)}
+    style={{
+      backgroundColor: '#F2F3F2',
+      width: 160,
+      height: 200,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+      marginRight: '5%',
+      marginTop: '2%',
+      marginLeft: '5%',
+    }}>
+    <Block alignCenter marginTop={'2%'} >
+      <Image style={{width: 100, height: 110}} source={image}></Image>
+    </Block>
+    <View
+      style={{
+        backgroundColor: 'white',
+        borderRadius: 5,
+        marginTop: '8%',
+        paddingHorizontal: 5,
+        paddingVertical: 5,
+      }}>
+      <View style={{marginTop: '2%'}}>
+        <Text style={{fontSize: 15, fontWeight: '500', color: 'black'}}>
+          {title}
+        </Text>
+      </View>
+      <View
+        style={{
+          marginTop: '8%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <Text style={{color: 'black'}}>{price}</Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#E6EAED',
+            borderRadius: 5,
+            width: 25,
+            height: 25,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <FontAwesome5
+            style={{}}
+            color={'black'}
+            name="chevron-right"
+            size={18}
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  </TouchableOpacity>
+  );
   return (
     <View style={styles.container}>
       <View style={styles.header}>

@@ -7,6 +7,7 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
+  
 } from 'react-native';
 import React, {useState} from 'react';
 import Block from '../../components/Block';
@@ -51,6 +52,7 @@ const InsertPet = ({navigation}) => {
 
   const addProduct = async () => {
     try {
+
       const res = await productApi.InsertPet(
         namePet,
         agePet,
@@ -65,9 +67,11 @@ const InsertPet = ({navigation}) => {
       );
       if (res.status === 200) {
         console.log('success');
+
       } else {
         console.log('thất bại');
       }
+
     } catch (error) {
       console.log('loi them san pham', error);
     }

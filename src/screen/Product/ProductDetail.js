@@ -1,18 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert  } from 'react-native'
 import React, {useState} from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const createTwoButtonAlert = () =>
-    Alert.alert('Xac nhan xoa san pham', 'Ban co chac chan muon xoa khong', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ]);
 
-const ProductDetail = () => {
+
+const ProductDetail = ({navigation}) => {
     const [ItemsImage, setItemsImage] = useState([
         { key: 1, image: require('../../assets/image/detail1.png')},
         { key: 2, image: require('../../assets/image/detail2.png')},
@@ -31,12 +24,12 @@ const ProductDetail = () => {
       <View style = {{alignItems: 'center',}}>
         <View style= {{flexDirection: 'row', width: '100%', justifyContent: 'space-between',
     paddingHorizontal: '3%', paddingVertical: '3%'}}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
                 <FontAwesome5 name='chevron-left' size={30} color={'black'} />
             </TouchableOpacity>
 
             <TouchableOpacity>
-                <FontAwesome5 name='delete' size={30} color={'black'} />
+                <MaterialCommunityIcons name='delete' size={30} color={'black'} />
             </TouchableOpacity>
 
         </View>
@@ -92,8 +85,8 @@ const ProductDetail = () => {
             </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={createTwoButtonAlert} style={{marginTop: '5%', backgroundColor: '#18A2E1', padding: '3%', borderRadius: 8}}>
-            <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>Thêm vào giỏ hàng</Text>
+        <TouchableOpacity  style={{marginTop: '5%', backgroundColor: '#18A2E1', padding: '3%', borderRadius: 8}}>
+            <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>Chinh sua gio hang</Text>
 
         </TouchableOpacity>
 
