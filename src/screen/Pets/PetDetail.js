@@ -53,6 +53,8 @@ const PetDetail = ({navigation}) => {
   const [quantityProduct, setQuantityProduct] = useState(quantityPet);
   const [typeProduct, setTypeProduct] = useState(typePet);
 
+
+  console.log('heheheh')
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
       <View style={{alignItems: 'center', marginLeft: '-5%'}}>

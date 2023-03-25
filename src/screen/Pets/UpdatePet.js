@@ -7,6 +7,7 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Block from '../../components/Block';
@@ -16,8 +17,12 @@ import {useRoute} from '@react-navigation/native';
 import {ScrollView} from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-crop-picker';
 import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
+import { HOME_SCREEN } from '../../router/ScreenName';
 
-const categoryproducts = ['Thức ăn', 'Dây', 'Quần', 'Jerry'];
+const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
+const categorygenderpets = ['Đực', 'Cái'];
 
 const UpdatePet = ({navigation}) => {
   const route = useRoute();
@@ -45,6 +50,9 @@ const UpdatePet = ({navigation}) => {
   const [quantityProduct, setQuantityProduct] = useState(quantityPet);
   const [typeProduct, setTypeProduct] = useState(typePet);
   const [imageEdit, setImageEdit] = useState();
+  const [loading, setLoading] = useState(false);
+
+
   const handleChooseImage = async () => {
     try {
       const image = await ImagePicker.openPicker({
@@ -53,18 +61,73 @@ const UpdatePet = ({navigation}) => {
         cropping: true,
       });
       console.log('imageeeeeeeeee', image);
-      setImgProduct(image);
-
+      setImageEdit(image);
     } catch (error) {
       console.log('erorr hinh', error);
     }
   };
 
+
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Them thanh cong',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
+  const showToast2 = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Them that bai',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
+  const editProduct = async () => {
+    try {
+      setLoading(true);
+      const res = await productApi.EditProduct(
+        id,
+        nameProduct,
+        ageProduct,
+        typeProduct,
+        priceProduct,
+        quantityProduct,
+        descriptionProduct,
+        genderProduct,
+        nameProduct,
+        'petStore',
+      );
+      if (res.status === 200) {
+        setLoading(false);
+        showToast();
+        navigation.navigate(HOME_SCREEN);
+        console.log('success');
+      } else {
+        setLoading(false);
+        showToast2();
+
+        console.log('thất bại');
+      }
+    } catch (error) {
+      showToast2();
+
+      setLoading(false);
+      console.log('loi sửa san pham', error);
+    }
+  };
   return (
-      <View style={styles.container}>
-          <ScrollView>
+    <View style={styles.container}>
+      <ScrollView>
         <View style={styles.hearderIcon}>
-          <TouchableOpacity onPress={() => navigation.goBack()} >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesome5
               style={{}}
               color={'black'}
@@ -81,37 +144,97 @@ const UpdatePet = ({navigation}) => {
             flexDirection: 'row',
             position: 'relative',
           }}>
-          <Image
-            source={{uri: imgProduct }}
-            style={{width: 100, height: 100, borderRadius: 8}}></Image>
-          <TouchableOpacity style={styles.iconAdd} onPress={() => handleChooseImage()}>
-            <FontAwesome5 style={{marginTop: 5}} color={'black'} name="edit" size={25} />
-          </TouchableOpacity>
+          {imageEdit ? (
+            <View>
+              <Image
+                source={{uri: imageEdit.path}}
+                style={{width: 100, height: 100, borderRadius: 8}}></Image>
+              <TouchableOpacity
+                style={styles.iconAdd}
+                onPress={() => handleChooseImage()}>
+                <FontAwesome5
+                  style={{marginTop: 5}}
+                  color={'black'}
+                  name="edit"
+                  size={25}
+                />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View>
+              <Image
+                source={{uri: imgProduct}}
+                style={{width: 100, height: 100, borderRadius: 8}}></Image>
+              {/* <TouchableOpacity style={styles.iconAdd} onPress={() => handleChooseImage()}>
+                      <FontAwesome5 style={{marginTop: 5}} color={'black'} name="edit" size={25} />
+                    </TouchableOpacity> */}
+            </View>
+          )}
         </View>
 
         <View style={styles.conTent}>
           <View>
-            <Text style={styles.nameProduct}>Tên dịch vụ</Text>
+            <Text style={styles.nameProduct}>Tên Thú cưng</Text>
           </View>
           <View style={styles.textInput}>
-            <TextInput placeholder="Nhập tên dịch vụ" />
+            <TextInput  placeholder="Nhập tên sản phẩm" value={nameProduct} onChangeText={setNameProduct} />
           </View>
 
           <View>
-            <Text style={styles.nameProduct}>Giá dịch vụ</Text>
+            <Text style={styles.nameProduct}>Mô tả</Text>
           </View>
           <View style={styles.textInput}>
-            <TextInput placeholder="Nhập giá dịch vụ" />
+            <TextInput
+              placeholder="Ví dụ: mèo lông ngán, chó giống Đức..."
+              onChangeText={setDecriptionProduct}
+              value={descriptionProduct}
+            />
           </View>
 
           <View>
-            <Text style={styles.nameProduct}>Danh mục</Text>
+            <Text style={styles.nameProduct}>Giá sản phẩm</Text>
+          </View>
+          <View style={styles.textInput}>
+            <TextInput
+            placeholder="Nhập giá sản phẩm"
+            keyboardType="numeric"
+              onChangeText={setPriceProduct}
+              value={formatMoney(priceProduct)}
+            />
+          </View>
+
+          <View>
+            <Text style={styles.nameProduct}>Số lượng</Text>
+          </View>
+          <View style={styles.textInput}>
+            <TextInput
+            placeholder="Nhập số lượng"
+            keyboardType="numeric"
+              onChangeText={setQuantityProduct}
+              value={quantityProduct}
+            />
+          </View>
+
+          <View>
+            <Text style={styles.nameProduct}>Tuổi</Text>
+          </View>
+          <View style={styles.textInput}>
+            <TextInput
+              placeholder="Ví dụ: 1 tháng, 2 năm..."
+              onChangeText={setAgeProduct}
+              value={ageProduct}
+            />
+          </View>
+
+          <View>
+            <Text style={styles.nameProduct}>Loại</Text>
           </View>
 
           <SelectDropdown
             data={categoryproducts}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
+              setTypeProduct(selectedItem)
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               // text represented after item is selected
@@ -123,7 +246,7 @@ const UpdatePet = ({navigation}) => {
               // if data array is an array of objects then return item.property to represent item in dropdown
               return item;
             }}
-            defaultButtonText={'Chó'}
+            defaultButtonText={typeProduct}
             buttonStyle={styles.dropdown4BtnStyle}
             buttonTextStyle={styles.dropdown4BtnTxtStyle}
             renderDropdownIcon={isOpened => {
@@ -142,9 +265,10 @@ const UpdatePet = ({navigation}) => {
           </View>
 
           <SelectDropdown
-            data={categoryproducts}
+            data={categorygenderpets}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
+              setGenderProduct(selectedItem)
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               // text represented after item is selected
@@ -156,7 +280,7 @@ const UpdatePet = ({navigation}) => {
               // if data array is an array of objects then return item.property to represent item in dropdown
               return item;
             }}
-            defaultButtonText={'Thú y'}
+            defaultButtonText={genderProduct}
             buttonStyle={styles.dropdown4BtnStyle}
             buttonTextStyle={styles.dropdown4BtnTxtStyle}
             renderDropdownIcon={isOpened => {
@@ -171,16 +295,22 @@ const UpdatePet = ({navigation}) => {
           />
         </View>
         <View style={styles.viewPressInsert}>
-          <TouchableOpacity style={styles.PressInsert}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-              Thêm sản phẩm
-            </Text>
+          <TouchableOpacity
+            style={styles.PressInsert}
+            onPress={() => editProduct()}>
+            {loading == true ? (
+              <ActivityIndicator size={'large'} color={'grey'} />
+            ) : (
+              <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
+                Thêm sản phẩm
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
 
-        <View style={{height: 200}}></View>
-    </ScrollView>
-      </View>
+        <View style={{height: 100}}></View>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -204,7 +334,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     left: 90,
-    top: -25
+    top: -25,
   },
 
   conTent: {
