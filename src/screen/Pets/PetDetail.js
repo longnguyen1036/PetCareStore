@@ -16,15 +16,7 @@ import {useRoute} from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import {EDIT_PETS_SCREEN} from '../../router/ScreenName';
 
-const createTwoButtonAlert = () =>
-  Alert.alert('Xac nhan xoa san pham', 'Ban co chac chan muon xoa khong', [
-    {
-      text: 'Cancel',
-      onPress: () => console.log('Cancel Pressed'),
-      style: 'cancel',
-    },
-    {text: 'OK', onPress: () => console.log('OK Pressed')},
-  ]);
+
 
 const PetDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);

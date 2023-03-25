@@ -160,6 +160,7 @@ const ListPets = ({navigation}) => {
         <FlatList
           numColumns={2}
           data={listProduct}
+          keyExtractor={(item) => item._id}
           renderItem={({item}) => (
             <Item
               agePet={item.agePet}
@@ -174,7 +175,7 @@ const ListPets = ({navigation}) => {
               typePet={item.typePet}
             />
           )}
-          keyExtractor={item => item.id}
+          
         />
       </SafeAreaView>
     </View>

@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
@@ -16,62 +16,45 @@ import {
   INSERT_SERVICES_SCREEN,
   SERVICES_DETAIL_SCREEN,
 } from '../../router/ScreenName';
-
-const DATA = [
-  {
-    id: '1',
-    title: 'First Item',
-    price: 800000,
-    price1: 900000,
-    address:
-      'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-    image: require('../../assets/image/profileavatar.png'),
-  },
-  {
-    id: '2',
-    title: 'First Item',
-    price: 700000,
-    price1: 800000,
-    address:
-      'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-    image: require('../../assets/image/profileavatar.png'),
-  },
-  {
-    id: '3',
-    title: 'First Item',
-    price: 600000,
-    price1: 700000,
-    address:
-      'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-    image: require('../../assets/image/profileavatar.png'),
-  },
-  {
-    id: '4',
-    title: 'First Item',
-    price: 500000,
-    price1: 600000,
-    address:
-      'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-    image: require('../../assets/image/profileavatar.png'),
-  },
-  {
-    id: '5',
-    title: 'First Item',
-    price: 400000,
-    price1: 400000,
-    address:
-      'Địa chỉ: 147 Nguyễn Sỹ Sách, phường 15, Tân Bình, thành phố Hồ Chí Minh.',
-    image: require('../../assets/image/profileavatar.png'),
-  },
-];
-
-
+import productApi from '../../api/productApi';
 
 const ListServices = ({navigation}) => {
+  const [listProduct, setListProduct] = useState([]);
 
-  const Item = ({title, price, image, price1, address}) => (
+  const getAllProduct = async () => {
+    const getListProductApi = await productApi.getAllProduct();
+    console.log('getAllProductApi', getListProductApi.data.data[1]);
+
+    setListProduct(getListProductApi.data.data[1]);
+  };
+
+  useEffect(() => {
+    getAllProduct();
+  }, []);
+
+  const Item = ({
+    _id,
+    descriptionService,
+    imgService,
+    nameService,
+    priceService,
+    quantityService,
+    timeService,
+    typeService,
+  }) => (
     <TouchableOpacity
-    onPress={()=> navigation.navigate(SERVICES_DETAIL_SCREEN)}
+      onPress={() =>
+        navigation.navigate(SERVICES_DETAIL_SCREEN, {
+          _id: _id,
+          descriptionService: descriptionService,
+          imgService: imgService,
+          nameService: nameService,
+          priceService: priceService,
+          quantityService: quantityService,
+          timeService: timeService,
+          typeService: typeService,
+        })
+      }
       style={{
         width: '100%',
         backgroundColor: '#E6EAED',
@@ -82,48 +65,44 @@ const ListServices = ({navigation}) => {
         marginTop: '3%',
       }}>
       <Block alignCenter marginTop={'2%'}>
-        <Image style={{width: 100, height: 120}} source={image}></Image>
+        <Image
+          style={{width: 100, height: 120}}
+          source={{uri: imgService}}></Image>
       </Block>
       <View
         style={{
           backgroundColor: 'white',
           paddingLeft: '4%',
-          borderRadius: 10
+          borderRadius: 10,
         }}>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-  
           }}>
           <View>
-            <Text style={{fontSize: 18, color: 'black'}}>{title}</Text>
-            <Text style={{color: 'red'}}>{price}</Text>
-            <Text style={{color: 'black'}}>{price1}</Text>
+            <Text style={{fontSize: 18, color: 'black'}}>{nameService}</Text>
+            <Text style={{color: 'red'}}>{priceService}</Text>
+            <Text style={{color: 'black'}}>{(priceService * 100) / 20}</Text>
           </View>
           <TouchableOpacity
             style={{
               backgroundColor: '#F2F3F2',
               borderRadius: 5,
               width: 30,
-              height: 30, 
+              height: 30,
               paddingLeft: '5%',
               paddingTop: '2%',
-              marginRight: '4%'
+              marginRight: '4%',
             }}>
-            <FontAwesome5
-              style={{}}
-              color={'black'}
-              name="chevron-right"
-              size={18}
-            />
+            <FontAwesome5 color={'black'} name="chevron-right" size={18} />
           </TouchableOpacity>
         </View>
         <View>
           <Text>Cửa hàng: Petmart</Text>
           <Text style={{width: 250, fontSize: 16, color: 'black'}}>
-            {address}
+            Dia chi cua hang
           </Text>
         </View>
       </View>
@@ -174,17 +153,20 @@ const ListServices = ({navigation}) => {
 
       <SafeAreaView style={{paddingHorizontal: '2%'}}>
         <FlatList
-          data={DATA}
+          data={listProduct}
           renderItem={({item}) => (
             <Item
-              title={item.title}
-              price={item.price}
-              image={item.image}
-              price1={item.price1}
-              address={item.address}
+              _id={item._id}
+              descriptionService={item.descriptionService}
+              imgService={item.imgService}
+              nameService={item.nameService}
+              priceService={item.priceService}
+              quantityService={item.quantityService}
+              timeService={item.timeService}
+              typeService={item.typeService}
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item._id}
         />
       </SafeAreaView>
     </View>
