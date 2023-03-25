@@ -85,7 +85,6 @@ function MainNavigation() {
   return (
     <NavigationContainer ref={navigationRef1}>
       {authState == true ? <MainStack /> : <AuthStack />}
-      {/* <MainStack/> */}
     </NavigationContainer>
   );
 }

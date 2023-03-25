@@ -148,9 +148,27 @@ const InsertImage = async (image) => {
     }
 }
 
+const getAllProduct =  async () => {
+    try {
+        const token = await getToken()
+        const getProduct = await axios.get(`${BASE_URL_TEST}/getpopulate`,{
+            headers: {
+                token: `Bearer ${token}`
+            }
+        })
+
+        // console.log('getall product', getProduct )
+        return getProduct
+    } catch (error) {
+        console.log('getall product error', error);
+        
+    }
+}   
+
 export default {
     InsertPet,
     InsertImage,
     InsertProduct, 
-    InsertService
+    InsertService,
+    getAllProduct
 }
