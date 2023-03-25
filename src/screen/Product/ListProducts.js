@@ -16,14 +16,13 @@ import {
   PRODUCTS_DETAIL_SCREEN,
 } from '../../router/ScreenName';
 import productApi from '../../api/productApi';
-import formatMoney from '../../components/FormatMoney';
 
 const ListProducts = ({navigation}) => {
   const [listProduct, setListProduct] = useState([]);
 
   const getAllProduct = async () => {
     const getListProductApi = await productApi.getAllProduct();
-    console.log('getAllProductApi', getListProductApi.data.data[0]);
+    // console.log('getAllProductApi', getListProductApi.data.data[0]);
 
     setListProduct(getListProductApi.data.data[0]);
   };
@@ -43,16 +42,20 @@ const ListProducts = ({navigation}) => {
     typeProduct,
   }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate(PRODUCTS_DETAIL_SCREEN , {
-        _id: _id,
-        codeProduct: codeProduct,
-        descriptionProduct: descriptionProduct,
-        imgProduct: imgProduct,
-        nameProduct: nameProduct,
-        priceProduct: priceProduct,
-        quantityProduct: quantityProduct,
-        typeProduct: typeProduct,
-      })}
+      onPress={() =>
+        navigation.navigate(
+          PRODUCTS_DETAIL_SCREEN,{
+          _id: _id,
+          codeProduc: codeProduct,
+          descriptionProduct: descriptionProduct,
+          imgProduct: imgProduct,
+          nameProduct: nameProduct,
+          priceProduct: priceProduct,
+          quantityProduct: quantityProduct,
+          typeProduct: typeProduct,
+          }
+        )
+      }
       style={{
         backgroundColor: '#F2F3F2',
         width: 160,
@@ -85,7 +88,7 @@ const ListProducts = ({navigation}) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <Text style={{color: 'black'}}>{formatMoney(priceProduct)}</Text>
+          <Text style={{color: 'black'}}>{priceProduct}</Text>
           <TouchableOpacity
             style={{
               backgroundColor: '#E6EAED',

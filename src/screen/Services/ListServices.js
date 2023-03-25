@@ -23,7 +23,7 @@ const ListServices = ({navigation}) => {
 
   const getAllProduct = async () => {
     const getListProductApi = await productApi.getAllProduct();
-    console.log('getAllProductApi', getListProductApi.data.data[1]);
+    // console.log('getAllProductApi', getListProductApi.data.data[1]);
 
     setListProduct(getListProductApi.data.data[1]);
   };
@@ -64,15 +64,15 @@ const ListServices = ({navigation}) => {
         borderRadius: 8,
         marginTop: '3%',
       }}>
-      <Block alignCenter marginTop={'2%'}>
+   
         <Image
-          style={{width: 100, height: 120}}
+          style={{width: 100, height: 120, borderRadius: 8}}
           source={{uri: imgService}}></Image>
-      </Block>
+    
       <View
         style={{
           backgroundColor: 'white',
-          paddingLeft: '4%',
+          paddingLeft: '1%',
           borderRadius: 10,
         }}>
         <View
@@ -83,8 +83,8 @@ const ListServices = ({navigation}) => {
           }}>
           <View>
             <Text style={{fontSize: 18, color: 'black'}}>{nameService}</Text>
-            <Text style={{color: 'red'}}>{priceService}</Text>
-            <Text style={{color: 'black'}}>{(priceService * 100) / 20}</Text>
+            <Text style={{color: 'black' }}>{priceService}</Text>
+            <Text style={{color: 'red' }}>{(priceService * 80) / 100}</Text>
           </View>
           <TouchableOpacity
             style={{
@@ -102,7 +102,7 @@ const ListServices = ({navigation}) => {
         <View>
           <Text>Cửa hàng: Petmart</Text>
           <Text style={{width: 250, fontSize: 16, color: 'black'}}>
-            Dia chi cua hang
+             Mô tả này dài lắm nên phải để đoạn text này dài ra.
           </Text>
         </View>
       </View>

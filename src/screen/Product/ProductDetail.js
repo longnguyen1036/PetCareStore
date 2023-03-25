@@ -10,23 +10,32 @@ import {
 import React, {useState} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useRoute } from '@react-navigation/native';
+import formatMoney from '../../components/FormatMoney';
 
 const ProductDetail = ({navigation}) => {
-  const [ItemsImage, setItemsImage] = useState([
-    {key: 1, image: require('../../assets/image/detail1.png')},
-    {key: 2, image: require('../../assets/image/detail2.png')},
-    {key: 3, image: require('../../assets/image/detail1.png')},
-    {key: 4, image: require('../../assets/image/detail2.png')},
-    {key: 5, image: require('../../assets/image/detail1.png')},
-    {key: 6, image: require('../../assets/image/detail2.png')},
-    {key: 7, image: require('../../assets/image/detail1.png')},
-    {key: 8, image: require('../../assets/image/detail2.png')},
-    {key: 9, image: require('../../assets/image/detail1.png')},
-  ]);
+  const route = useRoute();
+  const {
+    _id,
+    codeProduct,
+    descriptionProduct,
+    imgProduct,
+    nameProduct,
+    priceProduct,
+    quantityProduct,
+    typeProduct,
+  } = route.params;
+  
 
-  const [selectedImage, setSelectedImage] = useState(
-    require('../../assets/image/detail1.png'),
-  );
+  const [id, setId] = useState(_id);
+  const [nameProductDetail, setNameDetail] = useState(nameProduct);
+  const [codeProductDetail, setCodeProductDetail] = useState(codeProduct);
+  const [descriptionProductDetail, setDecriptionProductDetail] = useState(descriptionProduct);
+  const [imgProductDetail, setImgProductDetail] = useState(imgProduct);
+  const [priceProductDetail, setPriceProductDetail] = useState(priceProduct);
+  const [quantityProductDetail, setQuantityProductDetail] = useState(quantityProduct);
+  const [typeProductDetail, setTypeProductDetail] = useState(typeProduct);
+  console.log('image', id)
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
       <View style={{alignItems: 'center'}}>
@@ -49,11 +58,11 @@ const ProductDetail = ({navigation}) => {
 
         <View>
           <Image
-            source={selectedImage}
+            source={{uri: imgProductDetail}}
             style={{width: 200, height: 200, borderRadius: 8}}></Image>
         </View>
 
-        <ScrollView style={{width: '40%'}} horizontal={true}>
+        {/* <ScrollView style={{width: '40%'}} horizontal={true}>
           {ItemsImage.map(object => {
             return (
               <TouchableOpacity
@@ -68,12 +77,12 @@ const ProductDetail = ({navigation}) => {
               </TouchableOpacity>
             );
           })}
-        </ScrollView>
+        </ScrollView> */}
         <View style={{marginTop: '3%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-            Balo nắp trong trơn màu đuôi lưới
+            {nameProductDetail}
           </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>700.000đ</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(priceProductDetail)}</Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
             Tình trạng: Còn hàng
           </Text>
@@ -97,7 +106,20 @@ const ProductDetail = ({navigation}) => {
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
               Dành cho
             </Text>
-            <Text>Mèo</Text>
+            <Text>{typeProductDetail}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: 'white',
+              marginLeft: '10%',
+              padding: 8,
+              borderRadius: 8,
+            }}>
+            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
+              Số lượng: 
+            </Text>
+            <Text>{quantityProductDetail}</Text>
           </TouchableOpacity>
         </View>
 
@@ -112,38 +134,17 @@ const ProductDetail = ({navigation}) => {
             padding: 8,
             borderRadius: 8,
           }}>
-          <View style={{flexDirection: 'row'}}>
-            <View
-              style={{
-                backgroundColor: '#18A2E1',
-                padding: 5,
-                borderRadius: 8,
-                alignItems: 'center',
-              }}>
-              <Image source={require('../../assets/image/iconimg.png')}></Image>
-            </View>
+         
 
             <View style={{marginLeft: '5%'}}>
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
-                matpetfamily
+                Mô tả:
               </Text>
-              <Text>Store</Text>
+              <Text>{descriptionProductDetail}</Text>
             </View>
           </View>
 
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#18A2E1',
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 5,
-              height: 40,
-            }}>
-            <FontAwesome5 name="comments" size={20} color={'white'} />
-          </TouchableOpacity>
-        </View>
-
+          
         <TouchableOpacity
           style={{
             marginTop: '5%',
@@ -152,7 +153,7 @@ const ProductDetail = ({navigation}) => {
             borderRadius: 8,
           }}>
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
-            Chinh sua gio hang
+            Chỉnh sửa giỏ hàng
           </Text>
         </TouchableOpacity>
       </View>

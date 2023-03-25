@@ -20,7 +20,7 @@ const ListPets = ({navigation}) => {
 
   const getAllProduct = async () => {
     const getListProductApi = await productApi.getAllProduct();
-    console.log('getAllProductApi', getListProductApi.data.data[2]);
+    // console.log('getAllProductApi', getListProductApi.data.data[2]);
 
     setListProduct(getListProductApi.data.data[2]);
   };
