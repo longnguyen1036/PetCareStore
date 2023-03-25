@@ -33,16 +33,7 @@ const Home = ({navigation}) => {
   const [listProduct, setListProduct] = useState([])
 
 
-  const getAllProduct = async () => {
-      const getListProductApi = await productApi.getAllProduct();
-      console.log('getAllProductApi', getListProductApi.data.data[0])
-    
-      setListProduct(getListProductApi)
-  }
 
-  useEffect(() => {
-      getAllProduct()
-  },[])
 
 
   const renderItem = ({item}) => {
