@@ -23,7 +23,7 @@ const createTwoButtonAlert = () =>
     {text: 'OK', onPress: () => console.log('OK Pressed')},
   ]);
 
-const ServiceDetail = () => {
+const ServiceDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [ItemsImage, setItemsImage] = useState([
@@ -52,7 +52,7 @@ const ServiceDetail = () => {
             paddingHorizontal: '3%',
             paddingVertical: '3%',
           }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> navigation.goBack()}>
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
@@ -168,7 +168,6 @@ const ServiceDetail = () => {
         
 
         <TouchableOpacity
-          onPress={createTwoButtonAlert}
           style={{
             marginTop: '5%',
             backgroundColor: '#18A2E1',
