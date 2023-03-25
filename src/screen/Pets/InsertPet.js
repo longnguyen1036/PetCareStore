@@ -7,7 +7,6 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
-  
 } from 'react-native';
 import React, {useState} from 'react';
 import Block from '../../components/Block';
@@ -42,9 +41,6 @@ const InsertPet = ({navigation}) => {
       console.log('imageeeeeeeeee', image);
       setImageUri(image);
 
-      // const urlimage = await productApi.InsertImage(image)
-      // setUrlImage(urlimage.data.data.link);
-      // console.log('link hinh ne', urlimage.data.data.link)
     } catch (error) {
       console.log('erorr hinh', error);
     }

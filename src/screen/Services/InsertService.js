@@ -55,7 +55,7 @@ const InsertService = ({navigation}) => {
     Toast.show({
       type: 'success',
       text1: 'Them thanh cong',
-      visibilityTime: 2000,
+      visibilityTime: 4000,
       autoHide: true,
       topOffset: 30,
       bottomOffset: 40,
@@ -71,6 +71,7 @@ const InsertService = ({navigation}) => {
       topOffset: 30,
       bottomOffset: 40,
     });
+    navigation.goBack();
   };
 
   const handleChooseImage = async () => {
@@ -108,17 +109,21 @@ const InsertService = ({navigation}) => {
         'serviceStore',
       );
       if (res.status === 200) {
+        showToast();
         setLoading(false);
-        showToast()
         console.log('success');
         navigation.goBack();
       } else {
-        setLoading(true);
-        showToast2()
+        setLoading(false);
+        showToast2();
+        
         console.log('thất bại');
       }
     } catch (error) {
       console.log('loi them san pham', error);
+      setLoading(false);
+      showToast2();
+      console.log('thất bại');
     }
   };
 
