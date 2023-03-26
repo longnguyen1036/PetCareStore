@@ -54,14 +54,10 @@ const ServiceDetail = ({navigation}) => {
   const arr = timeServiceDetail;
 const size = arr.length;
 
-console.log(size); //
+console.log(priceServiceDetail); //
 
   const renderItem = ({item}) => {
     // console.log('itemmm', item);
-    // item.forEach(element => {
-    //   console.log(element)
-    // });
-    // console.log('phuoc', phuoc)
     return (
 
         <Block

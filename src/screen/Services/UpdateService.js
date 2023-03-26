@@ -9,45 +9,62 @@ import {
     Modal,
     Alert,
   } from 'react-native';
-  import React, {useState} from 'react';
+  import React, {useEffect, useState} from 'react';
   import Block from '../../components/Block';
   import Text from '../../components/Text';
   import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
   import SelectDropdown from 'react-native-select-dropdown';
   import ImagePicker from 'react-native-image-crop-picker';
   import productApi from '../../api/productApi';
-  
+  import {useRoute} from '@react-navigation/native';
+  import Toast, {ErrorToast} from 'react-native-toast-message';
+import { HOME_SCREEN } from '../../router/ScreenName';
   
   const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
   
-  const UpdateService = () => {
+  const UpdateService = ({navigation}) => {
+    const route = useRoute()
+    const {
+        _id,
+        descriptionService,
+        imgService,
+        nameService,
+        priceService,
+        quantityService,
+        timeService,
+        typeService
+    } = route.params
     const [modalVisible, setModalVisible] = useState(false);
-    const [nameService, setNameService] = useState('');
-    const [priceService, setPriceService] = useState();
-    const [imageUri, setImageUri] = useState();
-    const [descriptionService, setDescriptionService] = useState('');
-    const [typeService, setTypeService] = useState('');
-    const [quantityService, setQuantityService] = useState();
-  
     const [modalVisibleTime, setModalVisibleTime] = useState(false);
     const [time, setTime] = useState('');
-    const [timeService, setTimeService] = useState([
-      {
-        time: '+',
-        status: false,
-      },
-    ]);
+ 
+    
+    const [nameServiceUpdate, setNameSeriveUpdate] = useState(nameService);
+    const [id, setId] = useState(_id);
+    const [descriptionServiceUpdate, setDescriptionServiceUpdate] = useState(descriptionService);
+    const [imgServiceUpdate, setImgSeriveUpdate] = useState(imgService);
+    const [priceServiceUpdate, setPriceSeriveUpdate] = useState(priceService);
+    const [timeServiceUpdate, setTimeSeriveUpdate] = useState(timeService);
+    const [typeServiceUpdate, setTypeSeriveUpdate] = useState(typeService);
+    const [quantityServiceUpdate, setQuantitySeriveUpdate] = useState(quantityService);
+
+    const [imageEdit, setImageEdit] = useState();
+    const [loading, setLoading] = useState(false);
   
-    const insertTimeService = () => {
-      const arrTime = [...timeService];
-      arrTime.push(arrTime[arrTime.length - 1]);
+   console.log('gia gia ', timeServiceUpdate)
+
+   const pushAdd = () => {
+      const arrAdd = [...timeService, {
+        "time": "+",
+        "status": true
+      }];
+      setTimeSeriveUpdate(arrAdd)
       
-      arrTime[arrTime.length - 2] = {...time};
-  
-      setTimeService(arrTime);
-      console.log('arrTime: ', timeService);
-      setModalVisibleTime(false);
-    };
+   }
+
+   useEffect(() => {
+      pushAdd()
+   },[])
   
     const handleChooseImage = async () => {
       try {
@@ -57,59 +74,113 @@ import {
           cropping: true,
         });
         console.log('imageeeeeeeeee', image);
-        setImageUri(image);
-  
-        // const urlimage = await productApi.InsertImage(image)
-        // setUrlImage(urlimage.data.data.link);
-        // console.log('link hinh ne', urlimage.data.data.link)
+        setImageEdit(image);
       } catch (error) {
         console.log('erorr hinh', error);
       }
     };
   
-    const addService = async () => {
-      try {
-          timeService.pop()
-          const timeApi = JSON.stringify(timeService)
-          console.log('timeservice', timeService)
-        const res = await productApi.InsertService(
-          nameService,
-          priceService,
-          imageUri,
-          descriptionService,
-          typeService,
-          quantityService,
-          timeApi,
-          'serviceStore',
-        );
-        if (res.status === 200) {
-          console.log('success');
-        } else {
-          console.log('thất bại');
-        }
-      } catch (error) {
-        console.log('loi them san pham', error);
-      }
+    const showToast = () => {
+      Toast.show({
+        type: 'success',
+        text1: 'Them thanh cong',
+        visibilityTime: 2000,
+        autoHide: true,
+        topOffset: 30,
+        bottomOffset: 40,
+      });
     };
   
+    const showToast2 = () => {
+      Toast.show({
+        type: 'error',
+        text1: 'Them that bai',
+        visibilityTime: 2000,
+        autoHide: true,
+        topOffset: 30,
+        bottomOffset: 40,
+      });
+    };
+
+   const editProduct = async () => {
+    try {
+      setLoading(true);
+      timeServiceUpdate.pop()
+      // const timeApi = JSON.stringify(timeServiceUpdate);
+
+      const res = await productApi.EditProduct3(
+        id,
+        nameServiceUpdate,
+        priceServiceUpdate,
+        descriptionServiceUpdate,
+        typeServiceUpdate,
+        quantityServiceUpdate,
+        timeServiceUpdate,
+        'serviceStore',
+      );
+      console.log('resss', res)
+      if (res.status === 200) {
+        setLoading(false);
+        showToast();
+        navigation.navigate(HOME_SCREEN);
+        console.log('success');
+      } else {
+        setLoading(false);
+        showToast2();
+
+        console.log('thất bại');
+      }
+    } catch (error) {
+      showToast2();
+
+      setLoading(false);
+      console.log('loi sửa san pham', error);
+    }
+  };
   
+    const insertTimeService = () => {
+      const arrTime = [...timeServiceUpdate];
+      arrTime.push(arrTime[arrTime.length - 1]);
   
+      arrTime[arrTime.length - 2] = {...time};
+  
+      setTimeSeriveUpdate(arrTime);
+      setModalVisibleTime(false);
+
+    }
+
+    const eventChangeColor = (item) => {
+      if(item.time === '+'){
+        console.log('arrTime: ', timeService);
+      }else{
+        for (let i = 0; i < timeServiceUpdate.length; i++) {
+          if(item.time == timeServiceUpdate[i].time){
+            const tmp = [...timeServiceUpdate]
+            tmp[i].status = !tmp[i].status
+            setTimeSeriveUpdate(tmp)
+            console.log('hahahaaha', timeServiceUpdate)
+            return 
+          }
+        }
+      }
+    }
+
     const renderItem = ({item}) => {
-      // console.log('itemmm', item);
+      console.log('itemmm', item);
       return (
         <TouchableOpacity
           onPress={() => {
-            setModalVisibleTime(true);
-          }}
-          disabled={item.status}>
+              eventChangeColor(item),
+              item.time === '+' ? setModalVisibleTime(true) : setModalVisibleTime(false)
+          }}>
           <Block
             alignCenter
             margin={5}
             width={60}
             height={60}
-            paddingVertical={item.status == false ? 0 : 15}
+            paddingVertical={ 15}
             backgroundColor={'#ECF2F8'}>
-            <Text bold style={{fontSize: item.status == false ? 45 : 18}}>
+            <Text bold style={{fontSize:  18, color: item.status == false ? 'grey' : 'black' }}>
               {item.time}
             </Text>
           </Block>
@@ -120,7 +191,7 @@ import {
     return (
       <View style={styles.container}>
         <View style={styles.hearderIcon}>
-          <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesome5
               style={{}}
               color={'black'}
@@ -130,20 +201,36 @@ import {
           </TouchableOpacity>
         </View>
   
-        {imageUri ? (
-            <Block marginLeft={'5%'}>
+        <View
+        style={{
+          marginHorizontal: '6%',
+          marginVertical: '2%',
+          flexDirection: 'row',
+        }}>
+        {imageEdit ? (
+            <View>
               <Image
-                source={{uri: imageUri.path}}
-                style={{width: 100, height: 100}}
-              />
-            </Block>
+                source={{uri: imageEdit.path}}
+                style={{width: 100, height: 100, borderRadius: 8}}></Image>
+              <TouchableOpacity
+                style={styles.iconAdd}
+                onPress={() => handleChooseImage()}>
+                <FontAwesome5
+                  style={{marginTop: 5}}
+                  color={'black'}
+                  name="edit"
+                  size={25}
+                />
+              </TouchableOpacity>
+            </View>
           ) : (
-            <TouchableOpacity
-              style={styles.iconAdd}
-              onPress={() => handleChooseImage()}>
-              <FontAwesome5 style={{}} color={'black'} name="plus" size={25} />
-            </TouchableOpacity>
+            <View>
+              <Image
+                source={{uri: imgServiceUpdate}}
+                style={{width: 100, height: 100, borderRadius: 8}}></Image>
+            </View>
           )}
+      </View>
   
         <View style={styles.conTent}>
           <View>
@@ -152,8 +239,8 @@ import {
           <View style={styles.textInput}>
           <TextInput
                 placeholder="Nhập tên dịch vụ"
-                onChangeText={setNameService}
-                value={nameService}
+                onChangeText={setNameSeriveUpdate}
+                value={nameServiceUpdate}
               />
           </View>
   
@@ -163,8 +250,8 @@ import {
             <View style={styles.textInput}>
               <TextInput
                 placeholder="Ví dụ: massage cho chó mèo từ a tới z,.... "
-                onChangeText={setDescriptionService}
-                value={descriptionService}
+                onChangeText={setDescriptionServiceUpdate}
+                value={descriptionServiceUpdate}
               />
             </View>
           <View>
@@ -173,8 +260,8 @@ import {
           <View style={styles.textInput}>
             <TextInput placeholder="Nhập giá dịch vụ" 
             keyboardType="numeric"
-            onChangeText={setPriceService}
-            value={priceService}/>
+            onChangeText={setPriceSeriveUpdate}
+            value={priceServiceUpdate}/>
           </View>
   
           <View>
@@ -184,8 +271,8 @@ import {
               <TextInput
                 placeholder="Nhập số lượng"
                 keyboardType="numeric"
-                onChangeText={setQuantityService}
-                value={quantityService}
+                onChangeText={setQuantitySeriveUpdate}
+                value={quantityServiceUpdate}
               />
             </View>
   
@@ -197,7 +284,7 @@ import {
             data={categoryproducts}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
-              setTypeService(selectedItem)
+              setTypeSeriveUpdate(selectedItem)
             }}
           
             buttonTextAfterSelection={(selectedItem, index) => {
@@ -210,7 +297,7 @@ import {
               // if data array is an array of objects then return item.property to represent item in dropdown
               return item;
             }}
-            defaultButtonText={'Chọn giống'}
+            defaultButtonText={typeServiceUpdate}
             buttonStyle={styles.dropdown4BtnStyle}
             buttonTextStyle={styles.dropdown4BtnTxtStyle}
             renderDropdownIcon={isOpened => {
@@ -245,9 +332,9 @@ import {
           </TouchableOpacity>
         </View>
         <View style={styles.viewPressInsert}>
-          <TouchableOpacity style={styles.PressInsert} onPress={()=> addService()}>
+        <TouchableOpacity style={styles.PressInsert} onPress={() => editProduct()}>
             <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-              Sua san pham
+              Sửa dịch vụ
             </Text>
           </TouchableOpacity>
         </View>
@@ -261,7 +348,7 @@ import {
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.modalView}>
-            <FlatList numColumns={4} data={timeService} renderItem={renderItem} />
+            <FlatList numColumns={4} data={timeServiceUpdate} renderItem={renderItem} />
   
             <Block row margin={10}>
               <TouchableOpacity

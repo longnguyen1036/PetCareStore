@@ -73,23 +73,23 @@ const DelelePet = async (id, nameModel) => {
       method: 'POST',
       url: `${BASE_URL_TEST}/delete`,
       headers: {
-        token : `Bearer ${token}`,
-      },data:{
+        token: `Bearer ${token}`,
+      }, data: {
         id,
         nameModel
       }
     };
-    
+
     axios.request(options).then(function (response) {
-      console.log(response.data);
+      console.log('hehehe', response.data);
     }).catch(function (error) {
-      console.error(error.request);
+      console.error('loi eroor', error.request);
     });
 
-} catch (error) {
+  } catch (error) {
     console('loi api delete error', error.request);
     return error;
-} 
+  }
 }
 
 const InsertProduct = async (
@@ -332,6 +332,43 @@ const EditProduct2 = async (
   }
 };
 
+const EditProduct3 = async (
+  _id,
+  nameServiceUpdate,
+  priceServiceUpdate,
+  descriptionServiceUpdate,
+  typeServiceUpdate,
+  quantityServiceUpdate,
+  timeService,
+  nameModel
+) => {
+  try {
+    const token = await getToken();
+    const editProduct = await axios.post(
+      `${BASE_URL_TEST}/edtting`,
+      {
+        _id,
+        nameServiceUpdate,
+        priceServiceUpdate,
+        descriptionServiceUpdate,
+        typeServiceUpdate,
+        quantityServiceUpdate,
+        timeService,
+        nameModel
+      },
+      {
+        headers: {
+          token: `Bearer ${token}`,
+        },
+      },
+    );
+
+    console.log('EditProduct33', editProduct)
+    return editProduct;
+  } catch (error) {
+    console.log('EditProduct error', error);
+  }
+};
 export default {
   InsertPet,
   InsertImage,
@@ -339,6 +376,7 @@ export default {
   InsertService,
   getAllProduct,
   EditProduct,
-  EditProduct2, 
+  EditProduct2,
+  EditProduct3,
   DelelePet
 };
