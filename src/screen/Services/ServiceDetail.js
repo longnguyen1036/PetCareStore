@@ -17,10 +17,19 @@ import Block from '../../components/Block';
 import {useRoute} from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import { EDIT_SERVICES_SCREEN } from '../../router/ScreenName';
+import productApi from '../../api/productApi';
 
 const ServiceDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
+  const deletePet = async (id,nameModel) =>{
+    console.log('iddsadsad', id, nameModel)
+    const a = await productApi.DelelePet(id,nameModel);
+    setModalVisible(false);
+    navigation.goBack()
+    console.log(a)
+  }
+
   const route = useRoute();
   const {
     _id,
@@ -205,6 +214,7 @@ console.log(size); //
         </TouchableOpacity>
       </View>
 
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -222,7 +232,7 @@ console.log(size); //
             <Block row justifySpaceBetween>
               <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
+                onPress={() => deletePet(id,'serviceStore')}>
                 <Text style={styles.textStyle}>Đồng ý</Text>
               </TouchableOpacity>
               <TouchableOpacity

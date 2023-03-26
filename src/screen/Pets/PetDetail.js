@@ -15,11 +15,22 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useRoute} from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import {EDIT_PETS_SCREEN} from '../../router/ScreenName';
+import productApi from '../../api/productApi';
 
 
 
 const PetDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const deletePet = async (id,nameModel) =>{
+    console.log('iddsadsad', id, nameModel)
+    const a = await productApi.DelelePet(id,nameModel);
+    setModalVisible(false);
+    navigation.goBack()
+    console.log(a)
+  }
+
+
   const route = useRoute();
   const {
     agePet,
@@ -35,6 +46,7 @@ const PetDetail = ({navigation}) => {
   } = route.params;
 
   const [id, setId] = useState(_id);
+  
   const [nameProduct, setNameProduct] = useState(namePet);
   const [ageProduct, setAgeProduct] = useState(agePet);
   const [codeProduct, setCodeProduct] = useState(code);
@@ -234,7 +246,8 @@ const PetDetail = ({navigation}) => {
             <Block row justifySpaceBetween>
               <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
+                onPress={() => deletePet(id,'petStore')}>
+                  {/* onPress={() => */}
                 <Text style={styles.textStyle}>Đồng ý</Text>
               </TouchableOpacity>
               <TouchableOpacity

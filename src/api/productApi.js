@@ -65,6 +65,32 @@ const InsertPet = async (
     console.log('insert pet error', error);
   }
 };
+const DelelePet = async (id, nameModel) => {
+
+  try {
+    const token = await getToken();
+    const options = {
+      method: 'POST',
+      url: `${BASE_URL_TEST}/delete`,
+      headers: {
+        token : `Bearer ${token}`,
+      },data:{
+        id,
+        nameModel
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error.request);
+    });
+
+} catch (error) {
+    console('loi api delete error', error.request);
+    return error;
+} 
+}
 
 const InsertProduct = async (
   nameProduct,
@@ -179,6 +205,7 @@ const InsertService = async (
     console.log('insert pet error', error);
   }
 };
+
 
 const InsertImage = async image => {
   try {
@@ -312,5 +339,6 @@ export default {
   InsertService,
   getAllProduct,
   EditProduct,
-  EditProduct2
+  EditProduct2, 
+  DelelePet
 };

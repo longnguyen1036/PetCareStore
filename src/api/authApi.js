@@ -46,7 +46,7 @@ const Login = async(emailStore, passStore)=>{
             emailStore,
             passStore
         } );
-        // console.log('api login',login);
+        console.log('api login',login);
         return login;
 
     } catch (error) {

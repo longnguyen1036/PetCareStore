@@ -151,7 +151,7 @@ const ListServices = ({navigation}) => {
         </Block>
       </Block>
 
-      <SafeAreaView style={{paddingHorizontal: '2%'}}>
+      <SafeAreaView style={{height: '90%',paddingHorizontal: '2%'}}>
         <FlatList
           data={listProduct}
           renderItem={({item}) => (
@@ -169,6 +169,7 @@ const ListServices = ({navigation}) => {
           keyExtractor={item => item._id}
         />
       </SafeAreaView>
+      <Block width={'100%'} height={200}></Block>
     </View>
   );
 };

@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   Alert,
+  Modal
 } from 'react-native';
 import React, {useState} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -13,9 +14,21 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useRoute } from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import { EDIT_PRODUCTS_SCREEN } from '../../router/ScreenName';
+import productApi from '../../api/productApi';
+import Block from '../../components/Block';
 
 const ProductDetail = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const route = useRoute();
+  const deletePet = async (id,nameModel) =>{
+    console.log('iddsadsad', id, nameModel)
+    const a = await productApi.DelelePet(id,nameModel);
+    setModalVisible(false);
+    navigation.goBack()
+    console.log(a)
+  }
+
   const {
     _id,
     codeProduct,
@@ -52,7 +65,7 @@ const ProductDetail = ({navigation}) => {
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
             <MaterialCommunityIcons name="delete" size={30} color={'black'} />
           </TouchableOpacity>
         </View>
@@ -169,10 +182,92 @@ const ProductDetail = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Image
+              style={{width: 60, height: 60}}
+              source={require('../../assets/image/warning.png')}></Image>
+            <Text style={styles.modalText}>Xac nhan xoa dich vu!</Text>
+            <Block row justifySpaceBetween>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => deletePet(id,'productStore')}>
+                  {/* onPress={() => */}
+                <Text style={styles.textStyle}>Đồng ý</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose2]}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.textStyle}>Huy</Text>
+              </TouchableOpacity>
+            </Block>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 export default ProductDetail;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  modalView: {
+    margin: 30,
+    marginTop: '60%',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#52B4FF',
+  },
+  buttonClose: {
+    backgroundColor: '#52B4FF',
+    width: 100,
+  },
+  buttonClose2: {
+    marginLeft: '10%',
+    backgroundColor: 'grey',
+    width: 100,
+  },
+  textStyle: {
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  hinh: {
+    marginTop: 20,
+    marginLeft: '5%',
+    width: '100%',
+    height: 350,
+  },
+});
+
