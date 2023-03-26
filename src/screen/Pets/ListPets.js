@@ -81,7 +81,7 @@ const ListPets = ({navigation}) => {
           radius={8}>
           <Block marginLeft={'3%'}>
             <Text  style={{fontWeight: '700', width: 110, height: 38, marginTop: '5%'}}>
-              {namePet}
+             Tên: {namePet}
             </Text>
             <Block
               marginTop={'4%'}

@@ -94,9 +94,9 @@ const ProductDetail = ({navigation}) => {
         </ScrollView> */}
         <View style={{marginTop: '3%', marginLeft: '10%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-            {nameProductDetail}
+           Tên: {nameProductDetail}
           </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(priceProductDetail)}</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>Giá: {formatMoney(priceProductDetail)}</Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
             Tình trạng: Còn hàng
           </Text>

@@ -118,7 +118,7 @@ console.log(priceServiceDetail); //
         </ScrollView> */}
         <View style={{marginTop: '3%', width: '73%', marginLeft: '10%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-            {nameServiceDetail}
+           Tên: {nameServiceDetail}
           </Text>
 
           

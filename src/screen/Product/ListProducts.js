@@ -90,7 +90,7 @@ const ListProducts = ({navigation}) => {
               justifySpaceBetween
               paddingHorizontal={5}>
               <Text style={{width: 90, height: 18}}>
-               Giá: {formatMoney(priceProduct)}
+               {formatMoney(priceProduct)}
               </Text>
               <TouchableOpacity
                 style={{
