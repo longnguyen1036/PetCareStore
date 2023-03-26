@@ -1,5 +1,5 @@
-import {BASE_URL_TEST} from './BASE_URL';
-import {getToken, setToken} from '../helper/auth';
+import { BASE_URL_TEST } from './BASE_URL';
+import { getToken, setToken } from '../helper/auth';
 import axios from 'axios';
 
 const InsertPet = async (
@@ -259,7 +259,46 @@ const EditProduct = async (
       },
     );
 
-    console.log('EditProduct', editProduct )
+    console.log('EditProduct', editProduct)
+    return editProduct;
+  } catch (error) {
+    console.log('EditProduct error', error);
+  }
+};
+
+
+const EditProduct2 = async (
+  _id,
+  codeProduct,
+  descriptionProduct,
+  nameProduct,
+  priceProduct,
+  quantityProduct,
+  typeProduct,
+  nameModel
+) => {
+  try {
+    const token = await getToken();
+    const editProduct = await axios.post(
+      `${BASE_URL_TEST}/edtting`,
+      {
+        _id,
+        codeProduct,
+        descriptionProduct,
+        nameProduct,
+        priceProduct,
+        quantityProduct,
+        typeProduct,
+        nameModel
+      },
+      {
+        headers: {
+          token: `Bearer ${token}`,
+        },
+      },
+    );
+
+    console.log('EditProduct', editProduct)
     return editProduct;
   } catch (error) {
     console.log('EditProduct error', error);
@@ -272,5 +311,6 @@ export default {
   InsertProduct,
   InsertService,
   getAllProduct,
-  EditProduct
+  EditProduct,
+  EditProduct2
 };

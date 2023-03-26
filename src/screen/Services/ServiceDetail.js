@@ -16,6 +16,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Block from '../../components/Block';
 import {useRoute} from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
+import { EDIT_SERVICES_SCREEN } from '../../router/ScreenName';
 
 const ServiceDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -186,7 +187,18 @@ console.log(size); //
             backgroundColor: '#18A2E1',
             padding: '3%',
             borderRadius: 8,
-          }}>
+          }} 
+          onPress={() => navigation.navigate(EDIT_SERVICES_SCREEN, {
+              _id: id,
+              descriptionService: descriptionServiceDetail,
+              imgService: imgServiceDetail,
+              nameService: nameServiceDetail,
+              priceService: priceServiceDetail,
+              quantityService: quantityServiceDetail,
+              timeService: timeServiceDetail,
+              typeService: typeServiceDetail
+          })} 
+          >
           <Text style={{fontSize: 20, color: 'white', fontWeight: '300'}}>
             Chỉnh sửa sản phẩm
           </Text>

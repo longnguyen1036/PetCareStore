@@ -12,6 +12,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useRoute } from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
+import { EDIT_PRODUCTS_SCREEN } from '../../router/ScreenName';
 
 const ProductDetail = ({navigation}) => {
   const route = useRoute();
@@ -151,9 +152,20 @@ const ProductDetail = ({navigation}) => {
             backgroundColor: '#18A2E1',
             padding: '3%',
             borderRadius: 8,
-          }}>
+          }} 
+          onPress={() => navigation.navigate(EDIT_PRODUCTS_SCREEN, {
+              _id: id,
+              codeProduct: codeProductDetail,
+              descriptionProduct: descriptionProductDetail,
+              imgProduct: imgProductDetail,
+              nameProduct: nameProductDetail,
+              priceProduct: priceProductDetail,
+              quantityProduct: quantityProductDetail,
+              typeProduct: typeProductDetail
+          })} 
+          >
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
-            Chỉnh sửa giỏ hàng
+            Chỉnh sửa
           </Text>
         </TouchableOpacity>
       </View>

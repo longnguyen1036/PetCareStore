@@ -199,7 +199,7 @@ const UpdatePet = ({navigation}) => {
             placeholder="Nhập giá sản phẩm"
             keyboardType="numeric"
               onChangeText={setPriceProduct}
-              value={formatMoney(priceProduct)}
+              value={priceProduct}
             />
           </View>
 
@@ -302,7 +302,7 @@ const UpdatePet = ({navigation}) => {
               <ActivityIndicator size={'large'} color={'grey'} />
             ) : (
               <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-                Thêm sản phẩm
+                Sửa sản phẩm
               </Text>
             )}
           </TouchableOpacity>
