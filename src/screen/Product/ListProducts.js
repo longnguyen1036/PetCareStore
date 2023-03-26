@@ -16,6 +16,7 @@ import {
   PRODUCTS_DETAIL_SCREEN,
 } from '../../router/ScreenName';
 import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 
 const ListProducts = ({navigation}) => {
   const [listProduct, setListProduct] = useState([]);
@@ -55,57 +56,61 @@ const ListProducts = ({navigation}) => {
           typeProduct: typeProduct,
           }
         )
-      }
-      style={{
-        backgroundColor: '#F2F3F2',
-        width: 160,
-        height: 200,
-        borderRadius: 8,
-        paddingHorizontal: 8,
-        marginRight: '5%',
-        marginTop: '2%',
-        marginLeft: '5%',
-      }}>
-      <Block alignCenter marginTop={'2%'}>
-        <Image style={{width: 100, height: 110}} source={{uri: imgProduct}}></Image>
-      </Block>
-      <View
+      }>
+     <View
         style={{
-          backgroundColor: 'white',
-          borderRadius: 5,
-          marginTop: '8%',
-          paddingHorizontal: 5,
-          paddingVertical: 5,
+          backgroundColor: '#E6EAED',
+          width: 165,
+          height: 205,
+          borderRadius: 8,
+          paddingHorizontal: 8,
+          marginRight: '5%',
+          marginTop: '2%',
+          marginLeft: '5%',
         }}>
-        <View style={{marginTop: '2%'}}>
-          <Text style={{fontSize: 15, fontWeight: '500', color: 'black'}}>
-            {nameProduct}
-          </Text>
-        </View>
-        <View
-          style={{
-            marginTop: '8%',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text style={{color: 'black'}}>{priceProduct}</Text>
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#E6EAED',
-              borderRadius: 5,
-              width: 25,
-              height: 25,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <FontAwesome5
-              style={{}}
-              color={'black'}
-              name="chevron-right"
-              size={18}
-            />
-          </TouchableOpacity>
-        </View>
+        <Block alignCenter marginTop={'5%'}>
+          <Image
+            style={{width: 100, height: 110}}
+            source={{uri: imgProduct}}></Image>
+        </Block>
+        <Block
+          marginLeft={'1%'}
+          marginTop={'3%'}
+          width={150}
+          height={80}
+          backgroundColor={'white'}
+          radius={8}>
+          <Block marginLeft={'5%'}>
+            <Text  style={{color: 'black',fontWeight: '700', width: 110, height: 38, marginTop: '5%'}}>
+              Tên: {nameProduct}
+            </Text>
+            <Block
+              marginTop={'4%'}
+              row
+              justifySpaceBetween
+              paddingHorizontal={5}>
+              <Text style={{width: 90, height: 18}}>
+               Giá: {formatMoney(priceProduct)}
+              </Text>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#E6EAED',
+                  borderRadius: 5,
+                  width: 25,
+                  height: 25,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <FontAwesome5
+                  style={{}}
+                  color={'black'}
+                  name="chevron-right"
+                  size={18}
+                />
+              </TouchableOpacity>
+            </Block>
+          </Block>
+        </Block>
       </View>
     </TouchableOpacity>
   );

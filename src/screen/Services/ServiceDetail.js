@@ -80,7 +80,7 @@ console.log(size); //
 
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
-      <View style={{alignItems: 'center'}}>
+      <View >
         <View
           style={{
             flexDirection: 'row',
@@ -98,10 +98,10 @@ console.log(size); //
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View style={{alignItems: 'center'}}>
           <Image
             source={{uri: imgServiceDetail}}
-            style={{width: 200, height: 200, borderRadius: 8}}></Image>
+            style={{width: 220, height: 240, borderRadius: 8}}></Image>
         </View>
 
         {/* <ScrollView style={{width: '40%'}} horizontal={true}>
@@ -120,7 +120,7 @@ console.log(size); //
             );
           })}
         </ScrollView> */}
-        <View style={{marginTop: '3%', width: '73%'}}>
+        <View style={{marginTop: '3%', width: '73%', marginLeft: '10%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
             {nameServiceDetail}
           </Text>
@@ -130,7 +130,7 @@ console.log(size); //
           <Text style={{fontSize: 18, fontWeight: 'bold', color: 'red'}}>Khuyến mãi: {formatMoney(priceServiceDetail*80/100)}</Text>
 
         </View>
-        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
+        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%', marginLeft: '10%'}}>
           <TouchableOpacity
           onPress={()=>setModalVisible2()}
             style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
@@ -169,26 +169,28 @@ console.log(size); //
           </TouchableOpacity>
         </View>
 
-        <View
+    
+         
+
+         <View
           style={{
             marginTop: '5%',
-            flexDirection: 'row',
             width: '73%',
-            justifyContent: 'space-between',
             backgroundColor: 'white',
-            alignItems: 'center',
-            padding: 8,
             borderRadius: 8,
+            width: '80%',
+            height: 80,
+            marginLeft: '10%',
           }}>
          
 
-            <View style={{marginLeft: '5%'}}>
+            <View style={{marginLeft: '2%', width: '75%', height: 51}}>
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
                 Mô tả:
               </Text>
-              <Text>{descriptionServiceDetail}</Text>
+              <Text>{descriptionService}</Text>
             </View>
-          </View>
+          </View> 
 
         <TouchableOpacity
           style={{
@@ -196,6 +198,9 @@ console.log(size); //
             backgroundColor: '#18A2E1',
             padding: '3%',
             borderRadius: 8,
+            width: '50%',
+            alignItems: 'center',
+            marginLeft: '25%',
           }} 
           onPress={() => navigation.navigate(EDIT_SERVICES_SCREEN, {
               _id: id,
@@ -208,8 +213,8 @@ console.log(size); //
               typeService: typeServiceDetail
           })} 
           >
-          <Text style={{fontSize: 20, color: 'white', fontWeight: '300'}}>
-            Chỉnh sửa sản phẩm
+          <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
+            Chỉnh sửa
           </Text>
         </TouchableOpacity>
       </View>

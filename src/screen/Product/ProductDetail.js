@@ -52,7 +52,7 @@ const ProductDetail = ({navigation}) => {
   console.log('image', id)
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
-      <View style={{alignItems: 'center'}}>
+      <View >
         <View
           style={{
             flexDirection: 'row',
@@ -70,10 +70,10 @@ const ProductDetail = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View style={{alignItems: 'center'}}>
           <Image
             source={{uri: imgProductDetail}}
-            style={{width: 200, height: 200, borderRadius: 8}}></Image>
+            style={{width: 220, height: 240, borderRadius: 8}}></Image>
         </View>
 
         {/* <ScrollView style={{width: '40%'}} horizontal={true}>
@@ -92,7 +92,7 @@ const ProductDetail = ({navigation}) => {
             );
           })}
         </ScrollView> */}
-        <View style={{marginTop: '3%'}}>
+        <View style={{marginTop: '3%', marginLeft: '10%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
             {nameProductDetail}
           </Text>
@@ -101,34 +101,25 @@ const ProductDetail = ({navigation}) => {
             Tình trạng: Còn hàng
           </Text>
         </View>
-        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
+        <Block marginLeft={'10%'}>
+        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%',}}>
           <TouchableOpacity
-            style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
+            style={{backgroundColor: 'white', padding: 8, borderRadius: 8, alignItems: 'center'}}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
               Danh mục
-            </Text>
-            <Text>Phụ kiện</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'white',
-              marginLeft: '10%',
-              padding: 8,
-              borderRadius: 8,
-            }}>
-            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Dành cho
             </Text>
             <Text>{typeProductDetail}</Text>
           </TouchableOpacity>
 
+         
+
           <TouchableOpacity
             style={{
               backgroundColor: 'white',
               marginLeft: '10%',
               padding: 8,
               borderRadius: 8,
+              alignItems: 'center'
             }}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
               Số lượng: 
@@ -136,21 +127,21 @@ const ProductDetail = ({navigation}) => {
             <Text>{quantityProductDetail}</Text>
           </TouchableOpacity>
         </View>
+        </Block>
 
         <View
           style={{
             marginTop: '5%',
-            flexDirection: 'row',
             width: '73%',
-            justifyContent: 'space-between',
             backgroundColor: 'white',
-            alignItems: 'center',
-            padding: 8,
             borderRadius: 8,
+            width: '80%',
+            height: 80,
+            marginLeft: '10%',
           }}>
          
 
-            <View style={{marginLeft: '5%'}}>
+            <View style={{marginLeft: '2%', width: '75%', height: 51}}>
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
                 Mô tả:
               </Text>
@@ -165,6 +156,9 @@ const ProductDetail = ({navigation}) => {
             backgroundColor: '#18A2E1',
             padding: '3%',
             borderRadius: 8,
+            width: '50%',
+            alignItems: 'center',
+            marginLeft: '25%',
           }} 
           onPress={() => navigation.navigate(EDIT_PRODUCTS_SCREEN, {
               _id: id,

@@ -61,8 +61,8 @@ const PetDetail = ({navigation}) => {
   console.log('heheheh')
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
-      <View style={{alignItems: 'center', marginLeft: '-5%'}}>
-        <View
+      <View >
+      <View
           style={{
             flexDirection: 'row',
             width: '100%',
@@ -70,9 +70,7 @@ const PetDetail = ({navigation}) => {
             paddingHorizontal: '3%',
             paddingVertical: '3%',
           }}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{marginLeft: '4%'}}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
@@ -81,10 +79,10 @@ const PetDetail = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View style={{alignItems: 'center'}}>
           <Image
-            source={{uri: imgProduct}}
-            style={{width: 200, height: 200, borderRadius: 8}}></Image>
+            source={{uri: imgPet}}
+            style={{width: 220, height: 240, borderRadius: 8}}></Image>
         </View>
 
         {/* <ScrollView style={{width: '40%'}} horizontal={true}>
@@ -103,104 +101,74 @@ const PetDetail = ({navigation}) => {
             );
           })}
         </ScrollView> */}
-        <View style={{marginTop: '3%', width: '73%'}}>
+        <View style={{marginTop: '3%', marginLeft: '10%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-            {nameProduct}
+            {namePet}
           </Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(pricePet)}</Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-            Mô tả: {descriptionProduct}
-          </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-            {formatMoney(priceProduct)}
-          </Text>
-          <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-            Số lượng: {quantityProduct}
+            Tình trạng: Còn hàng
           </Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '73%',
-            marginTop: '3%',
-            marginLeft: '15%',
-          }}>
+        <Block marginLeft={'10%'}>
+        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%',}}>
           <TouchableOpacity
-            style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
+            style={{backgroundColor: 'white', padding: 8, borderRadius: 8, alignItems: 'center'}}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Giới tính
+              Danh mục
             </Text>
-            <Text>{genderProduct}</Text>
+            <Text>{typePet}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={{
               backgroundColor: 'white',
-              marginLeft: '5%',
+              marginLeft: '10%',
               padding: 8,
               borderRadius: 8,
+              alignItems: 'center'
             }}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Tuổi
+              Dành cho
             </Text>
-            <Text>{ageProduct}</Text>
+            <Text>{typePet}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={{
               backgroundColor: 'white',
-              marginLeft: '5%',
+              marginLeft: '10%',
               padding: 8,
               borderRadius: 8,
+              alignItems: 'center'
             }}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Giống
+              Số lượng: 
             </Text>
-            <Text>{typeProduct}</Text>
+            <Text>{quantityPet}</Text>
           </TouchableOpacity>
         </View>
+        </Block>
 
         <View
           style={{
             marginTop: '5%',
-            flexDirection: 'row',
             width: '73%',
-            justifyContent: 'space-between',
             backgroundColor: 'white',
-            alignItems: 'center',
-            padding: 8,
             borderRadius: 8,
+            width: '80%',
+            height: 80,
+            marginLeft: '10%',
           }}>
-          <View style={{flexDirection: 'row'}}>
-            <View
-              style={{
-                backgroundColor: '#18A2E1',
-                padding: 5,
-                borderRadius: 8,
-                alignItems: 'center',
-              }}>
-              <Image source={require('../../assets/image/iconimg.png')}></Image>
-            </View>
+         
 
-            <View style={{marginLeft: '5%'}}>
+            <View style={{marginLeft: '2%', width: '75%', height: 51}}>
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
-                matpetfamily
+                Mô tả:
               </Text>
-              <Text>Store</Text>
+              <Text>{descriptionPet}</Text>
             </View>
           </View>
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#18A2E1',
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 5,
-              height: 40,
-            }}>
-            <FontAwesome5 name="comments" size={20} color={'white'} />
-          </TouchableOpacity>
-        </View>
 
         <TouchableOpacity
           onPress={() =>
@@ -222,6 +190,10 @@ const PetDetail = ({navigation}) => {
             backgroundColor: '#18A2E1',
             padding: '3%',
             borderRadius: 8,
+            alignItems: 'center',
+            width: '50%',
+            marginLeft: '25%',
+
           }}>
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
             Chỉnh sửa

@@ -59,8 +59,8 @@ const ListPets = ({navigation}) => {
       <View
         style={{
           backgroundColor: '#E6EAED',
-          width: 160,
-          height: 200,
+          width: 165,
+          height: 205,
           borderRadius: 8,
           paddingHorizontal: 8,
           marginRight: '5%',
@@ -72,44 +72,44 @@ const ListPets = ({navigation}) => {
             style={{width: 100, height: 110}}
             source={{uri: imgPet}}></Image>
         </Block>
-        <View
-          style={{
-            backgroundColor: 'white',
-            borderRadius: 5,
-            marginTop: '8%',
-            paddingHorizontal: 5,
-            paddingVertical: 5,
-          }}>
-          <View style={{marginTop: '2%'}}>
-            <Text style={{fontSize: 15, fontWeight: '500', color: 'black'}}>
+        <Block
+          marginLeft={'1%'}
+          marginTop={'3%'}
+          width={150}
+          height={80}
+          backgroundColor={'white'}
+          radius={8}>
+          <Block marginLeft={'3%'}>
+            <Text  style={{fontWeight: '700', width: 110, height: 38, marginTop: '5%'}}>
               {namePet}
             </Text>
-          </View>
-          <View
-            style={{
-              marginTop: '5%',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{color: 'black'}}>{formatMoney(pricePet)}</Text>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#E6EAED',
-                borderRadius: 5,
-                width: 25,
-                height: 25,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <FontAwesome5
-                style={{}}
-                color={'black'}
-                name="chevron-right"
-                size={18}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+            <Block
+              marginTop={'4%'}
+              row
+              justifySpaceBetween
+              paddingHorizontal={5}>
+              <Text style={{width: 90, height: 18}}>
+                {formatMoney(pricePet)}
+              </Text>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#E6EAED',
+                  borderRadius: 5,
+                  width: 25,
+                  height: 25,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <FontAwesome5
+                  style={{}}
+                  color={'black'}
+                  name="chevron-right"
+                  size={18}
+                />
+              </TouchableOpacity>
+            </Block>
+          </Block>
+        </Block>
       </View>
     </TouchableOpacity>
   );
@@ -160,7 +160,7 @@ const ListPets = ({navigation}) => {
         <FlatList
           numColumns={2}
           data={listProduct}
-          keyExtractor={(item) => item._id}
+          keyExtractor={item => item._id}
           renderItem={({item}) => (
             <Item
               agePet={item.agePet}
@@ -175,7 +175,6 @@ const ListPets = ({navigation}) => {
               typePet={item.typePet}
             />
           )}
-          
         />
       </SafeAreaView>
     </View>

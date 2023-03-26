@@ -17,6 +17,7 @@ import {
   SERVICES_DETAIL_SCREEN,
 } from '../../router/ScreenName';
 import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 
 const ListServices = ({navigation}) => {
   const [listProduct, setListProduct] = useState([]);
@@ -54,57 +55,66 @@ const ListServices = ({navigation}) => {
           timeService: timeService,
           typeService: typeService,
         })
-      }
-      style={{
-        width: '100%',
-        backgroundColor: '#E6EAED',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        paddingVertical: 10,
-        borderRadius: 8,
-        marginTop: '3%',
-      }}>
-   
-        <Image
-          style={{width: 100, height: 120, borderRadius: 8}}
-          source={{uri: imgService}}></Image>
-    
+      }>
       <View
         style={{
-          backgroundColor: 'white',
-          paddingLeft: '1%',
-          borderRadius: 10,
+          width: '100%',
+          backgroundColor: '#E6EAED',
+          flexDirection: 'row',
+          paddingVertical: 10,
+          borderRadius: 8,
+          marginTop: '3%',
         }}>
-        <View
+        <Image
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            <Text style={{fontSize: 18, color: 'black'}}>{nameService}</Text>
-            <Text style={{color: 'black' }}>{priceService}</Text>
-            <Text style={{color: 'red' }}>{(priceService * 80) / 100}</Text>
-          </View>
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#F2F3F2',
-              borderRadius: 5,
-              width: 30,
-              height: 30,
-              paddingLeft: '5%',
-              paddingTop: '2%',
-              marginRight: '4%',
-            }}>
-            <FontAwesome5 color={'black'} name="chevron-right" size={18} />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text>Cửa hàng: Petmart</Text>
-          <Text style={{width: 250, fontSize: 16, color: 'black'}}>
-             Mô tả này dài lắm nên phải để đoạn text này dài ra.
+            width: 100,
+            height: 120,
+            borderRadius: 8,
+            marginLeft: '2%',
+            marginRight: '2%',
+          }}
+          source={{uri: imgService}}></Image>
+
+        <Block
+          radius={4}
+          width={'68%'}
+          height={120}
+          backgroundColor={'white'}
+          paddingLeft={'2%'}>
+          <Block row justifySpaceBetween width={'95%'} >
+            <Block>
+              <Text style={{color: 'black', fontSize: 18, fontWeight: '500', width: 190, height: 20}}>
+                Tên: {nameService}
+              </Text>
+              <Text style={{color: 'black'}}>Giá: {formatMoney(priceService)}</Text>
+              <Text style={{color: 'red'}}>KM: {formatMoney(priceService*8/10)}</Text>
+
+              <Text>Dành cho: {typeService}</Text>
+            </Block>
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#E6EAED',
+                borderRadius: 5,
+                width: 35,
+                height: 35,
+                marginTop: '4%',
+                marginRight: '0%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FontAwesome5
+                style={{}}
+                color={'black'}
+                name="chevron-right"
+                size={18}
+              />
+            </TouchableOpacity>
+          </Block>
+          <Text style ={{width: '99%', marginTop: '2%', color: 'black' }}>
+          Mô tả: {descriptionService} Mô tả này dài lắm nên phải để đoạn text này dài
+            ra.
           </Text>
-        </View>
+        </Block>
       </View>
     </TouchableOpacity>
   );
@@ -151,7 +161,7 @@ const ListServices = ({navigation}) => {
         </Block>
       </Block>
 
-      <SafeAreaView style={{height: '90%',paddingHorizontal: '2%'}}>
+      <SafeAreaView style={{paddingHorizontal: '2%'}}>
         <FlatList
           data={listProduct}
           renderItem={({item}) => (
@@ -169,7 +179,6 @@ const ListServices = ({navigation}) => {
           keyExtractor={item => item._id}
         />
       </SafeAreaView>
-      <Block width={'100%'} height={200}></Block>
     </View>
   );
 };
