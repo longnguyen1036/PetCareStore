@@ -219,7 +219,6 @@ const PetDetail = ({navigation}) => {
               <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => deletePet(id,'petStore')}>
-                  {/* onPress={() => */}
                 <Text style={styles.textStyle}>Đồng ý</Text>
               </TouchableOpacity>
               <TouchableOpacity

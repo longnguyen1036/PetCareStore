@@ -45,7 +45,7 @@ const Login = ({navigation}) => {
       } else {
         AsyncStorage.setItem('checkLogin', 'true');
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
-        dispatch(loggedAction());
+        dispatch(loggedAction(res.data));
         console.log('checkLogin', checkLogin)
         await setToken(res.data.token)
         

@@ -29,11 +29,11 @@ const DATA = [
 
 const Home = ({navigation}) => {
   // const test = useSelector(state => state.authState.userInfo)
-  // console.log('testttt', test)
   const [listProduct, setListProduct] = useState([])
+  const authState2 = useSelector(state => state.authState.userInfo)
 
-
-
+  console.log('authState2', authState2)
+  
 
 
   const renderItem = ({item}) => {
