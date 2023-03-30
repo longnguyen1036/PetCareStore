@@ -121,10 +121,10 @@ import authApi from '../../api/authApi';
                 <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
                   {profileStore?.nameStore}
                 </Text>
-                <Text style={{marginTop: 10}}>{profileStore?.emailStore}</Text>
+                <Text>{profileStore?.emailStore}</Text>
                 <TouchableOpacity onPress={() => getLocation()}>
 
-                <Text style={{marginTop: 5, color: 'blue'}}>
+                <Text style={{ color: 'blue', width: '42%',  height: 35}}>
                   {profileStore?.addressStore[0]}
                 </Text>
                 </TouchableOpacity>
