@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
@@ -17,6 +17,7 @@ import {
 } from '../../router/ScreenName';
 import productApi from '../../api/productApi';
 import formatMoney from '../../components/FormatMoney';
+import { useFocusEffect } from '@react-navigation/native';
 
 const ListProducts = ({navigation}) => {
   const [listProduct, setListProduct] = useState([]);
@@ -31,6 +32,12 @@ const ListProducts = ({navigation}) => {
   useEffect(() => {
     getAllProduct();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getAllProduct();
+    }, []),
+  );
 
   const Item = ({
     _id,
