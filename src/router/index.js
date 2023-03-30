@@ -31,13 +31,23 @@ import {
   INSERT_PRODUCTS_SCREEN,
   INSERT_SERVICES_SCREEN,
   MAIN_TAB,
+  NOTIFICATION_SCREEN,
   PETS_DETAIL_SCREEN,
   PETS_SCREEN,
+  PET_NOTIFICATION_SCREEN,
   PRODUCTS_DETAIL_SCREEN,
   PRODUCTS_SCREEN,
+  PRODUCT_NOTIFICATION_SCREEN,
   SERVICES_DETAIL_SCREEN,
   SERVICES_SCREEN,
+  SERVICE_NOTIFICATION_SCREEN,
 } from './ScreenName';
+import {Notification} from '../screen/Notification';
+import PetNotification from '../screen/Notification/PetNotification';
+import ProductNotification from '../screen/Notification/ProductNotification';
+import ServiceNotification from '../screen/Notification/ServiceNotification';
+
+
 
 function MainStack(props) {
   return (
@@ -49,7 +59,7 @@ function MainStack(props) {
       <Stack.Screen name={PETS_SCREEN} component={ListPets} />
       <Stack.Screen name={PRODUCTS_SCREEN} component={ListProducts} />
       <Stack.Screen name={SERVICES_SCREEN} component={ListServices} />
-       <Stack.Screen name={PETS_DETAIL_SCREEN} component={PetDetail} />
+      <Stack.Screen name={PETS_DETAIL_SCREEN} component={PetDetail} />
       <Stack.Screen name={PRODUCTS_DETAIL_SCREEN} component={ProductDetail} />
       <Stack.Screen name={SERVICES_DETAIL_SCREEN} component={ServiceDetail} />
       <Stack.Screen name={INSERT_PETS_SCREEN} component={InsertPet} />
@@ -58,6 +68,7 @@ function MainStack(props) {
       <Stack.Screen name={EDIT_PETS_SCREEN} component={UpdatePet} />
       <Stack.Screen name={EDIT_PRODUCTS_SCREEN} component={UpdateProduct} />
       <Stack.Screen name={EDIT_SERVICES_SCREEN} component={UpdateService} />
+      <Stack.Screen name={NOTIFICATION_SCREEN} component={Notification} />
     </Stack.Navigator>
   );
 }

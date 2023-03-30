@@ -7,7 +7,8 @@ import Text from '../../components/Text'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { NOTIFICATION_SCREEN, PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
 import { useSelector } from 'react-redux';
 import productApi from '../../api/productApi';
 const DATA = [
@@ -78,7 +79,9 @@ const Home = ({navigation}) => {
 
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-            <FontAwesome5 style={{marginRight: '15%'}} color={'black'} name='lock' size={25} />
+            <TouchableOpacity onPress={()=> navigation.navigate(NOTIFICATION_SCREEN)}>
+              <Entypo style={{marginRight: '15%'}} color={'black'} name='bell' size={25} />
+            </TouchableOpacity>
             <TouchableOpacity>
                 <Image source={require('../../assets/image/profiledog.png')}/>
             </TouchableOpacity>

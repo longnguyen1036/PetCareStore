@@ -11,7 +11,7 @@ import { CHART_SCREEN, HOME_SCREEN, NOTIFICATION_SCREEN, PROFILE_SCREEN,
 } from './ScreenName';
 import { Home } from '../screen/Main';
 import { Chart } from '../screen/Statistical';
-import Notification from '../screen/Notification/Notification';
+import Notification from './Notification';
 import Profile from '../screen/Profile/Profile';
 const Tab = createBottomTabNavigator();
 
