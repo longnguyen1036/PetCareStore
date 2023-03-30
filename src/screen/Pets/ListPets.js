@@ -8,13 +8,14 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Block from '../../components/Block';
 import {INSERT_PETS_SCREEN, PETS_DETAIL_SCREEN} from '../../router/ScreenName';
 import productApi from '../../api/productApi';
 import formatMoney from '../../components/FormatMoney';
+import { useFocusEffect } from '@react-navigation/native';
 const ListPets = ({navigation}) => {
   const [listProduct, setListProduct] = useState([]);
 
@@ -28,6 +29,12 @@ const ListPets = ({navigation}) => {
   useEffect(() => {
     getAllProduct();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getAllProduct();
+    }, []),
+  );
 
   const Item = ({
     agePet,

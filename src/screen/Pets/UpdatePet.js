@@ -19,7 +19,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import productApi from '../../api/productApi';
 import formatMoney from '../../components/FormatMoney';
 import {Toast} from 'react-native-toast-message/lib/src/Toast';
-import { HOME_SCREEN } from '../../router/ScreenName';
+import { HOME_SCREEN, PETS_SCREEN } from '../../router/ScreenName';
 
 const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 const categorygenderpets = ['Đực', 'Cái'];
@@ -108,7 +108,7 @@ const UpdatePet = ({navigation}) => {
       if (res.status === 200) {
         setLoading(false);
         showToast();
-        navigation.navigate(HOME_SCREEN);
+        navigation.navigate(PETS_SCREEN);
         console.log('success');
       } else {
         setLoading(false);
