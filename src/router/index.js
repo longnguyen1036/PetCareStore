@@ -43,9 +43,6 @@ import {
   SERVICE_NOTIFICATION_SCREEN,
 } from './ScreenName';
 import {Notification} from '../screen/Notification';
-import PetNotification from '../screen/Notification/PetNotification';
-import ProductNotification from '../screen/Notification/ProductNotification';
-import ServiceNotification from '../screen/Notification/ServiceNotification';
 
 
 
