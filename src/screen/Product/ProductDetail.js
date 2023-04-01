@@ -16,17 +16,31 @@ import formatMoney from '../../components/FormatMoney';
 import { EDIT_PRODUCTS_SCREEN } from '../../router/ScreenName';
 import productApi from '../../api/productApi';
 import Block from '../../components/Block';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 
 const ProductDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const route = useRoute();
+
+  const success = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Xoá thành công',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
+    });
+  };
   const deletePet = async (id,nameModel) =>{
-    console.log('iddsadsad', id, nameModel)
+    // console.log('iddsadsad', id, nameModel)
     const a = await productApi.DelelePet(id,nameModel);
     setModalVisible(false);
     navigation.goBack()
-    console.log(a)
+    success()
+    // console.log(a)
   }
 
   const {

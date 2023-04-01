@@ -18,16 +18,29 @@ import {useRoute} from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import { EDIT_SERVICES_SCREEN } from '../../router/ScreenName';
 import productApi from '../../api/productApi';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 
 const ServiceDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
+  const success = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Xoá thành công',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
+    });
+  };
   const deletePet = async (id,nameModel) =>{
-    console.log('iddsadsad', id, nameModel)
+    // console.log('iddsadsad', id, nameModel)
     const a = await productApi.DelelePet(id,nameModel);
     setModalVisible(false);
     navigation.goBack()
-    console.log(a)
+    success()
+    // console.log(a)
   }
 
   const route = useRoute();

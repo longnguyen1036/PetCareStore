@@ -17,7 +17,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SelectDropdown from 'react-native-select-dropdown';
 import ImagePicker from 'react-native-image-crop-picker';
 import productApi from '../../api/productApi';
-import Toast, {ErrorToast} from 'react-native-toast-message';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 
 const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 
@@ -51,29 +52,26 @@ const InsertService = ({navigation}) => {
     console.log('arrTime: ', timeService);
     setModalVisibleTime(false);
   };
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Them thanh cong',
-      visibilityTime: 4000,
-      autoHide: true,
-      topOffset: 30,
-      bottomOffset: 40,
+  const success = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Thêm mới thành công',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
     });
-  };
-
-  const showToast2 = () => {
-    Toast.show({
-      type: 'error',
-      text1: 'Them that bai',
-      visibilityTime: 2000,
-      autoHide: true,
-      topOffset: 30,
-      bottomOffset: 40,
+  }
+  const toast_error = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Thêm mới thất bại',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'error',
+      },
     });
-    navigation.goBack();
-  };
-
+  }
   const handleChooseImage = async () => {
     try {
       const image = await ImagePicker.openPicker({
@@ -109,18 +107,18 @@ const InsertService = ({navigation}) => {
         'serviceStore',
       );
       if (res.status === 200) {
-        showToast();
-        setLoading(false);
+        success()
+        setLoading(true);
         console.log('success');
         navigation.goBack();
       } else {
         setLoading(false);
-        showToast2();
+        toast_error()
         console.log('thất bại');
       }
     } catch (error) {
       setLoading(false);
-      showToast2();
+      toast_error()
       console.log('loi them san pham', error);
       console.log('thất bại');
     }
@@ -361,7 +359,6 @@ const InsertService = ({navigation}) => {
           </Block>
         </View>
       </Modal>
-      <Toast />
     </View>
   );
 };

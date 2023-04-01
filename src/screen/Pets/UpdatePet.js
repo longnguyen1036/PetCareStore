@@ -18,11 +18,13 @@ import {ScrollView} from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-crop-picker';
 import productApi from '../../api/productApi';
 import formatMoney from '../../components/FormatMoney';
-import {Toast} from 'react-native-toast-message/lib/src/Toast';
 import { HOME_SCREEN, PETS_SCREEN } from '../../router/ScreenName';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 
 const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 const categorygenderpets = ['Đực', 'Cái'];
+
 
 const UpdatePet = ({navigation}) => {
   const route = useRoute();
@@ -52,6 +54,27 @@ const UpdatePet = ({navigation}) => {
   const [imageEdit, setImageEdit] = useState();
   const [loading, setLoading] = useState(false);
 
+  const success = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Chỉnh sửa thành công',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
+    });
+  }
+  const toast_error = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Chỉnh sửa thất bại',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'error',
+      },
+    });
+  }
+
 
   const handleChooseImage = async () => {
     try {
@@ -65,29 +88,6 @@ const UpdatePet = ({navigation}) => {
     } catch (error) {
       console.log('erorr hinh', error);
     }
-  };
-
-
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Them thanh cong',
-      visibilityTime: 2000,
-      autoHide: true,
-      topOffset: 30,
-      bottomOffset: 40,
-    });
-  };
-
-  const showToast2 = () => {
-    Toast.show({
-      type: 'error',
-      text1: 'Them that bai',
-      visibilityTime: 2000,
-      autoHide: true,
-      topOffset: 30,
-      bottomOffset: 40,
-    });
   };
 
   const editProduct = async () => {
@@ -107,17 +107,17 @@ const UpdatePet = ({navigation}) => {
       );
       if (res.status === 200) {
         setLoading(false);
-        showToast();
+        success()
         navigation.navigate(PETS_SCREEN);
         console.log('success');
       } else {
         setLoading(false);
-        showToast2();
+        toast_error()
 
         console.log('thất bại');
       }
     } catch (error) {
-      showToast2();
+      toast_error()
 
       setLoading(false);
       console.log('loi sửa san pham', error);

@@ -16,7 +16,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SelectDropdown from 'react-native-select-dropdown';
 import productApi from '../../api/productApi';
 import ImagePicker from 'react-native-image-crop-picker';
-import {Toast} from 'react-native-toast-message/lib/src/Toast';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 
 const categorypets = ['Thức ăn', 'Vệ sinh', 'Phụ kiện', 'Khác...'];
 const categorygenderpets = ['Đực', 'Cái'];
@@ -49,27 +50,26 @@ const InsertProduct = ({navigation}) => {
     }
   };
 
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Them thanh cong',
-      visibilityTime: 2000,
-      autoHide: true,
-      topOffset: 30,
-      bottomOffset: 40,
+  const success = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Thêm mới thành công',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
     });
-  };
-
-  const showToast2 = () => {
-    Toast.show({
-      type: 'error',
-      text1: 'Them that bai',
-      visibilityTime: 2000,
-      autoHide: true,
-      topOffset: 30,
-      bottomOffset: 40,
+  }
+  const toast_error = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Thêm mới thất bại',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'error',
+      },
     });
-  };
+  }
 
   const addProduct = async () => {
     try {
@@ -86,16 +86,16 @@ const InsertProduct = ({navigation}) => {
       );
       if (res.status === 200) {
         setLoading(false);
-        showToast();
+        success()
         navigation.goBack();
         console.log('success');
       } else {
         setLoading(false);
-        showToast2();
+        toast_error()
         console.log('thất bại');
       }
     } catch (error) {
-      showToast2();
+      toast_error()
       setLoading(false);
       console.log('loi them san pham', error);
     }
@@ -226,7 +226,6 @@ const InsertProduct = ({navigation}) => {
         </View>
         <View style={{height: 200}}></View>
       </ScrollView>
-      <Toast />
     </View>
   );
 };

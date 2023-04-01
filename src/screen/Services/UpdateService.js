@@ -17,7 +17,8 @@ import {
   import ImagePicker from 'react-native-image-crop-picker';
   import productApi from '../../api/productApi';
   import {useRoute} from '@react-navigation/native';
-  import Toast, {ErrorToast} from 'react-native-toast-message';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+  
 import { HOME_SCREEN } from '../../router/ScreenName';
   
   const categoryproducts = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
@@ -50,6 +51,27 @@ import { HOME_SCREEN } from '../../router/ScreenName';
 
     const [imageEdit, setImageEdit] = useState();
     const [loading, setLoading] = useState(false);
+
+    const success = () => {
+      Notifier.showNotification({
+        title: 'Thông báo',
+        description: 'Chỉnh sửa thành công',
+        Component: NotifierComponents.Alert,
+        componentProps: {
+          alertType: 'success',
+        },
+      });
+    }
+    const toast_error = () => {
+      Notifier.showNotification({
+        title: 'Thông báo',
+        description: 'Chỉnh sửa thất bại',
+        Component: NotifierComponents.Alert,
+        componentProps: {
+          alertType: 'error',
+        },
+      });
+    }
   
    console.log('gia gia ', timeServiceUpdate)
 
@@ -80,27 +102,7 @@ import { HOME_SCREEN } from '../../router/ScreenName';
       }
     };
   
-    const showToast = () => {
-      Toast.show({
-        type: 'success',
-        text1: 'Them thanh cong',
-        visibilityTime: 2000,
-        autoHide: true,
-        topOffset: 30,
-        bottomOffset: 40,
-      });
-    };
-  
-    const showToast2 = () => {
-      Toast.show({
-        type: 'error',
-        text1: 'Them that bai',
-        visibilityTime: 2000,
-        autoHide: true,
-        topOffset: 30,
-        bottomOffset: 40,
-      });
-    };
+    
 
    const editProduct = async () => {
     try {
@@ -121,17 +123,17 @@ import { HOME_SCREEN } from '../../router/ScreenName';
       console.log('resss', res)
       if (res.status === 200) {
         setLoading(false);
-        showToast();
+        success()
         navigation.navigate(HOME_SCREEN);
         console.log('success');
       } else {
         setLoading(false);
-        showToast2();
+        toast_error()
 
         console.log('thất bại');
       }
     } catch (error) {
-      showToast2();
+      toast_error()
 
       setLoading(false);
       console.log('loi sửa san pham', error);

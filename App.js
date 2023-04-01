@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import MainNavigation from './src/router';
+import { NotifierWrapper } from 'react-native-notifier';
 
 function App1(){
   return(
@@ -23,11 +24,11 @@ function App1(){
 
 const App = () => {
   return (
-   
+    <NotifierWrapper>
     <Provider store={store}>
       <App1/>
     </Provider>
-
+    </NotifierWrapper>
     
    
  

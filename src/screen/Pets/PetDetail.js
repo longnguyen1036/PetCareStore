@@ -15,21 +15,29 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useRoute} from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import {EDIT_PETS_SCREEN} from '../../router/ScreenName';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
 import productApi from '../../api/productApi';
-
-
 
 const PetDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
-
-  const deletePet = async (id,nameModel) =>{
-    console.log('iddsadsad', id, nameModel)
-    const a = await productApi.DelelePet(id,nameModel);
+  const success = () => {
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Xoá thành công',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
+    });
+  };
+  const deletePet = async (id, nameModel) => {
+    // console.log('iddsadsad', id, nameModel);
+    const a = await productApi.DelelePet(id, nameModel);
     setModalVisible(false);
-    navigation.goBack()
-    console.log(a)
-  }
-
+    navigation.goBack();
+    success()
+    // console.log(a);
+  };
 
   const route = useRoute();
   const {
@@ -46,7 +54,7 @@ const PetDetail = ({navigation}) => {
   } = route.params;
 
   const [id, setId] = useState(_id);
-  
+
   const [nameProduct, setNameProduct] = useState(namePet);
   const [ageProduct, setAgeProduct] = useState(agePet);
   const [codeProduct, setCodeProduct] = useState(code);
@@ -57,12 +65,11 @@ const PetDetail = ({navigation}) => {
   const [quantityProduct, setQuantityProduct] = useState(quantityPet);
   const [typeProduct, setTypeProduct] = useState(typePet);
 
-
-  console.log('heheheh')
+  console.log('heheheh');
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
-      <View >
-      <View
+      <View>
+        <View
           style={{
             flexDirection: 'row',
             width: '100%',
@@ -105,49 +112,56 @@ const PetDetail = ({navigation}) => {
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
             Tên: {namePet}
           </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>Giá: {formatMoney(pricePet)}</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+            Giá: {formatMoney(pricePet)}
+          </Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
             Tình trạng: Còn hàng
           </Text>
         </View>
         <Block marginLeft={'10%'}>
-        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%',}}>
-          <TouchableOpacity
-            style={{backgroundColor: 'white', padding: 8, borderRadius: 8, alignItems: 'center'}}>
-            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Danh mục
-            </Text>
-            <Text>{typePet}</Text>
-          </TouchableOpacity>
+          <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: 'white',
+                padding: 8,
+                borderRadius: 8,
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
+                Danh mục
+              </Text>
+              <Text>{typePet}</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'white',
-              marginLeft: '10%',
-              padding: 8,
-              borderRadius: 8,
-              alignItems: 'center'
-            }}>
-            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Dành cho
-            </Text>
-            <Text>{typePet}</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: 'white',
+                marginLeft: '10%',
+                padding: 8,
+                borderRadius: 8,
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
+                Dành cho
+              </Text>
+              <Text>{typePet}</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={{
-              backgroundColor: 'white',
-              marginLeft: '10%',
-              padding: 8,
-              borderRadius: 8,
-              alignItems: 'center'
-            }}>
-            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Số lượng: 
-            </Text>
-            <Text>{quantityPet}</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={{
+                backgroundColor: 'white',
+                marginLeft: '10%',
+                padding: 8,
+                borderRadius: 8,
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
+                Số lượng:
+              </Text>
+              <Text>{quantityPet}</Text>
+            </TouchableOpacity>
+          </View>
         </Block>
 
         <View
@@ -160,15 +174,13 @@ const PetDetail = ({navigation}) => {
             height: 80,
             marginLeft: '10%',
           }}>
-         
-
-            <View style={{marginLeft: '2%', width: '75%', height: 51}}>
-              <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
-                Mô tả:
-              </Text>
-              <Text>{descriptionPet}</Text>
-            </View>
+          <View style={{marginLeft: '2%', width: '75%', height: 51}}>
+            <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
+              Mô tả:
+            </Text>
+            <Text>{descriptionPet}</Text>
           </View>
+        </View>
 
         <TouchableOpacity
           onPress={() =>
@@ -193,7 +205,6 @@ const PetDetail = ({navigation}) => {
             alignItems: 'center',
             width: '50%',
             marginLeft: '25%',
-
           }}>
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
             Chỉnh sửa
@@ -218,7 +229,7 @@ const PetDetail = ({navigation}) => {
             <Block row justifySpaceBetween>
               <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => deletePet(id,'petStore')}>
+                onPress={() => deletePet(id, 'petStore')}>
                 <Text style={styles.textStyle}>Đồng ý</Text>
               </TouchableOpacity>
               <TouchableOpacity
