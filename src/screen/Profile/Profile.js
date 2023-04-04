@@ -23,7 +23,7 @@ import authApi from '../../api/authApi';
   const Profile = ({navigation}) => {
     const dispatch = useDispatch()
     const authState = useSelector(state => state.authState.userInfo)
-    console.log('authState: ' , authState.id)
+    // console.log('authState: ' , authState.id)
     
     const [profileStore, setProFileStore] = useState()
 
