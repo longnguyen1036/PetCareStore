@@ -31,6 +31,7 @@ import {
   INSERT_PRODUCTS_SCREEN,
   INSERT_SERVICES_SCREEN,
   MAIN_TAB,
+  MANEGER_SERVICES_SCREEN,
   NOTIFICATION_SCREEN,
   PETS_DETAIL_SCREEN,
   PETS_SCREEN,
@@ -43,6 +44,7 @@ import {
   SERVICE_NOTIFICATION_SCREEN,
 } from './ScreenName';
 import {Notification} from '../screen/Notification';
+import ManegerService from './ManegerService';
 
 
 
@@ -66,6 +68,7 @@ function MainStack(props) {
       <Stack.Screen name={EDIT_PRODUCTS_SCREEN} component={UpdateProduct} />
       <Stack.Screen name={EDIT_SERVICES_SCREEN} component={UpdateService} />
       <Stack.Screen name={NOTIFICATION_SCREEN} component={Notification} />
+      <Stack.Screen name={MANEGER_SERVICES_SCREEN} component={ManegerService} />
     </Stack.Navigator>
   );
 }

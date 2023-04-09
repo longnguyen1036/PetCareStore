@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { CHART_SCREEN, HOME_SCREEN, NOTIFICATION_SCREEN, PROFILE_SCREEN,
+import { CHART_SCREEN, HOME_SCREEN, MANEGER_SERVICES_SCREEN, NOTIFICATION_SCREEN, PROFILE_SCREEN,
         
 
 } from './ScreenName';
@@ -13,6 +13,7 @@ import { Home } from '../screen/Main';
 import { Chart } from '../screen/Statistical';
 import Notification from './Notification';
 import Profile from '../screen/Profile/Profile';
+import ManegerService from './ManegerService';
 const Tab = createBottomTabNavigator();
 
 function MyTab(){
@@ -45,8 +46,8 @@ function MyTab(){
         }}
       />
       <Tab.Screen
-        name={NOTIFICATION_SCREEN}
-        component={Notification}
+        name={MANEGER_SERVICES_SCREEN}
+        component={ManegerService}
         options={{
           headerShown: false,
           tabBarLabel: 'Notification',
