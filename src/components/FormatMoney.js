@@ -15,3 +15,4 @@ const formatMoney = (price) => {
   };
 
 export default formatMoney
+

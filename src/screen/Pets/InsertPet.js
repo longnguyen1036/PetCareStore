@@ -9,7 +9,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -55,6 +55,10 @@ const InsertPet = ({navigation}) => {
       },
     });
   }
+
+
+
+  
 
   const handleChooseImage = async () => {
     try {
