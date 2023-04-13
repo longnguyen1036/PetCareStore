@@ -7,6 +7,7 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import Block from '../../components/Block';
@@ -16,6 +17,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {ScrollView} from 'react-native-gesture-handler';
 import productApi from '../../api/productApi';
 import ImagePicker from 'react-native-image-crop-picker';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 const categorypets = ['Chó', 'Mèo', 'Hamster', 'Vẹt', 'Khác...'];
 const categorygenderpets = ['Đực', 'Cái'];
@@ -29,32 +31,80 @@ const InsertPet = ({navigation}) => {
   const [quantityPet, setQuantityPet] = useState();
   const [descriptionPet, setDescriptionPet] = useState();
   const [genderPet, setGenderPet] = useState();
+  const [urlImage, setUrlImage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleChooseImage = async () => {
-    ImagePicker.openPicker({
+    try {
+      const image = await ImagePicker.openPicker({
         width: 300,
         height: 400,
         cropping: true,
-      }).then(image => {
-        setImageUri(image);
       });
+      console.log('imageeeeeeeeee', image);
+      setImageUri(image);
 
-      
+    } catch (error) {
+      console.log('erorr hinh', error);
     }
+  };
+
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Them thanh cong',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
+
+  const showToast2 = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Them that bai',
+      visibilityTime: 2000,
+      autoHide: true,
+      topOffset: 30,
+      bottomOffset: 40,
+    });
+  };
 
   const addProduct = async () => {
-        try {
-             const res = await productApi.InsertPet(namePet, agePet, typePet, imageUri, pricePet, quantityPet, descriptionPet, genderPet, namePet, 'petStore')
-             if(res.status === 200){
-                console.log('success')
-             }else{
-                console.log('thất bại')
-             }
-        } catch (error) {
-            console.log('loi them san pham', error)
-        }
-  }
-console.log('image', imageUri)
+    try {
+      setLoading(true);
+      const res = await productApi.InsertPet(
+        namePet,
+        agePet,
+        typePet,
+        imageUri,
+        pricePet,
+        quantityPet,
+        descriptionPet,
+        genderPet,
+        namePet,
+        'petStore',
+      );
+      if (res.status === 200) {
+        setLoading(false);
+        showToast();
+        navigation.goBack();
+        console.log('success');
+      } else {
+        setLoading(false);
+        showToast2();
+
+        console.log('thất bại');
+      }
+    } catch (error) {
+      showToast2();
+
+      setLoading(false);
+      console.log('loi them san pham', error);
+    }
+  };
+  // console.log('image', imageUri)
   return (
     <View style={styles.container}>
       <ScrollView style={{}}>
@@ -71,7 +121,10 @@ console.log('image', imageUri)
 
         {imageUri ? (
           <Block marginLeft={'5%'}>
-            <Image source={{uri: imageUri.path}} style={{width: 100, height: 100}} />
+            <Image
+              source={{uri: imageUri.path}}
+              style={{width: 100, height: 100}}
+            />
           </Block>
         ) : (
           <TouchableOpacity
@@ -108,21 +161,35 @@ console.log('image', imageUri)
             <Text style={styles.nameProduct}>Giá sản phẩm</Text>
           </View>
           <View style={styles.textInput}>
-            <TextInput placeholder="Nhập giá sản phẩm" keyboardType="numeric" onChangeText={setPricePet} value={pricePet} />
+            <TextInput
+              placeholder="Nhập giá sản phẩm"
+              keyboardType="numeric"
+              onChangeText={setPricePet}
+              value={pricePet}
+            />
           </View>
 
           <View>
             <Text style={styles.nameProduct}>Số lượng</Text>
           </View>
           <View style={styles.textInput}>
-            <TextInput placeholder="Nhập số lượng" keyboardType="numeric" onChangeText={setQuantityPet} value={quantityPet} />
+            <TextInput
+              placeholder="Nhập số lượng"
+              keyboardType="numeric"
+              onChangeText={setQuantityPet}
+              value={quantityPet}
+            />
           </View>
 
           <View>
             <Text style={styles.nameProduct}>Tuổi</Text>
           </View>
           <View style={styles.textInput}>
-            <TextInput placeholder="Ví dụ: 1 tháng, 2 năm..." onChangeText={setAgePet} value={agePet}/>
+            <TextInput
+              placeholder="Ví dụ: 1 tháng, 2 năm..."
+              onChangeText={setAgePet}
+              value={agePet}
+            />
           </View>
 
           <View>
@@ -133,7 +200,7 @@ console.log('image', imageUri)
             data={categorypets}
             onSelect={(selectedItem, index) => {
               console.log('ehehehehe', selectedItem, index);
-              setTypePet(selectedItem)
+              setTypePet(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               // text represented after item is selected
@@ -167,7 +234,7 @@ console.log('image', imageUri)
             data={categorygenderpets}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
-              setGenderPet(selectedItem)
+              setGenderPet(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               // text represented after item is selected
@@ -194,14 +261,21 @@ console.log('image', imageUri)
           />
         </View>
         <View style={styles.viewPressInsert}>
-          <TouchableOpacity style={styles.PressInsert} onPress={() => addProduct()}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-              Thêm sản phẩm
-            </Text>
+          <TouchableOpacity
+            style={styles.PressInsert}
+            onPress={() => addProduct()}>
+            {loading == true ? (
+              <ActivityIndicator size={'large'} color={'grey'} />
+            ) : (
+              <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
+                Thêm sản phẩm
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
         <View style={{height: 200}}></View>
       </ScrollView>
+      <Toast />
     </View>
   );
 };

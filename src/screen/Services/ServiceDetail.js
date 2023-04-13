@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert  } from 'react-native'
-import React, {useState} from 'react'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import { UPDATE_PRODUCTS_SCREEN } from '../../router/ScreenName';
-=======
 import {
   StyleSheet,
   Text,
@@ -12,50 +6,22 @@ import {
   Image,
   ScrollView,
   Alert,
-  Modal
+  Modal,
+  FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useRoute } from '@react-navigation/native';
-import formatMoney from '../../components/FormatMoney';
-import { EDIT_PRODUCTS_SCREEN } from '../../router/ScreenName';
-import productApi from '../../api/productApi';
 import Block from '../../components/Block';
->>>>>>> Long
+import {useRoute} from '@react-navigation/native';
+import formatMoney from '../../components/FormatMoney';
+import { EDIT_SERVICES_SCREEN } from '../../router/ScreenName';
+import productApi from '../../api/productApi';
 
-const ProductDetail = ({navigation}) => {
+const ServiceDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
-
-<<<<<<< HEAD
-const ProductDetail = ({navigation}) => {
-    const [ItemsImage, setItemsImage] = useState([
-        { key: 1, image: require('../../assets/image/profiledog.png')},
-        { key: 2, image: require('../../assets/image/profiledog.png')},
-        { key: 3, image: require('../../assets/image/profiledog.png')},
-        { key: 4, image: require('../../assets/image/profiledog.png')},
-        { key: 5, image: require('../../assets/image/profiledog.png')},
-        { key: 6, image: require('../../assets/image/profiledog.png')},
-        { key: 7, image: require('../../assets/image/profiledog.png')},
-        { key: 8, image: require('../../assets/image/profiledog.png')},
-        { key: 9, image: require('../../assets/image/profiledog.png')},
-    ])
-
-    const [selectedImage, setSelectedImage] = useState(require('../../assets/image/profiledog.png'));
-  return (
-    <View style={{ backgroundColor: '#dcdcdc', height: '100%'}}>
-      <View style = {{alignItems: 'center',}}>
-        <View style= {{flexDirection: 'row', width: '100%', justifyContent: 'space-between',
-    paddingHorizontal: '3%', paddingVertical: '3%'}}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <FontAwesome5 name='chevron-left' size={30} color={'black'} />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={createTwoButtonAlert}>
-                <FontAwesome5 name='trash-alt' size={30} color={'black'} />
-            </TouchableOpacity>
-=======
-  const route = useRoute();
+  const [modalVisible2, setModalVisible2] = useState(false);
   const deletePet = async (id,nameModel) =>{
     console.log('iddsadsad', id, nameModel)
     const a = await productApi.DelelePet(id,nameModel);
@@ -64,27 +30,50 @@ const ProductDetail = ({navigation}) => {
     console.log(a)
   }
 
+  const route = useRoute();
   const {
     _id,
-    codeProduct,
-    descriptionProduct,
-    imgProduct,
-    nameProduct,
-    priceProduct,
-    quantityProduct,
-    typeProduct,
+    descriptionService,
+    imgService,
+    nameService,
+    priceService,
+    quantityService,
+    timeService,
+    typeService,
   } = route.params;
-  
 
   const [id, setId] = useState(_id);
-  const [nameProductDetail, setNameDetail] = useState(nameProduct);
-  const [codeProductDetail, setCodeProductDetail] = useState(codeProduct);
-  const [descriptionProductDetail, setDecriptionProductDetail] = useState(descriptionProduct);
-  const [imgProductDetail, setImgProductDetail] = useState(imgProduct);
-  const [priceProductDetail, setPriceProductDetail] = useState(priceProduct);
-  const [quantityProductDetail, setQuantityProductDetail] = useState(quantityProduct);
-  const [typeProductDetail, setTypeProductDetail] = useState(typeProduct);
-  console.log('image', id)
+  const [nameServiceDetail, setNameServiceDetail] = useState(nameService);
+  const [descriptionServiceDetail, setDescriptionServiceDetail] = useState(descriptionService);
+  const [priceServiceDetail, setPriceServiceDetail] = useState(priceService);
+  const [imgServiceDetail, setImgServiceDetail] = useState(imgService);
+  const [timeServiceDetail, setTimeServiceDetail] = useState(timeService);
+  const [quantityServiceDetail, setQuantityServiceDetail] = useState(quantityService);
+  const [typeServiceDetail, setTypeServiceDetail] = useState(typeService);
+  // console.log('image', timeServiceDetail.lenght);
+  const arr = timeServiceDetail;
+const size = arr.length;
+
+console.log(priceServiceDetail); //
+
+  const renderItem = ({item}) => {
+    // console.log('itemmm', item);
+    return (
+
+        <Block
+          alignCenter
+          margin={5}
+          width={60}
+          height={60}
+          paddingVertical={15}
+          backgroundColor={'#ECF2F8'}>
+          <Text style={{fontSize: 18, color: item.status == false ? 'grey' : 'black' }}>
+            {item.time}
+          </Text>
+        </Block>
+    );
+  };
+
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
       <View >
@@ -99,7 +88,6 @@ const ProductDetail = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
->>>>>>> Long
 
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <MaterialCommunityIcons name="delete" size={30} color={'black'} />
@@ -108,7 +96,7 @@ const ProductDetail = ({navigation}) => {
 
         <View style={{alignItems: 'center'}}>
           <Image
-            source={{uri: imgProductDetail}}
+            source={{uri: imgServiceDetail}}
             style={{width: 220, height: 240, borderRadius: 8}}></Image>
         </View>
 
@@ -128,26 +116,27 @@ const ProductDetail = ({navigation}) => {
             );
           })}
         </ScrollView> */}
-        <View style={{marginTop: '3%', marginLeft: '10%'}}>
+        <View style={{marginTop: '3%', width: '73%', marginLeft: '10%'}}>
           <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-           Tên: {nameProductDetail}
+           Tên: {nameServiceDetail}
           </Text>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>Giá: {formatMoney(priceProductDetail)}</Text>
-          <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-            Tình trạng: Còn hàng
-          </Text>
-        </View>
-        <Block marginLeft={'10%'}>
-        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%',}}>
-          <TouchableOpacity
-            style={{backgroundColor: 'white', padding: 8, borderRadius: 8, alignItems: 'center'}}>
-            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
-              Danh mục
-            </Text>
-            <Text>{typeProductDetail}</Text>
-          </TouchableOpacity>
 
-         
+          
+          <Text style={{fontSize: 18, fontWeight: 'bold',color: 'black' }}>Giá: {formatMoney(priceServiceDetail)}</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold', color: 'red'}}>Khuyến mãi: {formatMoney(priceServiceDetail*80/100)}</Text>
+
+        </View>
+        <View style={{flexDirection: 'row', width: '73%', marginTop: '3%', marginLeft: '10%'}}>
+          <TouchableOpacity
+          onPress={()=>setModalVisible2()}
+            style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
+            <Text style={{fontSize: 16, color: 'black', fontWeight: '700', marginTop: '10%'}}>
+              Thời gian
+            </Text>
+            <Block absolute left={'90%'} top={'-10%'} backgroundColor={'red'} width={20} height={20} radius={10}>
+              <Text style={{color: 'white', textAlign: 'center', }}>{size}</Text>
+            </Block>
+          </TouchableOpacity>
 
           <TouchableOpacity
             style={{
@@ -155,17 +144,31 @@ const ProductDetail = ({navigation}) => {
               marginLeft: '10%',
               padding: 8,
               borderRadius: 8,
-              alignItems: 'center'
+            }}>
+            <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
+              Dành cho
+            </Text>
+            <Text>{typeServiceDetail}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: 'white',
+              marginLeft: '10%',
+              padding: 8,
+              borderRadius: 8,
             }}>
             <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
               Số lượng: 
             </Text>
-            <Text>{quantityProductDetail}</Text>
+            <Text style = {{textAlign: 'center'}}>{quantityServiceDetail}</Text>
           </TouchableOpacity>
         </View>
-        </Block>
 
-        <View
+    
+         
+
+         <View
           style={{
             marginTop: '5%',
             width: '73%',
@@ -181,22 +184,10 @@ const ProductDetail = ({navigation}) => {
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
                 Mô tả:
               </Text>
-              <Text>{descriptionProductDetail}</Text>
+              <Text>{descriptionService}</Text>
             </View>
-<<<<<<< HEAD
-            
-            <TouchableOpacity style={{backgroundColor: '#18A2E1', borderRadius: 8, alignItems: 'center', justifyContent: 'center', padding: 5, height: 40}}>
-                <FontAwesome5 name='comments' size={20} color={'white'} />
-            </TouchableOpacity>
-        </View>
+          </View> 
 
-        <TouchableOpacity onPress={() => navigation.navigate(UPDATE_PRODUCTS_SCREEN)} style={{marginTop: '5%', backgroundColor: '#18A2E1', padding: '3%', borderRadius: 8}}>
-            <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>Chỉnh sửa sản phẩm</Text>
-=======
-          </View>
->>>>>>> Long
-
-          
         <TouchableOpacity
           style={{
             marginTop: '5%',
@@ -207,15 +198,15 @@ const ProductDetail = ({navigation}) => {
             alignItems: 'center',
             marginLeft: '25%',
           }} 
-          onPress={() => navigation.navigate(EDIT_PRODUCTS_SCREEN, {
+          onPress={() => navigation.navigate(EDIT_SERVICES_SCREEN, {
               _id: id,
-              codeProduct: codeProductDetail,
-              descriptionProduct: descriptionProductDetail,
-              imgProduct: imgProductDetail,
-              nameProduct: nameProductDetail,
-              priceProduct: priceProductDetail,
-              quantityProduct: quantityProductDetail,
-              typeProduct: typeProductDetail
+              descriptionService: descriptionServiceDetail,
+              imgService: imgServiceDetail,
+              nameService: nameServiceDetail,
+              priceService: priceServiceDetail,
+              quantityService: quantityServiceDetail,
+              timeService: timeServiceDetail,
+              typeService: typeServiceDetail
           })} 
           >
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
@@ -223,6 +214,7 @@ const ProductDetail = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
+
 
       <Modal
         animationType="slide"
@@ -241,8 +233,7 @@ const ProductDetail = ({navigation}) => {
             <Block row justifySpaceBetween>
               <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => deletePet(id,'productStore')}>
-                  {/* onPress={() => */}
+                onPress={() => deletePet(id,'serviceStore')}>
                 <Text style={styles.textStyle}>Đồng ý</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -254,11 +245,37 @@ const ProductDetail = ({navigation}) => {
           </View>
         </View>
       </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible2}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible2(!modalVisible2);
+        }}>
+        <View style={styles.modalView}>
+          <FlatList numColumns={4} data={timeServiceDetail} renderItem={renderItem} />
+
+          <Block row margin={10}>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible2(!modalVisible2)}>
+              <Text style={styles.textStyle}>Đồng ý</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonClose2]}
+              onPress={() => setModalVisible2(!modalVisible2)}>
+              <Text style={styles.textStyle}>Hủy</Text>
+            </TouchableOpacity>
+          </Block>
+        </View>
+      </Modal>
     </View>
   );
 };
 
-export default ProductDetail;
+export default ServiceDetail;
 
 const styles = StyleSheet.create({
   modalView: {
@@ -311,4 +328,3 @@ const styles = StyleSheet.create({
     height: 350,
   },
 });
-

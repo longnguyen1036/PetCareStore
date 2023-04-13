@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
@@ -16,6 +16,7 @@ import {
   INSERT_SERVICES_SCREEN,
   SERVICES_DETAIL_SCREEN,
 } from '../../router/ScreenName';
+<<<<<<< HEAD
 
 const DATA = [
   {
@@ -129,6 +130,119 @@ const ListServices = ({navigation}) => {
       </View>
     </TouchableOpacity>
   );
+=======
+import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
+import { useFocusEffect } from '@react-navigation/native';
+
+const ListServices = ({navigation}) => {
+  const [listProduct, setListProduct] = useState([]);
+
+  const getAllProduct = async () => {
+    const getListProductApi = await productApi.getAllProduct();
+    // console.log('getAllProductApi', getListProductApi.data.data[1]);
+
+    setListProduct(getListProductApi.data.data[1]);
+  };
+
+  useEffect(() => {
+    getAllProduct();
+  }, []);
+
+
+  useFocusEffect(
+    useCallback(() => {
+      getAllProduct();
+    }, []),
+  );
+
+  const Item = ({
+    _id,
+    descriptionService,
+    imgService,
+    nameService,
+    priceService,
+    quantityService,
+    timeService,
+    typeService,
+  }) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(SERVICES_DETAIL_SCREEN, {
+          _id: _id,
+          descriptionService: descriptionService,
+          imgService: imgService,
+          nameService: nameService,
+          priceService: priceService,
+          quantityService: quantityService,
+          timeService: timeService,
+          typeService: typeService,
+        })
+      }>
+      <View
+        style={{
+          width: '100%',
+          backgroundColor: '#E6EAED',
+          flexDirection: 'row',
+          paddingVertical: 10,
+          borderRadius: 8,
+          marginTop: '3%',
+        }}>
+        <Image
+          style={{
+            width: 100,
+            height: 120,
+            borderRadius: 8,
+            marginLeft: '2%',
+            marginRight: '2%',
+          }}
+          source={{uri: imgService}}></Image>
+
+        <Block
+          radius={4}
+          width={'68%'}
+          height={120}
+          backgroundColor={'white'}
+          paddingLeft={'2%'}>
+          <Block row justifySpaceBetween width={'95%'} >
+            <Block>
+              <Text style={{color: 'black', fontSize: 18, fontWeight: '500', width: 190, height: 20}}>
+                Tên: {nameService}
+              </Text>
+              <Text style={{color: 'black'}}>Giá: {formatMoney(priceService)}</Text>
+              <Text style={{color: 'red'}}>KM: {formatMoney(priceService*8/10)}</Text>
+
+              <Text>Dành cho: {typeService}</Text>
+            </Block>
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#E6EAED',
+                borderRadius: 5,
+                width: 35,
+                height: 35,
+                marginTop: '4%',
+                marginRight: '0%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <FontAwesome5
+                style={{}}
+                color={'black'}
+                name="chevron-right"
+                size={18}
+              />
+            </TouchableOpacity>
+          </Block>
+          <Text style ={{width: '99%', marginTop: '2%', color: 'black' }}>
+          Mô tả: {descriptionService} Mô tả này dài lắm nên phải để đoạn text này dài
+            ra.
+          </Text>
+        </Block>
+      </View>
+    </TouchableOpacity>
+  );
+
+>>>>>>> Long
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -173,17 +287,20 @@ const ListServices = ({navigation}) => {
 
       <SafeAreaView style={{paddingHorizontal: '2%'}}>
         <FlatList
-          data={DATA}
+          data={listProduct}
           renderItem={({item}) => (
             <Item
-              title={item.title}
-              price={item.price}
-              image={item.image}
-              price1={item.price1}
-              address={item.address}
+              _id={item._id}
+              descriptionService={item.descriptionService}
+              imgService={item.imgService}
+              nameService={item.nameService}
+              priceService={item.priceService}
+              quantityService={item.quantityService}
+              timeService={item.timeService}
+              typeService={item.typeService}
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item._id}
         />
       </SafeAreaView>
     </View>

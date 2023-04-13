@@ -7,19 +7,26 @@ import {
     SafeAreaView,
     ScrollView,
     Alert,
+    Linking
   } from 'react-native';
-  import React from 'react';
+  import React,{useState, useEffect} from 'react';
   import Block from '../../components/Block';
   import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
   import {useNavigation} from '@react-navigation/native';
   import AsyncStorage from '@react-native-async-storage/async-storage';
   import { EDIT_PROFILE_ACCOUNT, EDIT_PROFILE_ADDRESS, HISTORY_PRODUCTS, HISTORY_SERVICES, LOGIN_SCREEN } from '../../router/ScreenName';
   import { useDispatch, useSelector } from 'react-redux';
-import { loggedAction, logoutAction } from '../../redux/actions/authAction';
+  import { loggedAction, logoutAction } from '../../redux/actions/authAction';
+import authApi from '../../api/authApi';
+
+
   const Profile = ({navigation}) => {
-    // const navigation = useNavigation();
     const dispatch = useDispatch()
+    const authState = useSelector(state => state.authState.userInfo)
+    console.log('authState: ' , authState.id)
     
+    const [profileStore, setProFileStore] = useState()
+
     const signOut = async () => {
     Alert.alert(
         'Đăng xuất',
@@ -44,6 +51,23 @@ import { loggedAction, logoutAction } from '../../redux/actions/authAction';
         {cancelable: false},
       );
     };
+
+    const getInformation =  async () => {
+      const getProfile = await authApi.getProfile(authState.id)
+      setProFileStore(getProfile.data.data)
+    }
+
+    useEffect(() => {
+      getInformation();
+    },[])
+
+    const getLocation =  () => {
+        const address = profileStore.addressStore[0]
+        const url = `https://www.google.com/maps/search/${encodeURIComponent(address)}`
+        Linking.openURL(url)
+    }
+
+    console.log('getInformation', profileStore);
     return (
       <View style={{alignItems: 'center', backgroundColor: '#dcdcdc', flex: 1}}>
         <View
@@ -95,11 +119,17 @@ import { loggedAction, logoutAction } from '../../redux/actions/authAction';
               </View>
               <View style={{marginLeft: 10, justifyContent: 'center'}}>
                 <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
-                  phuocps19167
+                  {profileStore?.nameStore}
                 </Text>
-                <Text style={{marginTop: 10}}>phuocphps19167@fpt.edu.vn</Text>
+                <Text>{profileStore?.emailStore}</Text>
+                <TouchableOpacity onPress={() => getLocation()}>
+
+                <Text style={{ color: 'blue', width: '42%',  height: 35}}>
+                  {profileStore?.addressStore[0]}
+                </Text>
+                </TouchableOpacity>
                 <Text style={{marginTop: 5}}>
-                  Hoàng Diệu - P Linh Trung - Thủ Đức
+                  {profileStore?.phoneStore}
                 </Text>
               </View>
             </View>

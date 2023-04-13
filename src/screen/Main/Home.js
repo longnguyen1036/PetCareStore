@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View , Image, TouchableOpacity, FlatList} from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { SliderBox } from "react-native-image-slider-box";
 import Block from '../../components/Block'
@@ -8,8 +8,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
-
-
+import { useSelector } from 'react-redux';
+import productApi from '../../api/productApi';
 const DATA = [
     {
       id: 1,
@@ -25,6 +25,17 @@ const DATA = [
     },
   ];
 
+ 
+
+const Home = ({navigation}) => {
+  // const test = useSelector(state => state.authState.userInfo)
+  const [listProduct, setListProduct] = useState([])
+  const authState2 = useSelector(state => state.authState.userInfo)
+
+  console.log('authState2', authState2)
+  
+
+
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity>
@@ -38,7 +49,7 @@ const DATA = [
         <Block radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
           <Block paddingTop={5}>
             <Text >{item.name}</Text>
-            <Text color={'#'}>Cate</Text>
+            <Text color={'black'}>Cate</Text>
             <Text marginTop={7} size={15}>{item.price} VND</Text>
           </Block>
           <TouchableOpacity style={styles.nut}>
@@ -49,8 +60,6 @@ const DATA = [
       </TouchableOpacity>
     );
   };
-
-const Home = ({navigation}) => {
     const images = [
         require('../../assets/image/anhcamnang.png'),
         require('../../assets/image/anhcamnang1.png'),
@@ -139,7 +148,7 @@ const Home = ({navigation}) => {
       <View style ={{marginTop: '3%'}}>
         <FlatList
         numColumns={2}
-            data={DATA}
+            data={listProduct}
             renderItem={renderItem}
             keyExtractor={item => item.id}
         />
