@@ -106,7 +106,6 @@ const ListServices = ({navigation}) => {
                 width: 35,
                 height: 35,
                 marginTop: '4%',
-                marginRight: '0%',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
@@ -118,9 +117,8 @@ const ListServices = ({navigation}) => {
               />
             </TouchableOpacity>
           </Block>
-          <Text style ={{width: '99%', marginTop: '2%', color: 'black' }}>
-          Mô tả: {descriptionService} Mô tả này dài lắm nên phải để đoạn text này dài
-            ra.
+          <Text style ={{width: '99%', marginTop: '2%', color: 'black', height: 26}}>
+          Mô tả: {descriptionService} 
           </Text>
         </Block>
       </View>

@@ -81,7 +81,6 @@ const ListProducts = ({navigation}) => {
             source={{uri: imgProduct}}></Image>
         </Block>
         <Block
-          marginLeft={'1%'}
           marginTop={'3%'}
           width={150}
           height={80}
