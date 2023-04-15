@@ -14,7 +14,7 @@ import {
   import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
   import {useNavigation} from '@react-navigation/native';
   import AsyncStorage from '@react-native-async-storage/async-storage';
-  import { EDIT_PROFILE_ACCOUNT, EDIT_PROFILE_ADDRESS, HISTORY_PRODUCTS, HISTORY_SERVICES, LOGIN_SCREEN } from '../../router/ScreenName';
+  import { EDIT_PROFILE_ACCOUNT, EDIT_PROFILE_ADDRESS, HISTORY_PRODUCTS, HISTORY_SERVICES, LIST_CHAT, LOGIN_SCREEN } from '../../router/ScreenName';
   import { useDispatch, useSelector } from 'react-redux';
   import { loggedAction, logoutAction } from '../../redux/actions/authAction';
 import authApi from '../../api/authApi';
@@ -156,6 +156,7 @@ import authApi from '../../api/authApi';
               <FontAwesome5 name="camera-retro" size={25} color={'white'} />
             </TouchableOpacity>
             <TouchableOpacity
+            onPress={()=> navigation.navigate(LIST_CHAT)}
               style={{
                 backgroundColor: '#18A2E1',
                 width: '30%',

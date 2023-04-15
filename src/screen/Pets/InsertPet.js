@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   FlatList,
   ActivityIndicator,
+  PermissionsAndroid,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Block from '../../components/Block';
@@ -57,18 +58,56 @@ const InsertPet = ({navigation}) => {
   }
 
 
-
-  
-
   const handleChooseImage = async () => {
     try {
-      const image = await ImagePicker.openPicker({
-        width: 300,
-        height: 400,
-        cropping: true,
-      });
-      console.log('imageeeeeeeeee', image);
-      setImageUri(image);
+      // const granted = await PermissionsAndroid.request(
+      //   PermissionsAndroid.PERMISSIONS.GETIMAGE,
+      //   {
+      //     title: 'Cool Photo App Camera Permission',
+      //     message:
+      //       'Cool Photo App needs access to your camera ' +
+      //       'so you can take awesome pictures.',
+      //     buttonNeutral: 'Ask Me Later',
+      //     buttonNegative: 'Cancel',
+      //     buttonPositive: 'OK',
+      //   },
+      // );
+      // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      //   console.log('You can use the camera');
+      //   const image = await ImagePicker.openPicker({
+      //     width: 300,
+      //     height: 400,
+      //     cropping: true,
+      //   });
+      //   console.log('imageeeeeeeeee', image);
+      //   setImageUri(image);
+      // } else {
+      //   console.log('Camera permission denied');
+      // }
+      
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        ]);
+        if (
+          granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED &&
+          granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED &&
+          granted['android.permission.WRITE_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED
+        ) {
+          console.log('Camera and gallery permissions granted');
+            const image = await ImagePicker.openPicker({
+          width: 300,
+          height: 400,
+          cropping: true,
+        });
+        console.log('imageeeeeeeeee', image);
+        setImageUri(image);
+        } else {
+          console.log('Camera and gallery permissions denied');
+        }
+      }
 
     } catch (error) {
       console.log('erorr hinh', error);

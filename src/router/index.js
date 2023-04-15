@@ -23,6 +23,7 @@ import InsertService from '../screen/Services/InsertService';
 import UpdateService from '../screen/Services/UpdateService';
 import ServiceDetail from '../screen/Services/ServiceDetail';
 import {
+  CHAT,
   EDIT_PETS_SCREEN,
   EDIT_PRODUCTS_SCREEN,
   EDIT_SERVICES_SCREEN,
@@ -30,6 +31,7 @@ import {
   INSERT_PETS_SCREEN,
   INSERT_PRODUCTS_SCREEN,
   INSERT_SERVICES_SCREEN,
+  LIST_CHAT,
   MAIN_TAB,
   MANEGER_SERVICES_SCREEN,
   NOTIFICATION_SCREEN,
@@ -45,6 +47,7 @@ import {
 } from './ScreenName';
 import {Notification} from '../screen/Notification';
 import ManegerService from './ManegerService';
+import { Chat, ListChat } from '../screen/Messenger';
 
 
 
@@ -69,6 +72,8 @@ function MainStack(props) {
       <Stack.Screen name={EDIT_SERVICES_SCREEN} component={UpdateService} />
       <Stack.Screen name={NOTIFICATION_SCREEN} component={Notification} />
       <Stack.Screen name={MANEGER_SERVICES_SCREEN} component={ManegerService} />
+      <Stack.Screen name={LIST_CHAT} component={ListChat} />
+      <Stack.Screen name={CHAT} component={Chat} />
     </Stack.Navigator>
   );
 }
