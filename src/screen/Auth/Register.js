@@ -87,6 +87,16 @@ const Register = ({ navigation }) => {
   return (
     <ScrollView>
       <View>
+      <View>
+        <TouchableOpacity
+          style={styles.nut}
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Image
+            source={require('../../assets/image/back.png')}/>
+        </TouchableOpacity>
+      </View>
         <View
           style={{
             justifyContent: 'center',
@@ -314,7 +324,17 @@ const styles = StyleSheet.create({
   hinh: {
     marginTop: 20,
     marginLeft: '5%',
-    width: '100%',
-    height: 350,
+    width: '90%',
+    height: 300,
+  },
+  nut: {
+    marginLeft: 10,
+    width: 30,
+    height: 30,
+    backgroundColor: '#F2F7FC',
+    alignItems: 'center',
+    borderRadius: 15,
+    padding: 10,
+    marginTop: 10,
   },
 });

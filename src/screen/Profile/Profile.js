@@ -60,14 +60,14 @@ import authApi from '../../api/authApi';
     useEffect(() => {
       getInformation();
     },[])
-
+    console.log('getInformadsdsdtion', profileStore?.addressStore[0])
     const getLocation =  () => {
         const address = profileStore.addressStore[0]
         const url = `https://www.google.com/maps/search/${encodeURIComponent(address)}`
         Linking.openURL(url)
     }
 
-    console.log('getInformation', profileStore);
+    // console.log('getInformation', profileStore);
     return (
       <View style={{alignItems: 'center', backgroundColor: '#dcdcdc', flex: 1}}>
         <View
@@ -124,7 +124,7 @@ import authApi from '../../api/authApi';
                 <Text>{profileStore?.emailStore}</Text>
                 <TouchableOpacity onPress={() => getLocation()}>
 
-                <Text style={{ color: 'blue', width: '42%',  height: 35}}>
+                <Text style={{ color: 'blue', width: '92%',  height: 35}}>
                   {profileStore?.addressStore[0]}
                 </Text>
                 </TouchableOpacity>
@@ -150,8 +150,7 @@ import authApi from '../../api/authApi';
                 alignItems: 'center',
                 padding: 10,
                 borderRadius: 10,
-              }}
-              onPress={() => signOut()}>
+              }}>
               <Text style={{color: 'white', fontWeight: 'bold'}}>Camera</Text>
               <FontAwesome5 name="camera-retro" size={25} color={'white'} />
             </TouchableOpacity>
@@ -227,7 +226,9 @@ import authApi from '../../api/authApi';
               paddingHorizontal: 10,
               marginTop: '3%',
             }}
-            onPress={ ()=>navigation.navigate(EDIT_PROFILE_ADDRESS)}>
+            onPress={ ()=>navigation.navigate(EDIT_PROFILE_ADDRESS,{
+              addressStore: profileStore?.addressStore[0]
+            })}>
             <Text
               style={{
                 width: '90%',

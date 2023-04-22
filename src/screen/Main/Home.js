@@ -91,7 +91,7 @@ const Home = ({navigation}) => {
 
       </View>
 
-       {/* <View style={{marginTop: '10%'}}>
+       <View style={{marginTop: '10%'}}>
         <SliderBox 
             images={images}
             dotColor="#FFEE58"
@@ -102,7 +102,7 @@ const Home = ({navigation}) => {
             ImageComponentStyle={{borderRadius: 15, width: '90%', marginTop: 5}}
         />
 
-      </View>  */}
+      </View> 
 
       <View style={styles.category}>
       <View style={{paddingHorizontal: '3%', marginTop: '3%', marginBottom: '3%'}}>
@@ -145,10 +145,10 @@ const Home = ({navigation}) => {
           </TouchableOpacity>
         </Block>
       </View>
-      <View style={{paddingHorizontal: '5%', marginTop: '3%'}}>
+      {/* <View style={{paddingHorizontal: '5%', marginTop: '3%'}}>
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
       </View>
-      <View style ={{marginTop: '3%'}}>
+      <View style ={{marginTop: '3%'}}> */}
         <FlatList
         numColumns={2}
             data={listProduct}
@@ -156,7 +156,7 @@ const Home = ({navigation}) => {
             keyExtractor={item => item.id}
         />
 
-      </View>
+      {/* </View> */}
 
     </View>
   )
