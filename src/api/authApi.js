@@ -73,9 +73,32 @@ const getProfile = async (id) => {
     }
 
 }
+
+const UpdateTokenFCM = async (tokenFCM) => {
+    try {
+        const token = await getToken();
+        const getProduct = await axios.post(`${BASE_URL_TEST}/updateuser`,
+        {
+            tokenFCM
+        },
+        {
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        });
+        // console.log('UpdateTokenFCM', getProduct)
+        return getProduct
+
+    } catch (error) {
+        console('loi api UpdateTokenFCM error', error);
+
+    }
+
+}
 export default {
     Register,
     OTPRegister,
     Login,
-    getProfile
+    getProfile,
+    UpdateTokenFCM
 }

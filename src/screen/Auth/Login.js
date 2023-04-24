@@ -10,7 +10,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
@@ -18,16 +18,32 @@ import { loggedAction } from '../../redux/actions/authAction';
 import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setToken, getToken} from '../../helper/auth';
-
+import messaging from '@react-native-firebase/messaging';
+import { io } from 'socket.io-client';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch()
   const authState = useSelector(state => state.authState.logged)
   
   const [modalVisible, setModalVisible] = useState(false);
-  console.log("authState: " , authState)
   const [emailStore, setEmailStore] = useState('prolatui112233@gmail.com');
   const [passStore, setPassStore] = useState('123');
+  const [fcmTokenFireBase, setFcmTokenFireBase] = useState()
+
+
+  const registerAppWithFCM = async () => {
+    await messaging().registerDeviceForRemoteMessages();
+  
+    // Lấy token FCM cho thiết bị hiện tại
+    const fcmToken = await messaging().getToken();
+    console.log('FCM Token:', fcmToken);
+    setFcmTokenFireBase(fcmToken);
+
+  };
+
+  useEffect(() => {
+    registerAppWithFCM()
+  },[])
 
   const Login = async () => {
     try {
@@ -55,6 +71,8 @@ const Login = ({navigation}) => {
       setModalVisible(true);
     }
   };
+
+
   return (
     <ScrollView>
       <View>
