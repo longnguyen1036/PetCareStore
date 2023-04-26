@@ -92,7 +92,7 @@ const Home = ({navigation}) => {
       </View>
 
        <View style={{marginTop: '10%'}}>
-        <SliderBox 
+        {/* <SliderBox 
             images={images}
             dotColor="#FFEE58"
             inactiveDotColor="#90A4AE"
@@ -100,7 +100,7 @@ const Home = ({navigation}) => {
             // autoplayInterval={1000}
             circleLoop={true}
             ImageComponentStyle={{borderRadius: 15, width: '90%', marginTop: 5}}
-        />
+        /> */}
 
       </View> 
 
