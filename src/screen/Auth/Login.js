@@ -20,6 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setToken, getToken} from '../../helper/auth';
 import messaging from '@react-native-firebase/messaging';
 import { io } from 'socket.io-client';
+import SocketManager from '../Messenger/SocketManager';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch()
@@ -41,6 +42,27 @@ const Login = ({navigation}) => {
 
   };
 
+  const connectSocket = async () => {
+    try {
+      const data = {
+        emailAccount: emailStore,
+        table: 'store'
+      }
+      const socket = SocketManager.getSocket();
+      socket.on('connect', () => {
+        console.log('connected to server');
+      });
+  
+      const res =  socket.emit('Login', data);
+      console.log('ressss', res);
+      socket.on('checkLogin', (data) => {
+          console.log('data socket', data);
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    }
+
   useEffect(() => {
     registerAppWithFCM()
   },[])
@@ -50,21 +72,19 @@ const Login = ({navigation}) => {
       if ( emailStore == '' || passStore == '') {
         setModalVisible(true);
       }
-      console.log('truoc login', emailStore, passStore)
       const res = await authApi.Login(
         emailStore, 
         passStore,
       );
-      console.log('resssssssssssssssssssssssssssss',res);
       if (res.status != 200) {
         setModalVisible(true);
       } else {
         AsyncStorage.setItem('checkLogin', 'true');
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
         dispatch(loggedAction(res.data));
-        console.log('checkLogin', checkLogin)
+        console.log('checkLogin', res.data.token)
         await setToken(res.data.token)
-        
+        connectSocket();
       }
     } catch (e) {
       console.log('login error: ', e);

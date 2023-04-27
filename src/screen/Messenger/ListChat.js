@@ -1,29 +1,50 @@
 import { View, Image, TouchableOpacity, StyleSheet, TextInput, FlatList} from 'react-native'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Block from '../../components/Block'
 import Text  from '../../components/Text'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { CHAT } from '../../router/ScreenName';
+import authApi from '../../api/authApi';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const ListChat = ({navigation}) => {
+  const [message, setMessage] = useState([]);
 
-  const DATA = [
-    {
-      id: 1,
-      name: 'Phuoc',
-      day: '10-04-2023'
-    },
-    {
-      id: 2,
-      name: 'Long',
-      day: '05-04-2023'
-    },
-  ];
+const getListMess = async () => {
+  try {
+      const res = await authApi.getMessengerApi();
+      setMessage(res?.data?.data?.chatId);
+      console.log('ressss', res.data);
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     getListMess();
+  //   }, []),
+  // );
+
+  useFocusEffect(
+    useCallback(() => {
+      getListMess();
+    }, []),
+  );
   
+ 
   const renderItem = ({item}) => {
+    console.log('item', item);
     return (
-      <TouchableOpacity onPress={()=> navigation.navigate(CHAT)}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate(CHAT, {
+            data: item.data,
+            id: item._id,
+            idSocketUser: item._id_idSocketUser.idSocketUser
+          })
+        }>
         <Block
           margin={'1%'}
           backgroundColor={'#ECF2F8'}
@@ -35,20 +56,25 @@ const ListChat = ({navigation}) => {
               <Block row>
                 <Block marginLeft={10}>
                   <Text>{item.name}</Text>
-                  <Text size={10}>5 min ago</Text>
                 </Block>
               </Block>
-              
             </Block>
             <Image
-              style={{width: 55, height: 55, margin: 1, backgroundColor: 'green', borderRadius: 15, marginRight: 10, marginTop: '2%'}}
+              style={{
+                width: 55,
+                height: 55,
+                margin: 1,
+                backgroundColor: 'green',
+                borderRadius: 15,
+                marginRight: 10,
+                marginTop: '2%',
+              }}
               source={require('../../assets/image/dog.png')}></Image>
           </Block>
         </Block>
       </TouchableOpacity>
     );
   };
-
   return (
     <Block flex={1} backgroundColor={'white'} >
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
@@ -61,7 +87,7 @@ const ListChat = ({navigation}) => {
       </TouchableOpacity>
         <Block width={'50%'}>
           <Text size={20} color={'black'} bold>
-            Messenger
+            Messengerdasd
           </Text>
         </Block>
       </Block>
@@ -86,7 +112,7 @@ const ListChat = ({navigation}) => {
       </Block>
 
       <Block marginTop={5} paddingHorizontal={10}>
-        <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
+        <FlatList data={message} renderItem={renderItem} />
       </Block>
     </Block>
   )
