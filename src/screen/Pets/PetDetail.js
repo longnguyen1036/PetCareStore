@@ -92,22 +92,7 @@ const PetDetail = ({navigation}) => {
             style={{width: 340, height: 240, borderRadius: 8}}></Image>
         </View>
 
-        {/* <ScrollView style={{width: '40%'}} horizontal={true}>
-          {ItemsImage.map(object => {
-            return (
-              <TouchableOpacity
-                onPress={() => setSelectedImage(object.image)}
-                key={object.key}
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: 8,
-                }}>
-                <Image source={object.image}></Image>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView> */}
+        
         <View style={{marginTop: '3%', marginLeft: '10%'}}>
           <Text style={{fontSize: 24, color: '#18A2E1', fontWeight: 'bold'}}>
             {namePet}
