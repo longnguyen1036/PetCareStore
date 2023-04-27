@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Register = async (nameStore, emailStore, passStore, addressStore, phoneStore) => {
     try {
-        console.log('log name accccc', nameStore, emailStore, passStore, addressStore, phoneStore);
+        // console.log('log name accccc', nameStore, emailStore, passStore, addressStore, phoneStore);
         const register = await axios.post(`${BASE_URL_TEST}/email`,
             {
                 nameStore,
@@ -40,7 +40,7 @@ const OTPRegister = async (otpAcount) => {
 const Login = async (emailStore, passStore) => {
 
     try {
-        console.log('truyen vao login', emailStore, passStore);
+        // console.log('truyen vao login', emailStore, passStore);
         const login = await axios.post(`${BASE_URL_TEST}/checklogin`,
             {
                 emailStore,
@@ -56,7 +56,7 @@ const Login = async (emailStore, passStore) => {
 
 const getProfile = async (id) => {
     try {
-        console.log('id', id);
+        // console.log('id', id);
         const token = await getToken();
         const getProduct = await axios.get(`${BASE_URL_TEST}/getastore/${id}`, {
             headers: {
@@ -103,7 +103,7 @@ const getMessengerApi = async () => {
                 token: `Bearer ${token}`,
             },
         });
-        console.log('getProfile', getMess)
+        // console.log('getProfile', getMess)
         return getMess
 
     } catch (error) {

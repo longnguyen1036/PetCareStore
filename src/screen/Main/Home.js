@@ -23,6 +23,7 @@ import {
 } from '../../router/ScreenName';
 import {useSelector} from 'react-redux';
 import productApi from '../../api/productApi';
+import PagerView from 'react-native-pager-view';
 
 const Home = ({navigation}) => {
   // const test = useSelector(state => state.authState.userInfo)
@@ -62,13 +63,6 @@ const Home = ({navigation}) => {
       </TouchableOpacity>
     );
   };
-  const images = [
-    require('../../assets/image/anhcamnang.png'),
-    require('../../assets/image/anhcamnang1.png'),
-    require('../../assets/image/caphe.png'),
-    require('../../assets/image/main.png'),
-    require('../../assets/image/salad.png'),
-  ];
   return (
     <View style={{flex: 1, backgroundColor: '#DADADA'}}>
       <View
@@ -83,7 +77,7 @@ const Home = ({navigation}) => {
             Welcome to
           </Text>
           <Text style={{fontSize: 22, fontWeight: '700', color: 'black'}}>
-            Tên tài khoản
+            PetCare
           </Text>
         </View>
         <View
@@ -107,16 +101,29 @@ const Home = ({navigation}) => {
         </View>
       </View>
 
-      <View style={{marginTop: '10%'}}>
-        {/* <SliderBox 
-            images={images}
-            dotColor="#FFEE58"
-            inactiveDotColor="#90A4AE"
-            autoplay = {true}
-            // autoplayInterval={1000}
-            circleLoop={true}
-            ImageComponentStyle={{borderRadius: 15, width: '90%', marginTop: 5}}
-        /> */}
+      <View style={styles.banner}>
+        <PagerView style={styles.pagerView} initialPage={0}>
+          <View key="1">
+            <View style={styles.p1}>
+              <Text style={styles.tp1}>
+                Street animals need our, protection. Help them today.
+              </Text>
+              <Image
+                style={styles.i2}
+                source={require('../../assets/image/dog.png')}></Image>
+            </View>
+          </View>
+          <View key="2">
+            <View style={styles.p1}>
+              <Text style={styles.tp1}>
+                Khuyên mãi cực sốc giảm ngay 205 cho khách hàng mua sản phẩm ngày hôm nay.
+              </Text>
+              <Image
+                style={styles.i2}
+                source={require('../../assets/image/dog.png')}></Image>
+            </View>
+          </View>
+        </PagerView>
       </View>
 
       <View style={styles.category}>

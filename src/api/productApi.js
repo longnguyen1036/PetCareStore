@@ -15,19 +15,19 @@ const InsertPet = async (
   nameModel,
 ) => {
   try {
-    console.log(
-      'log insert pet',
-      namePet,
-      agePet,
-      typePet,
-      image,
-      pricePet,
-      quantityPet,
-      descriptionPet,
-      genderPet,
-      code,
-      nameModel,
-    );
+    // console.log(
+    //   'log insert pet',
+    //   namePet,
+    //   agePet,
+    //   typePet,
+    //   image,
+    //   pricePet,
+    //   quantityPet,
+    //   descriptionPet,
+    //   genderPet,
+    //   code,
+    //   nameModel,
+    // );
     const token = await getToken();
     const formData = new FormData();
     formData.append('namePet', namePet);
@@ -46,7 +46,7 @@ const InsertPet = async (
     formData.append('code', code);
     formData.append('nameModel', nameModel);
 
-    console.log('formDatadsds', formData._parts);
+    // console.log('formDatadsds', formData._parts);
 
     const insertPet = await axios.post(
       `${BASE_URL_TEST}/addproduct`,
@@ -59,7 +59,7 @@ const InsertPet = async (
       },
     );
 
-    console.log('insert thanh cong', insertPet);
+    // console.log('insert thanh cong', insertPet);
     return insertPet;
   } catch (error) {
     console.log('insert pet error', error);
@@ -103,17 +103,17 @@ const InsertProduct = async (
   nameModel,
 ) => {
   try {
-    console.log(
-      'log insert pet',
-      nameProduct,
-      priceProduct,
-      image,
-      descriptionProduct,
-      quantityProduct,
-      typeProduct,
-      codeProduct,
-      nameModel,
-    );
+    // console.log(
+    //   'log insert pet',
+    //   nameProduct,
+    //   priceProduct,
+    //   image,
+    //   descriptionProduct,
+    //   quantityProduct,
+    //   typeProduct,
+    //   codeProduct,
+    //   nameModel,
+    // );
     const token = await getToken();
     const formData = new FormData();
     formData.append('nameProduct', nameProduct);
@@ -129,7 +129,7 @@ const InsertProduct = async (
     formData.append('codeProduct', codeProduct);
     formData.append('nameModel', nameModel);
 
-    console.log('formDatadsds', formData._parts);
+    // console.log('formDatadsds', formData._parts);
 
     const insertProduct = await axios.post(
       `${BASE_URL_TEST}/addproduct`,
@@ -142,7 +142,7 @@ const InsertProduct = async (
       },
     );
 
-    console.log('insert thanh cong', insertProduct);
+    // console.log('insert thanh cong', insertProduct);
     return insertProduct;
   } catch (error) {
     console.log('insert pet error', error);
@@ -160,17 +160,17 @@ const InsertService = async (
   nameModel,
 ) => {
   try {
-    console.log(
-      'log insert pet',
-      nameService,
-      priceService,
-      image,
-      descriptionService,
-      typeService,
-      quantityService,
-      timeService,
-      nameModel,
-    );
+    // console.log(
+    //   'log insert pet',
+    //   nameService,
+    //   priceService,
+    //   image,
+    //   descriptionService,
+    //   typeService,
+    //   quantityService,
+    //   timeService,
+    //   nameModel,
+    // );
     const token = await getToken();
     const formData = new FormData();
     formData.append('nameService', nameService);
@@ -186,7 +186,7 @@ const InsertService = async (
     formData.append('timeService', timeService);
     formData.append('nameModel', nameModel);
 
-    console.log('formDatadsds', formData._parts);
+    // console.log('formDatadsds', formData._parts);
 
     const insertService = await axios.post(
       `${BASE_URL_TEST}/addproduct`,
@@ -199,7 +199,7 @@ const InsertService = async (
       },
     );
 
-    console.log('insert thanh cong', insertService);
+    // console.log('insert thanh cong', insertService);
     return insertService;
   } catch (error) {
     console.log('insert pet error', error);
@@ -209,7 +209,7 @@ const InsertService = async (
 
 const InsertImage = async image => {
   try {
-    console.log('insert image', image);
+    // console.log('insert image', image);
     const file = {
       uri: image.path,
       type: image.mime,
@@ -217,7 +217,7 @@ const InsertImage = async image => {
     };
     const formData = new FormData();
     formData.append('image', file);
-    console.log('formDataneneenen', formData._parts);
+    // console.log('formDataneneenen', formData._parts);
     const insertImage = await axios.post(
       `http://pes.store/api/upLoadOne`,
       formData,
@@ -228,7 +228,7 @@ const InsertImage = async image => {
         },
       },
     );
-    console.log('api image', insertImage);
+    // console.log('api image', insertImage);
     return insertImage;
   } catch (error) {
     console.log('insert image error', error);
@@ -286,7 +286,7 @@ const EditProduct = async (
       },
     );
 
-    console.log('EditProduct', editProduct)
+    // console.log('EditProduct', editProduct)
     return editProduct;
   } catch (error) {
     console.log('EditProduct error', error);
@@ -325,7 +325,7 @@ const EditProduct2 = async (
       },
     );
 
-    console.log('EditProduct', editProduct)
+    // console.log('EditProduct', editProduct)
     return editProduct;
   } catch (error) {
     console.log('EditProduct error', error);
@@ -363,7 +363,7 @@ const EditProduct3 = async (
       },
     );
 
-    console.log('EditProduct33', editProduct)
+    // console.log('EditProduct33', editProduct)
     return editProduct;
   } catch (error) {
     console.log('EditProduct error', error);

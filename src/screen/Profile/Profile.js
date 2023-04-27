@@ -71,32 +71,28 @@ import authApi from '../../api/authApi';
     return (
       <View style={{alignItems: 'center', backgroundColor: '#dcdcdc', flex: 1}}>
         <View
-          style={{
-            height: '25%',
-            width: '100%',
-            backgroundColor: '#18A2E1',
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}>
-          <Block
-            row={1}
-            alignCenter
-            width={'100%'}
-            justifySpaceBetween
-            paddingHorizontal={10}
-            marginTop={'2%'}>
-            <FontAwesome5 name="chevron-left" size={30} />
-            <Text
-              style={{
-                width: '60%',
-                color: 'white',
-                fontSize: 20,
-                fontWeight: 'bold',
-              }}>
-              Tài khoản
-            </Text>
-          </Block>
-        </View>
+        style={{
+          height: '25%',
+          width: '100%',
+          backgroundColor: '#18A2E1',
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+        }}>
+        <Block
+          alignCenter
+          marginLeft={'24%'}
+          marginTop={'8%'}>
+          <Text
+            style={{
+              width: '100%',
+              color: 'white',
+              fontSize: 26,
+              fontWeight: 'bold',
+            }}>
+            Thông tin tài khoản
+          </Text>
+        </Block>
+      </View>
         <View
           style={{
             height: '24%',
