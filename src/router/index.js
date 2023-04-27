@@ -26,6 +26,8 @@ import {
   CHAT,
   EDIT_PETS_SCREEN,
   EDIT_PRODUCTS_SCREEN,
+  EDIT_PROFILE_ACCOUNT,
+  EDIT_PROFILE_ADDRESS,
   EDIT_SERVICES_SCREEN,
   HOME_SCREEN,
   INSERT_PETS_SCREEN,
@@ -48,6 +50,7 @@ import {
 import {Notification} from '../screen/Notification';
 import ManegerService from './ManegerService';
 import { Chat, ListChat } from '../screen/Messenger';
+import { ChangeAcount, ChangeAddress } from '../screen/Profile';
 
 
 
@@ -74,6 +77,8 @@ function MainStack(props) {
       <Stack.Screen name={MANEGER_SERVICES_SCREEN} component={ManegerService} />
       <Stack.Screen name={LIST_CHAT} component={ListChat} />
       <Stack.Screen name={CHAT} component={Chat} />
+      <Stack.Screen name={EDIT_PROFILE_ACCOUNT} component={ChangeAcount} />
+      <Stack.Screen name={EDIT_PROFILE_ADDRESS} component={ChangeAddress} />
     </Stack.Navigator>
   );
 }

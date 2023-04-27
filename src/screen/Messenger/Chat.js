@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   FlatList,
@@ -10,61 +10,69 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Block from '../../components/Block';
-
+import SocketManager from './SocketManager';
+import { useRoute } from '@react-navigation/native';
 
 const Chat = ({navigation}) => {
-  const [message, setMessage] = useState('');
-  const [message2, setMessage2] = useState([
-    {
-      id: '1',
-      text: 'Hello there!',
-      sender: 'other',
-    },
-    {
-      id: '2',
-      text: 'Hi, how are you?',
-      sender: 'me',
-    },
-    {
-      id: '3',
-      text: 'I am doing well, thanks. And you?',
-      sender: 'other',
-    },
-  ]);
-
+  const [inputmess, SetInputMess] = useState('');
+  const router = useRoute();
+  
+  const {data, id, idSocketUser} = router.params;
+  const [message, setMessage] = useState([]);
 
 
   const sendMessage = () => {
-      setMessage(message);
-    
+    try {
+      SetInputMess('')
+      const data = {
+        id: id,
+        socketId: idSocketUser,
+        mess: inputmess,
+        table: 'store',
+      };
+      const socket = SocketManager.getSocket();
+     
+      socket.emit('sendmess', data);
+     
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const renderItem = ({ item }) => {
-    const isMe = item.sender === 'me';
-    const align = isMe ? 'flex-end' : 'flex-start';
-    const backgroundColor = isMe ? '#DCF8C5' : '#FFFFFF';
+  const CutArray = () => {
+    const cutarray = data.map(item => {
+       const [key, value] = item.split(':');
+       return {[key]: value};
+     });
+     setMessage(cutarray);
 
+   };
+
+   useEffect(() => {
+    CutArray();
+  }, []);
+
+
+    const socket = SocketManager.getSocket();
+    socket.on('mgs', (data) => {
+      console.log('data', data);
+    });
+    socket.on('checkerror', error => {
+      console.log('error socket', error);
+    });
+
+
+  
+
+  const renderItem = ({item}) => {
+    const key = Object.keys(item)[0];
+    const value = item[key];
+    
     return (
-      <View style={[styles.messageContainer, { alignItems: align }]}>
-        {/* {!isMe && ( */}
-          {/* <Image
-          source={require('../../assets/image/phonenumber.png')} 
-            style={styles.avatar}
-          /> */}
-        {/* )} */}
-        
-        <View style={[styles.messageBubble, { backgroundColor, }]}>
-          
-          <Text style={styles.messageText}>{item.text}</Text>
-          
+      <View style={styles.messageContainer}>
+        <View style={[styles.messageBubble, {backgroundColor: key === '1' ? 'pink' : 'cyan' , marginLeft: key === '1' ? 'auto' : 0 , marginRight:key === '2' ? 'auto' : 0  }]}>
+          <Text style={styles.messageText}>{value}</Text>
         </View>
-       
-        {/* {isMe && (
-          <Image
-          source={require('../../assets/image/phonenumber.png')} 
-            style={styles.avatar}
-          /> 
-        )}  */}
       </View>
     );
   };
@@ -87,19 +95,19 @@ const Chat = ({navigation}) => {
       </Block>
       <FlatList
         
-        data={message2}
+        data={message}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         
       />
       <View style={styles.inputContainer}>
-        <TextInput
+      <TextInput
+          value={inputmess}
           style={styles.input}
-          value={message}
-          onChangeText={setMessage}
           placeholder="Type your message here"
+          onChangeText={text => SetInputMess(text)}
         />
-        <TouchableOpacity style={styles.sendButton} onPress={()=> sendMessage(setMessage())} >
+        <TouchableOpacity style={styles.sendButton} onPress={()=> sendMessage()} >
           <FontAwesome name={'send'} size={25}/>
         </TouchableOpacity>
       </View>
