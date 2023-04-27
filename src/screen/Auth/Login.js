@@ -25,7 +25,6 @@ const Login = ({navigation}) => {
   const authState = useSelector(state => state.authState.logged)
   
   const [modalVisible, setModalVisible] = useState(false);
-  console.log("authState: " , authState)
   const [emailStore, setEmailStore] = useState('prolatui112233@gmail.com');
   const [passStore, setPassStore] = useState('123');
 
