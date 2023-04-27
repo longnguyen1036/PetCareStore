@@ -19,7 +19,7 @@ const Chat = ({navigation}) => {
   
   const {data, id, idSocketUser} = router.params;
   const [message, setMessage] = useState([]);
-
+  const [newMess, setNewMess] = useState();
 
   const sendMessage = () => {
     try {
@@ -33,29 +33,43 @@ const Chat = ({navigation}) => {
       const socket = SocketManager.getSocket();
      
       socket.emit('sendmess', data);
-     
+      setNewMess('2:' +inputmess)
+      console.log('inputmess', inputmess);
     } catch (error) {
       console.log(error);
     }
   };
 
   const CutArray = () => {
-    const cutarray = data.map(item => {
-       const [key, value] = item.split(':');
-       return {[key]: value};
-     });
-     setMessage(cutarray);
+    if(newMess == null){
+      console.log('hehee');
+      const cutarray = data.map(item => {
+         const [key, value] = item.split(':');
+         return {[key]: value};
+       });
+       setMessage(cutarray);
+    }else{
+      console.log('newMess');
+      data.push(newMess)
+      const cutarray = data.map(item => {
+        const [key, value] = item.split(':');
+        return {[key]: value};
+      });
+      setMessage(cutarray);
+    }
 
    };
 
-   useEffect(() => {
+
+  useEffect(() => {
     CutArray();
-  }, []);
+  }, [newMess]);
 
 
     const socket = SocketManager.getSocket();
     socket.on('mgs', (data) => {
       console.log('data', data);
+      setNewMess(data)
     });
     socket.on('checkerror', error => {
       console.log('error socket', error);

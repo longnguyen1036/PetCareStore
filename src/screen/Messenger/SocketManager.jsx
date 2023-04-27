@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 class SocketManager {
   static instance = null;
   socket = null;
-  serverUrl = 'http://192.168.1.6:9998';
+  serverUrl = 'http://192.168.1.14:9999';
 
   constructor() {
     if (!SocketManager.instance) {
