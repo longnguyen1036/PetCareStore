@@ -83,7 +83,7 @@ const UpdatePet = ({navigation}) => {
         height: 400,
         cropping: true,
       });
-      console.log('imageeeeeeeeee', image);
+      // console.log('imageeeeeeeeee', image);
       setImageEdit(image);
     } catch (error) {
       console.log('erorr hinh', error);
@@ -109,12 +109,12 @@ const UpdatePet = ({navigation}) => {
         setLoading(false);
         success()
         navigation.navigate(PETS_SCREEN);
-        console.log('success');
+        // console.log('success');
       } else {
         setLoading(false);
         toast_error()
 
-        console.log('thất bại');
+        // console.log('thất bại');
       }
     } catch (error) {
       toast_error()

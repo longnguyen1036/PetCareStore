@@ -37,14 +37,14 @@ const Register = ({ navigation }) => {
   const register = async () => {
     const emailRegex = /\S+@\S+.\S+/;
     const isValidEmail = emailRegex.test(emailAccount);
-    console.log('log emaill', emailAccount);
+    // console.log('log emaill', emailAccount);
 
     if (passwordAccount.localeCompare(confirmPassWord) == 0) {
       try {
         if (nameAccount == '' || emailAccount == '' || passwordAccount == '' || addressStore == '' || phoneStore == '') {
           setModalVisible(true);
         } else if (!isValidEmail) {
-          console.log('Email khong hop le');
+          // console.log('Email khong hop le');
         } else {
           submitRegister();
         }
@@ -56,17 +56,6 @@ const Register = ({ navigation }) => {
     }
   };
 
-  // const checkEmail = (emailAccount) => {
-  //   const emailRegex = /\S+@\S+.\S+/;
-  //   const isValidEmail = emailRegex.test(emailAccount);
-  //   console.log('log emaill',emailAccount)
-  //   if (isValidEmail) {
-  //     console.log('Email hợp lệ');
-  //     navigation.navigate('CONFIRM_OTP_SCREEN');
-  //   } else {
-  //     console.log('Email không đúng định dạng');
-  //   }
-  // };
 
   const submitRegister = async () => {
     const user = await authApi.Register(
@@ -77,7 +66,7 @@ const Register = ({ navigation }) => {
       phoneStore
     );
     setCheckUser(user.status);
-    console.log('data', user.status);
+    // console.log('data', user.status);
     if (user.status === 200) {
       navigation.navigate('CONFIRM_OTP_SCREEN');
     } else {

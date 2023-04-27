@@ -73,7 +73,7 @@ import { HOME_SCREEN } from '../../router/ScreenName';
       });
     }
   
-   console.log('gia gia ', timeServiceUpdate)
+  //  console.log('gia gia ', timeServiceUpdate)
 
    const pushAdd = () => {
       const arrAdd = [...timeService, {
@@ -95,7 +95,7 @@ import { HOME_SCREEN } from '../../router/ScreenName';
           height: 400,
           cropping: true,
         });
-        console.log('imageeeeeeeeee', image);
+        // console.log('imageeeeeeeeee', image);
         setImageEdit(image);
       } catch (error) {
         console.log('erorr hinh', error);
@@ -120,17 +120,17 @@ import { HOME_SCREEN } from '../../router/ScreenName';
         timeServiceUpdate,
         'serviceStore',
       );
-      console.log('resss', res)
+      // console.log('resss', res)
       if (res.status === 200) {
         setLoading(false);
         success()
         navigation.navigate(HOME_SCREEN);
-        console.log('success');
+        // console.log('success');
       } else {
         setLoading(false);
         toast_error()
 
-        console.log('thất bại');
+        // console.log('thất bại');
       }
     } catch (error) {
       toast_error()
@@ -153,14 +153,14 @@ import { HOME_SCREEN } from '../../router/ScreenName';
 
     const eventChangeColor = (item) => {
       if(item.time === '+'){
-        console.log('arrTime: ', timeService);
+        // console.log('arrTime: ', timeService);
       }else{
         for (let i = 0; i < timeServiceUpdate.length; i++) {
           if(item.time == timeServiceUpdate[i].time){
             const tmp = [...timeServiceUpdate]
             tmp[i].status = !tmp[i].status
             setTimeSeriveUpdate(tmp)
-            console.log('hahahaaha', timeServiceUpdate)
+            // console.log('hahahaaha', timeServiceUpdate)
             return 
           }
         }
@@ -168,7 +168,7 @@ import { HOME_SCREEN } from '../../router/ScreenName';
     }
 
     const renderItem = ({item}) => {
-      console.log('itemmm', item);
+      // console.log('itemmm', item);
       return (
         <TouchableOpacity
           onPress={() => {

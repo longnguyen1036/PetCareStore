@@ -49,7 +49,7 @@ const InsertService = ({navigation}) => {
     arrTime[arrTime.length - 2] = {...time};
 
     setTimeService(arrTime);
-    console.log('arrTime: ', timeService);
+    // console.log('arrTime: ', timeService);
     setModalVisibleTime(false);
   };
   const success = () => {
@@ -79,7 +79,7 @@ const InsertService = ({navigation}) => {
         height: 400,
         cropping: true,
       });
-      console.log('imageeeeeeeeee', image);
+      // console.log('imageeeeeeeeee', image);
       setImageUri(image);
 
       // const urlimage = await productApi.InsertImage(image)
@@ -95,7 +95,7 @@ const InsertService = ({navigation}) => {
       setLoading(true);
       timeService.pop();
       const timeApi = JSON.stringify(timeService);
-      console.log('timeservice', timeService);
+      // console.log('timeservice', timeService);
       const res = await productApi.InsertService(
         nameService,
         priceService,
@@ -109,18 +109,18 @@ const InsertService = ({navigation}) => {
       if (res.status === 200) {
         success()
         setLoading(true);
-        console.log('success');
+        // console.log('success');
         navigation.goBack();
       } else {
         setLoading(false);
         toast_error()
-        console.log('thất bại');
+        // console.log('thất bại');
       }
     } catch (error) {
       setLoading(false);
       toast_error()
       console.log('loi them san pham', error);
-      console.log('thất bại');
+      // console.log('thất bại');
     }
   };
 

@@ -44,7 +44,7 @@ import authApi from '../../api/authApi';
             const checkLogin = await AsyncStorage.getItem('checkLogin'); 
             dispatch(logoutAction());
               
-              console.log('dang xuat')
+              // console.log('dang xuat')
             },
           },
         ],
@@ -60,7 +60,7 @@ import authApi from '../../api/authApi';
     useEffect(() => {
       getInformation();
     },[])
-    console.log('getInformadsdsdtion', profileStore?.addressStore[0])
+    // console.log('getInformadsdsdtion', profileStore?.addressStore[0])
     const getLocation =  () => {
         const address = profileStore.addressStore[0]
         const url = `https://www.google.com/maps/search/${encodeURIComponent(address)}`
@@ -99,7 +99,7 @@ import authApi from '../../api/authApi';
         </View>
         <View
           style={{
-            height: '27%',
+            height: '24%',
             width: '90%',
             backgroundColor: '#FFFFFF',
             borderRadius: 10,
@@ -124,7 +124,7 @@ import authApi from '../../api/authApi';
                 <Text>{profileStore?.emailStore}</Text>
                 <TouchableOpacity onPress={() => getLocation()}>
 
-                <Text style={{ color: 'blue', width: '92%',  height: 35}}>
+                <Text style={{ numberOfLines: 2, color: 'blue', width: '48%',  height: 35}}>
                   {profileStore?.addressStore[0]}
                 </Text>
                 </TouchableOpacity>
@@ -136,11 +136,12 @@ import authApi from '../../api/authApi';
           </View>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
+              // flexDirection: 'row',
+              // justifyContent: 'space-around',
+              paddingLeft: 12,
               marginTop: '1%',
             }}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
 
               style={{
                 backgroundColor: '#18A2E1',
@@ -153,7 +154,7 @@ import authApi from '../../api/authApi';
               }}>
               <Text style={{color: 'white', fontWeight: 'bold'}}>Camera</Text>
               <FontAwesome5 name="camera-retro" size={25} color={'white'} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity
             onPress={()=> navigation.navigate(LIST_CHAT)}
               style={{
@@ -184,17 +185,20 @@ import authApi from '../../api/authApi';
           </View>
         </View>
   
+       
+       
+  
         <View
           style={{
             width: '90%',
             marginTop: '3%',
             backgroundColor: '#18A2E1',
-            height: '13%',
+            height: '18%',
             borderRadius: 8,
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <TouchableOpacity
+           <TouchableOpacity
             style={{
               flexDirection: 'row',
               justifyContent: 'space-around',
@@ -239,85 +243,7 @@ import authApi from '../../api/authApi';
               Thay địa chỉ
             </Text>
             <FontAwesome5 color={'white'} style={{width: '10%'}} name="chevron-right" size={18} />
-          </TouchableOpacity>
-        </View>
-        <View style={{width: '90%', marginTop: '3%', flexDirection: 'row'}}>
-          <TouchableOpacity
-            style={{backgroundColor: '#18A2E1', padding: 8, borderRadius: 8}}>
-            <FontAwesome5 name="comments" size={30} color={'white'} />
-          </TouchableOpacity>
-          <View style={{marginLeft: '3%'}}>
-            <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>
-              Hỗ trợ và phản hồi
-            </Text>
-            <Text>Liên hệ với chúng tôi</Text>
-          </View>
-        </View>
-  
-        <View
-          style={{
-            width: '90%',
-            marginTop: '3%',
-            backgroundColor: '#18A2E1',
-            height: '18%',
-            borderRadius: 8,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-          onPress={ ()=>navigation.navigate(HISTORY_PRODUCTS)}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              paddingHorizontal: 10,
-            }}>
-            <Text
-              style={{
-                width: '90%',
-                fontSize: 16,
-                color: 'white',
-                fontWeight: 'bold',
-              }}>
-              Lịch sử mua hàng
-            </Text>
-            <FontAwesome5
-              style={{width: '10%'}}
-              name="chevron-right"
-              size={18}
-              color={'white'}
-            />
-          </TouchableOpacity>
-          <View
-            style={{
-              borderWidth: 0.5,
-              borderColor: 'white',
-              width: '95%',
-              marginTop: '3%',
-            }}></View>
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              paddingHorizontal: 10,
-              marginTop: '3%',
-            }}
-            onPress={ ()=>navigation.navigate(HISTORY_SERVICES)}>
-            <Text
-              style={{
-                width: '90%',
-                fontSize: 16,
-                color: 'white',
-                fontWeight: 'bold',
-              }}>
-              Lịch sử đặt dịch vụ
-            </Text>
-            <FontAwesome5
-              style={{width: '10%'}}
-              name="chevron-right"
-              size={18}
-              color={'white'}
-            />
-          </TouchableOpacity>
+          </TouchableOpacity> 
   
          
           <View

@@ -50,13 +50,13 @@ const Login = ({navigation}) => {
       }
       const socket = SocketManager.getSocket();
       socket.on('connect', () => {
-        console.log('connected to server');
+        // console.log('connected to server');
       });
   
       const res =  socket.emit('Login', data);
-      console.log('ressss', res);
+      // console.log('ressss', res);
       socket.on('checkLogin', (data) => {
-          console.log('data socket', data);
+          // console.log('data socket', data);
       })
     } catch (error) {
       console.log(error)
@@ -82,7 +82,7 @@ const Login = ({navigation}) => {
         AsyncStorage.setItem('checkLogin', 'true');
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
         dispatch(loggedAction(res.data));
-        console.log('checkLogin', res.data.token)
+        // console.log('checkLogin', res.data.token)
         await setToken(res.data.token)
         connectSocket();
       }

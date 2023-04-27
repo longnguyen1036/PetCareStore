@@ -5,22 +5,51 @@ import Block from '../../components/Block'
 import Text from '../../components/Text'
 import { useRoute } from '@react-navigation/native'
 import authApi from '../../api/authApi'
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
 
 const ChangeAddress = ({navigation}) => {
   const route = useRoute();
   const { addressStore} = route.params
 
-  const [address, setAddress] = useState(addressStore)
+  const [address, setAddress] = useState('')
 
   const SubmitUpdateProfile =async () => {
     try {
-      const res = await authApi.UpdateProfile(address)
-      console.log('res', res)
+      if(!address.trim()){
+        Notifier.showNotification({
+          title: 'Thông báo',
+          description: 'không được để trống form này',
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: 'error',
+          },
+        });
+      }else{
+        const res = await authApi.UpdateProfile(address)
       if(res.status === 200) {
+        Notifier.showNotification({
+          title: 'Thông báo',
+          description: 'Đăng ký thành công',
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: 'success',
+          },
+        });
         navigation.goBack()
       }else{
-        console.log('loi')
+        Notifier.showNotification({
+          title: 'Thông báo',
+          description: 'Đổi không thành công',
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: 'error',
+          },
+        });
+        navigation.goBack()
       }
+      }
+
+      
     } catch (error) {
       console.log(error)
     }

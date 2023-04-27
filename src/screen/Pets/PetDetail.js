@@ -65,7 +65,7 @@ const PetDetail = ({navigation}) => {
   const [quantityProduct, setQuantityProduct] = useState(quantityPet);
   const [typeProduct, setTypeProduct] = useState(typePet);
 
-  console.log('heheheh');
+  // console.log('heheheh');
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
       <View>
@@ -89,7 +89,7 @@ const PetDetail = ({navigation}) => {
         <View style={{alignItems: 'center'}}>
           <Image
             source={{uri: imgPet}}
-            style={{width: 220, height: 240, borderRadius: 8}}></Image>
+            style={{width: 340, height: 240, borderRadius: 8}}></Image>
         </View>
 
         {/* <ScrollView style={{width: '40%'}} horizontal={true}>
@@ -109,11 +109,11 @@ const PetDetail = ({navigation}) => {
           })}
         </ScrollView> */}
         <View style={{marginTop: '3%', marginLeft: '10%'}}>
-          <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-            Tên: {namePet}
+          <Text style={{fontSize: 24, color: '#18A2E1', fontWeight: 'bold'}}>
+            {namePet}
           </Text>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-            Giá: {formatMoney(pricePet)}
+            {formatMoney(pricePet)}
           </Text>
           <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
             Tình trạng: Còn hàng

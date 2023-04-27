@@ -110,28 +110,13 @@ console.log(priceServiceDetail); //
         <View style={{alignItems: 'center'}}>
           <Image
             source={{uri: imgServiceDetail}}
-            style={{width: 220, height: 240, borderRadius: 8}}></Image>
+            style={{width: 340, height: 240, borderRadius: 8}}></Image>
         </View>
 
-        {/* <ScrollView style={{width: '40%'}} horizontal={true}>
-          {ItemsImage.map(object => {
-            return (
-              <TouchableOpacity
-                onPress={() => setSelectedImage(object.image)}
-                key={object.key}
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: 8,
-                }}>
-                <Image source={object.image}></Image>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView> */}
+        
         <View style={{marginTop: '3%', width: '73%', marginLeft: '10%'}}>
-          <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-           Tên: {nameServiceDetail}
+          <Text style={{fontSize: 24, color: '#18A2E1', fontWeight: 'bold'}}>
+           {nameServiceDetail}
           </Text>
 
           

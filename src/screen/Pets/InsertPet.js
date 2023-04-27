@@ -60,30 +60,6 @@ const InsertPet = ({navigation}) => {
 
   const handleChooseImage = async () => {
     try {
-      // const granted = await PermissionsAndroid.request(
-      //   PermissionsAndroid.PERMISSIONS.GETIMAGE,
-      //   {
-      //     title: 'Cool Photo App Camera Permission',
-      //     message:
-      //       'Cool Photo App needs access to your camera ' +
-      //       'so you can take awesome pictures.',
-      //     buttonNeutral: 'Ask Me Later',
-      //     buttonNegative: 'Cancel',
-      //     buttonPositive: 'OK',
-      //   },
-      // );
-      // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      //   console.log('You can use the camera');
-      //   const image = await ImagePicker.openPicker({
-      //     width: 300,
-      //     height: 400,
-      //     cropping: true,
-      //   });
-      //   console.log('imageeeeeeeeee', image);
-      //   setImageUri(image);
-      // } else {
-      //   console.log('Camera permission denied');
-      // }
       
       if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.requestMultiple([
@@ -96,16 +72,16 @@ const InsertPet = ({navigation}) => {
           granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED &&
           granted['android.permission.WRITE_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED
         ) {
-          console.log('Camera and gallery permissions granted');
+          // console.log('Camera and gallery permissions granted');
             const image = await ImagePicker.openPicker({
           width: 300,
           height: 400,
           cropping: true,
         });
-        console.log('imageeeeeeeeee', image);
+        // console.log('imageeeeeeeeee', image);
         setImageUri(image);
         } else {
-          console.log('Camera and gallery permissions denied');
+          // console.log('Camera and gallery permissions denied');
         }
       }
 
@@ -134,11 +110,11 @@ const InsertPet = ({navigation}) => {
         setLoading(false);
         success()
         navigation.goBack();
-        console.log('success');
+        // console.log('success');
       } else {
         setLoading(false);
         toast_error()
-        console.log('thất bại');
+        // console.log('thất bại');
       }
     } catch (error) {
       toast_error()

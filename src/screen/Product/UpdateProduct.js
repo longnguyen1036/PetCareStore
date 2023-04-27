@@ -55,7 +55,7 @@ const UpdateProduct = ({navigation}) => {
         height: 400,
         cropping: true,
       });
-      console.log('imageeeeeeeeee', image);
+      // console.log('imageeeeeeeeee', image);
       setImageEdit(image);
     } catch (error) {
       console.log('erorr hinh', error);
@@ -100,12 +100,12 @@ const UpdateProduct = ({navigation}) => {
         setLoading(false);
         success()
         navigation.navigate(HOME_SCREEN);
-        console.log('success');
+        // console.log('success');
       } else {
         setLoading(false);
         toast_error()
 
-        console.log('thất bại');
+        // console.log('thất bại');
       }
     } catch (error) {
       toast_error()
@@ -114,7 +114,7 @@ const UpdateProduct = ({navigation}) => {
       console.log('loi sửa san pham', error);
     }
   };
-  console.log('iddsadasds', _id);
+  // console.log('iddsadasds', _id);
   return (
     <View style={styles.container}>
       <View style={styles.hearderIcon}>

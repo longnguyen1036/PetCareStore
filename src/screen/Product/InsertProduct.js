@@ -39,7 +39,7 @@ const InsertProduct = ({navigation}) => {
         height: 400,
         cropping: true,
       });
-      console.log('imageeeeeeeeee', image);
+      // console.log('imageeeeeeeeee', image);
       setImageUri(image);
 
       // const urlimage = await productApi.InsertImage(image)
@@ -88,11 +88,11 @@ const InsertProduct = ({navigation}) => {
         setLoading(false);
         success()
         navigation.goBack();
-        console.log('success');
+        // console.log('success');
       } else {
         setLoading(false);
         toast_error()
-        console.log('thất bại');
+        // console.log('thất bại');
       }
     } catch (error) {
       toast_error()

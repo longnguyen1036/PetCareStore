@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   TouchableOpacity,
@@ -10,6 +9,7 @@ import {
 } from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import Block from '../../components/Block';
+import Text from '../../components/Text';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
   INSERT_PETS_SCREEN,
@@ -64,64 +64,28 @@ const ListServices = ({navigation}) => {
           typeService: typeService,
         })
       }>
-      <View
-        style={{
-          width: '100%',
-          backgroundColor: '#E6EAED',
-          flexDirection: 'row',
-          paddingVertical: 10,
-          borderRadius: 8,
-          marginTop: '3%',
-        }}>
-        <Image
-          style={{
-            width: 100,
-            height: 120,
-            borderRadius: 8,
-            marginLeft: '2%',
-            marginRight: '2%',
-          }}
-          source={{uri: imgService}}></Image>
-
-        <Block
-          radius={4}
-          width={'68%'}
-          height={120}
-          backgroundColor={'white'}
-          paddingLeft={'2%'}>
-          <Block row justifySpaceBetween width={'95%'} >
-            <Block>
-              <Text style={{color: 'black', fontSize: 18, fontWeight: '500', width: 190, height: 20}}>
-                Tên: {nameService}
-              </Text>
-              <Text style={{color: 'black'}}>Giá: {formatMoney(priceService)}</Text>
-              <Text style={{color: 'red'}}>KM: {formatMoney(priceService*8/10)}</Text>
-
-              <Text>Dành cho: {typeService}</Text>
+      <Block
+            marginLeft={'4%'}
+            backgroundColor={'white'}
+            width={'92%'}
+            // height={130}
+            row
+            marginTop={10} 
+            radius={10}
+            // alignCenter
+            padding={12}
+            >
+            <Image style={styles.ilist} source={{uri: imgService}}></Image>
+            
+              <Block marginLeft={'2%'} width={'74%'} >
+                <Text numberOfLines={1} color={'#18A2E1'} size={18}>
+                 Dịch vụ: {nameService}
+                </Text>
+                <Text  marginTop={4} size={16}>Giá: {formatMoney(priceService)}</Text>
+                <Text numberOfLines={2} marginTop={4} size={14}>Mô tả: {descriptionService}</Text>
+              </Block>
+             
             </Block>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#E6EAED',
-                borderRadius: 5,
-                width: 35,
-                height: 35,
-                marginTop: '4%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <FontAwesome5
-                style={{}}
-                color={'black'}
-                name="chevron-right"
-                size={18}
-              />
-            </TouchableOpacity>
-          </Block>
-          <Text style ={{width: '99%', marginTop: '2%', color: 'black', height: 26}}>
-          Mô tả: {descriptionService} 
-          </Text>
-        </Block>
-      </View>
     </TouchableOpacity>
   );
 
@@ -150,7 +114,7 @@ const ListServices = ({navigation}) => {
           row={1}
           justifyCenter
           alignCenter
-          backgroundColor={'#F2F3F2'}
+          backgroundColor={'white'}
           height={40}
           borderRadius={15}
           margin={10}>
@@ -194,7 +158,7 @@ export default ListServices;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#F2F3F2',
   },
   header: {
     flexDirection: 'row',
@@ -211,5 +175,11 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 10,
     alignItems: 'center',
+  },
+  ilist: {
+    width: 90,
+    height: 100,
+    marginLeft: '2%',
+    marginTop: '2%',
   },
 });
