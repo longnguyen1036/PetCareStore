@@ -29,9 +29,7 @@ const ListProducts = ({navigation}) => {
     setListProduct(getListProductApi.data.data[0]);
   };
 
-  useEffect(() => {
-    getAllProduct();
-  }, []);
+
 
   useFocusEffect(
     useCallback(() => {
@@ -70,6 +68,7 @@ const ListProducts = ({navigation}) => {
           width={160}
          marginTop={12}
           radius={10}
+          marginBottom={20}
           >
           <Image style={styles.ilist} source={{uri: imgProduct}}></Image>
           <Block
@@ -136,7 +135,8 @@ const ListProducts = ({navigation}) => {
         </Block>
       </Block>
 
-      <SafeAreaView style={{width: '100%', paddingHorizontal: 14}}>
+     <Block flex={1}>
+
         <FlatList
           numColumns={2}
           data={listProduct}
@@ -154,7 +154,8 @@ const ListProducts = ({navigation}) => {
           )}
           keyExtractor={item => item._id}
         />
-      </SafeAreaView>
+     </Block>
+   
     </View>
   );
 };

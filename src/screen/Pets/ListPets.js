@@ -136,7 +136,7 @@ const ListPets = ({navigation}) => {
         </Block>
       </Block>
 
-      <SafeAreaView style={{width: '100%', paddingHorizontal: 14}}>
+      <SafeAreaView style={{width: '100%', paddingHorizontal: 14, flex: 1}}>
         <FlatList
           numColumns={2}
           data={listProduct}

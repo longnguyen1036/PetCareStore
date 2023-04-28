@@ -1,2 +1,2 @@
 //api local 
-export const BASE_URL_TEST =  'http://192.168.1.8:9991/v1'
+export const BASE_URL_TEST =  'http://192.168.106.195:9999/v1'
