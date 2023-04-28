@@ -131,7 +131,7 @@ const ListServices = ({navigation}) => {
         </Block>
       </Block>
 
-      <SafeAreaView style={{paddingHorizontal: '2%'}}>
+      <SafeAreaView style={{paddingHorizontal: '2%', flex: 1}}>
         <FlatList
           data={listProduct}
           renderItem={({item}) => (
