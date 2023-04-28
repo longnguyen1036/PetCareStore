@@ -110,7 +110,7 @@ const getListMess = async () => {
         </Block>
       </Block>
 
-      <Block marginTop={5} paddingHorizontal={10}>
+      <Block marginTop={5} paddingHorizontal={10} flex={1}>
         <FlatList data={message} renderItem={renderItem} />
       </Block>
     </Block>
