@@ -20,6 +20,8 @@ const Chart = () => {
   // const series = [10, 20, 70,];
   const [series, setSeries] = useState([1, 1, 1]);
   const [sum, setSum] = useState(0);
+  const [sumPet, setSumPet] = useState(0);
+  const [sumProduct, setSumProduct] = useState(0);
   const sliceColor = ['#F44336', '#2196F3', 'yellow'];
   const [loading, setLoading] = useState(false);
 
@@ -34,6 +36,8 @@ const Chart = () => {
       ]);
       const total = res.data.data.sumPricePet + res.data.data.sumPriceProduct;
       setSum(total);
+      setSumProduct(res.data.data.sumPriceProduct)
+      setSumPet(res.data.data.sumPricePet)
       setLoading(false);
     } catch (error) {
       console.log('error:', error);
@@ -64,27 +68,30 @@ const Chart = () => {
 
           <Block row marginTop={30} justifyCenter alignCenter>
             <Block
-              width={50}
-              height={50}
-              radius={25}
+              width={20}
+              height={20}
               backgroundColor={'#2196F3'}></Block>
             <Text style={{marginLeft: '10%'}}>Sản phẩm: {series[0]}</Text>
           </Block>
           <Block row marginTop={30} justifyCenter alignCenter>
             <Block
-              width={50}
-              height={50}
-              radius={25}
+               width={20}
+               height={20}
               backgroundColor={'#F44336'}></Block>
             <Text style={{marginLeft: '10%'}}>Thú cưng: {series[1]}</Text>
           </Block>
           <Block row marginTop={30} justifyCenter alignCenter>
             <Block
-              width={50}
-              height={50}
-              radius={25}
+              width={20}
+              height={20}
               backgroundColor={'yellow'}></Block>
             <Text style={{marginLeft: '10%'}}>Dịch vụ: {series[2]}</Text>
+          </Block>
+          <Block alignCenter marginTop={15}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Tổng tiền sản phẩm: {formatMoney(sumProduct)}</Text>
+          </Block>
+          <Block alignCenter marginTop={15}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Tổng tiền thú cưng: {formatMoney(sumPet)}</Text>
           </Block>
           <Block alignCenter marginTop={15}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Tổng tiền: {formatMoney(sum)}</Text>

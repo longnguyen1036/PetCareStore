@@ -41,11 +41,11 @@ function MyTab(){
           headerShown: false,
           tabBarLabel: 'Chart',
           tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="favorite" color={color} size={size} />
+            <Ionicons name="pie-chart" color={color} size={size} />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={MANEGER_SERVICES_SCREEN}
         component={ManegerService}
         options={{
@@ -55,7 +55,7 @@ function MyTab(){
             <Foundation name="book-bookmark" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name={PROFILE_SCREEN}
         component={Profile}
