@@ -369,6 +369,21 @@ const EditProduct3 = async (
     console.log('EditProduct error', error);
   }
 };
+
+const getChart = async () => {
+  try {
+    const token = await getToken();
+    const getChart = await axios.get(`${BASE_URL_TEST}/getchart`, {
+      headers: {
+        token: `Bearer ${token}`,
+      },
+    });
+
+    return getChart;
+  } catch (error) {
+    console.log('getall product error', error);
+  }
+};
 export default {
   InsertPet,
   InsertImage,
@@ -378,5 +393,6 @@ export default {
   EditProduct,
   EditProduct2,
   EditProduct3,
-  DelelePet
+  DelelePet,
+  getChart,
 };

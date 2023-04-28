@@ -15,7 +15,6 @@ const getListMess = async () => {
   try {
       const res = await authApi.getMessengerApi();
       setMessage(res?.data?.data?.chatId);
-      console.log('ressss', res.data);
   } catch (error) {
     console.log('error', error);
   }
